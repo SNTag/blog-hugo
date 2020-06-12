@@ -1,87 +1,40 @@
-<!DOCTYPE html>
-<html lang="en-us">
-    <head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title>Tags &middot; SNTagore&#39;s blog</title>
+---
+layout: post-index
+title: Tags Archive
+---
 
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+{% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+{% assign tags_list = site_tags | split:',' | sort %}
 
-		
-		<link href="/tags/index.xml" rel="alternate" type="application/rss+xml" title="SNTagore&#39;s blog" />
-	</head>
-
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">SNTagore&#39;s blog</h2>
-				</a>
-				<ul>
+<article>
+    <h1 class="entry-title">
+        <a>{{ page.title }}</a>
+    </h1>
     
+    <hr>
     
-        <li>
-            <a href="https://www.linkedin.com/in/shayontagore/">
-                
-                <span>linkedin</span>
-                
-            </a>
-        </li>
-    
-        <li>
-            <a href="https://github.com/sntag">
-                
-                <span>github</span>
-                
-            </a>
-        </li>
-    
-        <li>
-            <a href="/getting-started/">
-                
-                <span>rss</span>
-                
-            </a>
-        </li>
-    
-        <li>
-            <a href="/about/">
-                
-                <span>about me</span>
-                
-            </a>
-        </li>
-    
-</ul>
-			</div>
-		</nav>
+    <ul class="entry-meta inline-list">
+        {% for item in (0..site.tags.size) %}{% unless forloop.last %}
+            {% capture this_word %}{{ tags_list[item] | strip_newlines }}{% endcapture %}
+  	             <li><a href="#{{ this_word }}" class="tag"><span class="term">{{ this_word }}</span> <span class="count">({{ site.tags[this_word].size }})</span></a></li>
+            {% endunless %}
+        {% endfor %}
+    </ul>
+</article>
 
-        
-<main>
-    <h1>Tags</h1>
-	<div class="catalogue">
-        <ul></ul>
-	</div>
-	
-	<div class="pagination"><span>1</span>
-	</div>
-</main>
-
-
-        		<footer>
-			<span>
-			&copy; <time datetime="2020-06-12 18:03:48.084004092 &#43;0800 &#43;08 m=&#43;0.046219756">2020</time> Shayon Tagore. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
-
-		
-
-    </body>
-</html>
+{% for item in (0..site.tags.size) %}{% unless forloop.last %}
+    {% capture this_word %}{{ tags_list[item] | strip_newlines }}{% endcapture %}
+	<article>
+        <h1 id="{{ this_word }}" class="entry-title">{{ this_word }}</h1>
+            <ul>
+                {% for post in site.tags[this_word] %}
+                    {% if post.title != null %}
+                        <li>
+                            <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}   ({{ post.date | date: "%B %d, %Y" }})</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+		  </ul>
+    </article>
+{% endunless %}{% endfor %}
