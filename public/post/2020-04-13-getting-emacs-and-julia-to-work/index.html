@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Getting Emacs and Julia to work &middot; SNTagore&#39;s blog</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="SNTagore&#39;s blog" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">SNTagore&#39;s blog</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="https://www.linkedin.com/in/shayontagore/">
+                
+                <span>linkedin</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="https://github.com/sntag">
+                
+                <span>github</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="/getting-started/">
+                
+                <span>rss</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about me</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2020-04-13 00:00:00 &#43;0000 UTC">April 13, 2020</time>
+</div>
+		<h1 class="post-title">Getting Emacs and Julia to work</h1>
+<div class="post-line"></div>
+
+		
+
+		<h1 id="julia-and-emacs">Julia and Emacs</h1>
+<p>Julia is a hot upcoming language. I see nothing but support for it online, and many benchmarks showing a notable improvements over Python or R. The main reason why it is not already rivaling Python or R is the framework and packages. The language is still new, and does not have a mature framework. Even though it is now on the stable v1.4, there are features I&rsquo;ve seen described as as &lsquo;in development&rsquo;. The packages are also maturing, and I can find many equivalent packages to those I use a biologist. However, I will admit a certain level of distrust until I understand Julia better.</p>
+<p>I&rsquo;ve been meaning to play with this language, but the biggest obstacle is the IDE. My Emacs config
+is something that I&rsquo;ve grown very attached to, and I&rsquo;m not going to use any other if I have
+to. Unfortunately, nearly all of the packages I found for Emacs+Julia have not been worked on for 3 years
+or more. I suspect that Emacs support for the language will not be great for a while. The best hope for anyone is to use
+ESS, which has active support for Julia.</p>
+<!-- raw HTML omitted -->
+<p>The best implementation of Julia that I have achieved is ESS+Jupyter. This approach has created a
+stable environment with all of the features I rely on; autocompletion, access to a shell, access to
+documentation. Plus, while org-babel is unavailable, I can add literate notes to my experiments in
+Julia!</p>
+<p>For anyone interested, a simplified version of my config<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> is this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp"><span style="color:#75715e">;; ====================</span>
+<span style="color:#75715e">;; ess</span>
+<span style="color:#75715e">;;</span>
+<span style="color:#75715e">;; This is a very simplified version of my config.</span>
+(use-package ess
+  :mode (
+         (<span style="color:#e6db74">&#34;\\.jl\\&#39;&#34;</span> <span style="color:#f92672">.</span> ess-mode)
+         (<span style="color:#e6db74">&#34;\\.R\\&#39;&#34;</span>  <span style="color:#f92672">.</span> ess-mode)
+         (<span style="color:#e6db74">&#34;\\.r\\&#39;&#34;</span>  <span style="color:#f92672">.</span> ess-mode)
+	 )
+  )
+
+<span style="color:#75715e">;; ====================</span>
+<span style="color:#75715e">;; julia-mode</span>
+<span style="color:#75715e">;;</span>
+<span style="color:#75715e">;; dependency for the ess-julia-mode-hook</span>
+(use-package julia-mode
+  :mode (<span style="color:#e6db74">&#34;\\.jl\\&#39;&#34;</span> <span style="color:#f92672">.</span> ess-mode)
+  :init
+  (add-hook <span style="color:#e6db74">&#39;julia-mode-hook</span> <span style="color:#e6db74">&#39;ess-julia-mode</span>)
+  )
+
+<span style="color:#75715e">;; ====================</span>
+<span style="color:#75715e">;; for ein (jupyter)</span>
+(use-package ein
+:defer <span style="color:#66d9ef">t</span>)
+
+(require <span style="color:#e6db74">&#39;ein</span>)
+(require <span style="color:#e6db74">&#39;ein-notebook</span>)
+(require <span style="color:#e6db74">&#39;ein-subpackages</span>)
+</code></pre></div><p>When starting the terminal using this approach, you might get the message &ldquo;Terminal not
+functional&rdquo;. According to a <a href="https://github.com/emacs-ess/ESS/issues/143">github issue</a>, the system
+is just upset about a missing history file.</p>
+<p>As a little extra, Manjaro users may have had issues with downloading packages through Julia. Add this line to your Bashrc/Zshrc, and it should be fixed:</p>
+<p><code>export JULIA_PKG_SERVER=pkg.julialang.org</code></p>
+<h1 id="summary-of-this-approach">Summary of this approach</h1>
+<h2 id="positives">Positives:</h2>
+<p>-Adds ESS support to Julia. This adds a large number of features that currently lack from any other competitors.
+-Adds jupyter support through <a href="https://github.com/millejoh/emacs-ipython-notebook">EIN</a>, enabling literate programming.
+-Source-editing will now have auto-complete for julia.
+-Stable enough to get you going!</p>
+<h2 id="negatives">negatives:</h2>
+<p>-No org-mode for now&hellip;</p>
+<p>If you want to reach out to me about this post, please leave an issue on the <a href="https://github.com/sntag/sntag.github.io/issues">github repo</a>. I will get around to setting up a comments system for a static website eventually.</p>
+<h2 id="discontinued-packages-for-julia-that-i-had-found-in-case-your-interested">discontinued packages for Julia that I had found (in case your interested)</h2>
+<ul>
+<li><a href="https://github.com/dennisog/julia-shell-mode">Julia-shell</a>: seemed promising, but was last updated in 2016 as of writing. That was before the
+release of v1. Considering the issues and level of maturity that &lt;v1 Julia had, I&rsquo;m not keen on
+testing this shell&rsquo;s stability.</li>
+<li><a href="https://github.com/gjkerns/ob-julia/blob/master/ob-julia-doc.org">ob-julia</a>: Org-mode support for Julia also seem discontinued. This was also written before v1. It
+may be worth playing with if I can get Julia and org to work. I&rsquo;ll update this post in the future
+once I figure out how to get org-babel working with Julia.</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>My full config can be found <a href="https://github.com/SNTag/.dotfiles/tree/master/emacs-26.2">here</a>. The folder &lsquo;Borg-Collective-Emacs&rsquo; has each of my major modes separated into individual el files. And yes, the name Borg is a star trek reference. My emacs assimilates each of my el files to form the final product. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/2020-01-19-new-years-resolution/" class="left arrow">&#8592;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2020-06-12 18:03:48.083014254 &#43;0800 &#43;08 m=&#43;0.045229920">2020</time> Shayon Tagore. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+		
+
+    </body>
+</html>

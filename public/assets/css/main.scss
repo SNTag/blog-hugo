@@ -1,0 +1,57 @@
+---
+sitemap: false
+---
+@import "variables";
+@import "reset";
+@import "main";
+@import "syntax";
+@import "grid";
+
+
+/*--- navigation-bar ----------------------------------------------------------------*/
+
+.navigation-bar a {
+    text-decoration: none;
+    color: #202020;
+}
+
+.navigation-bar a:hover{
+    text-decoration: none;
+    color: #535353;
+}
+
+.navigation-bar a:visited{
+    color: #535353;
+}
+
+
+/*--- personal-social-media ----------------------------------------------------------------*/
+
+.personal-social-media a {
+    text-decoration: none;
+    color: #42a593;
+}
+
+.personal-social-media a:hover{
+    text-decoration: none;
+    color: #8dc9be;
+}
+
+.personal-social-media a:visited{
+    color: #8dc9be;
+}
+
+/*--- HYPERLINKS ------------------------------------------------------------*/
+
+a{
+    color:
+	#42a593
+}
+
+a:visited{
+    color:#800080
+}
+
+a:hover{
+    color:#800080
+}
