@@ -1,0 +1,8 @@
+[submodule "public"]
+	path = public
+	url = https://github.com/SNTag/sntag.github.io
+	branch = master
+[submodule "themes/tale-hugo"]
+	path = themes/tale-hugo
+	url = https://github.com/SNTag/tale-hugo
+	branch = master
