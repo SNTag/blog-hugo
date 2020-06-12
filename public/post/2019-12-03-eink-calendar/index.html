@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>eink calendar: Part 1 &middot; SNTagore&#39;s blog</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="SNTagore&#39;s blog" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">SNTagore&#39;s blog</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="https://www.linkedin.com/in/shayontagore/">
+                
+                <span>linkedin</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="https://github.com/sntag">
+                
+                <span>github</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="/getting-started/">
+                
+                <span>rss</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="/about/">
+                
+                <span>about me</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        
+        <br>
+        <span>on&nbsp;</span><time datetime="2019-12-03 00:00:00 &#43;0000 UTC">December 3, 2019</time>
+</div>
+		<h1 class="post-title">eink calendar: Part 1</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>When I first started using org-mode on Emacs, the agenda option seemed like too much hassle.  There was too much programming involved, too many shortcuts to remember (like anything Emacs), and it just wasn&rsquo;t pretty.  But mid-2019, most other methods to become organized just didn&rsquo;t click, and org-agenda seemed ever-more appealing.  With a little bit of effort (or in my case, copy-paste) in the configuration, I&rsquo;ve managed to get something that works.  What I need now is someway to get a device to give me daily notifications when something is coming up.  That&rsquo;s when I realized that my eink Kobo reader could be it!</p>
+<p>I love my Kobo e-reader, but its not as useful as the newer versions with a direct link to the library.  I&rsquo;ve gone back to regular old paper and pen.  Besides, my need to get organized takes priority.</p>
+<p>Here&rsquo;s the rough plan: with a bit of effort, the Kobo can be reprogrammed to display my org-agenda, along with little snippets of extra information (weather for instance) using Python.  My Emacs will generate an iCal file.  This file will be uploaded to my Kobo reader through the internet for the Python program to process and generate an eink display of my calendar.</p>
+<p><img src="/images/posts/kobo-eink-display-1.jpg" alt="My Kobo e-reader"></p>
+<p>However, here&rsquo;s the main challenge to getting this project working; I can&rsquo;t seem to hack into the Kobo e-reader.  I&rsquo;ve come across resources, and can detect my Kobo on Linux.  But something is preventing that final step&hellip;Once I hack into the reader, it&rsquo;s another thing to understand the operating system to get a python script working.  I suspect I&rsquo;ll have to get a raspberry pi involved at some step, or drop the Kobo for a dedicated eink display hooked directly to my raspberry pi.</p>
+<p>The iCal files can be read using python package <a href="https://pypi.org/project/icalendar/">iCalendar</a>.  The details can then be easily extracted, requiring only formatting to get working.  Setting up the python program to generate a display should not be difficult.  There is still a good deal of information to read to ensure I understand what is necessary to influence the display of an eink display, and what is possible.</p>
+<p>To get my Emacs to generate a new iCal file whenever modifications are made, I&rsquo;m referring to this <a href="https://orgmode.org/worg/org-tutorials/org-google-sync.html">site</a>.  I&rsquo;m hesitant to post details on my current approach just yet as I suspect it will change.  Using a file sharing service (ssh, sync-thing, etc.), the iCal file will be shared to the Kobo.  However, if the Kobo OS is too foreign, the Raspberry Pi will be used to process the iCal file, and dictate to the Kobo how to display the calendar.  The best case scenario is that the Kobo is able to run python and have access to a file sharing service.</p>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/post/2019-11-29-using-a-crispr-ko-library-on-a-migration-screen/" class="left arrow">&#8592;</a>
+		<a href="/post/2020-01-19-new-years-resolution/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2020-06-12 21:04:25.022986128 &#43;0800 &#43;08 m=&#43;0.038986987">2020</time> Shayon Tagore. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
+		
+
+    </body>
+</html>
