@@ -1,0 +1,29 @@
+#baseURL: http://example.org/
+disablePathToLower: true
+languageCode: en-us
+author: "SNTag"
+title: SNTagore's blog
+theme: "tale"
+#sectionPagesMenu: "main"
+menu:
+  main:
+  - identifier: linkedin
+    name: linkedin
+    pre: <i class='fa fa-heart'></i>
+    url: "https://www.linkedin.com/in/shayontagore/"
+    weight: -130
+  - identifier: github
+    name: github
+    pre: <i class='fa fa-heart'></i>
+    url: "https://github.com/sntag"
+    weight: -120
+  - identifier: about
+    name: about me
+    pre: <i class='fa fa-heart'></i>
+    url: /about/
+    weight: -110
+  - name: rss
+#    post: <span class='alert'>New!</span>
+    pre: <i class='fa fa-road'></i>
+    url: /getting-started/
+    weight: -100
