@@ -11,6 +11,7 @@ features = ["pagination"]
 min_version = "0.50"
 title = "SNTagore's blog"
 languageCode = "en-us"
+theme = "tale-hugo"
 
 [menu]
   [[menu.main]]
