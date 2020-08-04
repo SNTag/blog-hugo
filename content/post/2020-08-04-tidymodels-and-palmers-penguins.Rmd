@@ -1,69 +1,66 @@
 ---
 title: "Tidymodels & palmer-penguins"
 author: "SNTag"
-date: '2020-08-04T00:00:00Z'
-output:
-  html_document:
-    number_sections: false
-    toc: false
-    toc_depth: 3
-    fig_caption: true
-    fig_width: 7
-    fig_height: 4
+date: '2020-08-04T00:00:00'Z
+layout: post
+categories:
+  - machine-learning
+  - tidymodels
+  - tidytuesday
+  - R
+  - programming
 ---
 
-```{R self_running, eval=FALSE, include = FALSE}
-knitr::purl("./2020-08-04-tidymodels-and-palmers-penguins.Rmd")
-source("./2020-08-04-tidymodels-and-palmers-penguins.R")
-```
 
-Oddly enough, I've been hearing a lot about tidymodels this week, from reddit to youtube. Plus, the
-tidytuesday dataset this week looks fun.I figure I'll spend a tidytuesday trying to figure out this
-new and in-development machine-learning package.
+Oddly enough, I've been hearing a lot about [tidymodels](https://www.tidymodels.org/) this week, from reddit to youtube. Plus, the
+[tidytuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-07-28/readme.md)
+dataset this week looks fun.I figure I'll spend a tidytuesday trying to figure out this new and
+in-development machine-learning package.
 
-For the newcomer, tidymodels is the planned replacement for the caret package. Complicated machine
-learning (ml) models will continue using caret for a while, because tidymodels is very new to the
-field. I'm taking the word of others more experienced in the matter, but tidymodels does have the
-same abilities as caret. This does not speak to tidymodels potential, for it has successfully tied a
+For the newcomer, `tidymodels` is the planned replacement for the `caret` package. Complicated
+machine learning (ml) models will continue using `caret` for a while as `tidymodels` is very new to
+the field. I'm taking the word of others more experienced in the matter, but it does have the same
+abilities as `caret`. This does not speak to `tidymodels` potential, for it has successfully tied a
 large number of ml models under one roof. It's use of tidy implementation means it could also make
 ml an easier field to break into for the non-computer scientist like me (I'm the classic biologist
 turned programmer).
 
-This is my exploration into the models, some of my notes, and my implementation of tidymodels. I've
+This is my exploration into the models, some of my notes, and my implementation of `tidymodels`. I've
 referred to a number of sites to get a broad idea. I've put those references at the very
-bottom. This will be useful to those new to tidymodels or machine learning.
+bottom. This will be useful to those new to the package or machine learning.
 
 # the tidymodel packages
 
 `tidymodels` isn't just one package. It's a family of packages, each serving a distinct
 purpose. I focus in this post on getting familiar with the essentials; rsample, parsnip, and yardstick.
 
-- rsample : Processes data to prepare it for models.
+- `rsample` : Processes data to prepare it for models.
 
-- recipes : used to create 'recipes' for models. Can be used to design preprocessing matrixs, and
+- `recipes` : used to create 'recipes' for models. Can be used to design preprocessing matrixs, and
   useful for reproducible research.
 
-- parsnip : For running the models. Attempts to provide a singular interface to multiple
-  packages. If you haven't realized, the name is also a pun on the original 'caret' package!
+- `parsnip` : For running the models. Attempts to provide a singular interface to multiple
+  packages. If you haven't realized, the name is also a pun on the original `caret` package!
 
-- tune : For fine tuning the models. Can be helpful in getting a model the way you need it. not
+- `tune` : For fine tuning the models. Can be helpful in getting a model the way you need it. not
   attempted here.
 
-- yardstick : helps in quantifiying models.
+- `yardstick` : helps in quantifiying models.
 
-I began my machine learning journey with caret, which is wonderfully well-built. Any advanced user
-could easily develop sophisticated scripts. Tidymodels has an advantage over caret that I appreciate
+I began my machine learning journey with `caret`, which is wonderfully well-built. Any advanced user
+could easily develop sophisticated scripts. `Tidymodels` has an advantage over `caret` that I appreciate
 as someone still learning ml; it is refreshingly easy to change models, metrics, or other details
 during experimentation.
 
 # palmer penguins
 
-When I came across tidymodels, this week's tidytuesday dataset were the palmer penguins. It is
+When I came across `tidymodels`, this week's tidytuesday dataset were the palmer penguins. It is
 proposed as an alternative to the classic iris dataset.
 
 Below, I show a simple ml model to classify penguins based on body features. I hope it is of help to someone.
 
 ## data exploration
+
 
 ```{R packages}
 pacman::p_load(magrittr,
@@ -78,7 +75,8 @@ I'm grabbing the data directly from github, but you can also get it from the CRA
 Penguins](https://github.com/allisonhorst/palmerpenguins) package.
 
 There are two types of files. The smaller and larger penguins dataset. I'll make use of
-the smaller penguins to minimize the variables while playing with tidymodels.
+the smaller penguins to minimize the variables while playing with `tidymodels`.
+
 
 ```{R prepping_data}
 penguins     <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-28/penguins.csv')
@@ -93,6 +91,7 @@ penguins %>%
 
 I need species as a factor. All rows with nas will be removed to enable downstream analysis.
 
+
 ```{R cleaning_data}
 penguins$species <- penguins$species %>%
     as.factor()
@@ -105,6 +104,7 @@ specific penguin. All four metrics measuring the body have a multi-modal distrib
 that in every case, a peak is representative of one species. For example, `bill_depth_mm` can
 identify Gentoo, `bill_length_mm` for Adelie, while Chinstrap has a strong overlap with either
 species in all metrics. I imagine that this overlap will not interfere with the identification.
+
 
 ```{R met_vs_spc, fig.align = "center", fig.cap = "metrics vs species"}
 penguins.pivot <- penguins %>%
@@ -144,8 +144,9 @@ I don't make use of the pivot functions often enough. They can be incredibly han
 
 ## machine learning
 
-Following chunk makes use of rsample to split the dataset into train/test. As this is a small
+Following chunk makes use of `rsample` to split the dataset into train/test. As this is a small
 dataset, lets split 65/35. The vfold_cv is necessary downstream when tuning the model.
+
 
 ```{R data_splitting}
 penguins.split <- penguins %>%
@@ -165,18 +166,19 @@ penguins.cv <- penguins.train %>%
 
 ## building a model
 
-In one of my first real introductions to tidymodel (which was also with the palmer penguins data
+In one of my first real introductions to `tidymodels` (which was also with the palmer penguins data
 set), the author made a large effort to use logistic regression. That is the wrong way to go,
 because a logistic is expecting two factors for the response. Linear regression is open to a greater
-range of response variables. Multi-class regression is done here with the engine 'rangr' which is
-improved over 'randomForest'.
+range of response variables. Multi-class regression is done here with the engine `ranger` which is
+improved over `randomForest`.
 
 The 'r set_engine' is not a necessity here. Depending on the parsnip chosen, it automatically
 sets to rangr. I imagine that for the complicated models, it will be necessary to specify the engine.
 
-The package tune brings a handy 'fit_resample' function. As the name suggests, it adds to the 'fit'
+The package `tune` brings a handy `fit_resample` function. As the name suggests, it adds to the 'fit'
 function by adding resampling capabilities. Specifically, it measures metrics over multiple
 resamples (folds) for tuning the model.
+
 
 ```{R model_making}
 model.fit.prep <- parsnip::rand_forest(mode = "classification") %>%
@@ -190,6 +192,7 @@ model.fit.prep
 
 Now that we have a basic model, lets build a training example.
 
+
 ```{R}
 model.fit <- parsnip::rand_forest(mode = "classification") %>%
     parsnip::set_engine("ranger") %>%
@@ -202,7 +205,8 @@ model.fit
 
 ## evaluating classification model
 
-Here, yardstick comes into play.
+Here, `yardstick` comes into play.
+
 
 ```{R metrics_study}
 penguins.fit.pred <- model.fit %>%
@@ -214,6 +218,7 @@ penguins.fit.pred <- model.fit %>%
 Looking at the metrics, the model is acceptable. Other metrics could be observed
 through 'metric_set' which I will not elaborate here. I'm satisfied by looking at
 kappa and accuracy.
+
 
 ```{R metrics_study_2}
 penguins.fit.pred %>%
@@ -227,7 +232,8 @@ species with few type 1 or 2 errors. Interestingly, I thought that chinstrap wou
 identify as it always overlapped with one of the other species. This seems to have been a benefit in
 identification.
 
-```{R curves_study, fig.align = "center", fig.cap = "ROC"}
+
+```{R curves_study, fig.align = "center", fig.cap = "ROC", warning = F, message = F}
 penguins.met <- model.fit %>%
     predict(penguins.test, type = "prob") %>%
     bind_cols(penguins.test) %>%
@@ -243,19 +249,19 @@ penguins.met %>%
 
 ```
 
-# Summary
+# summary
 
 As mentioned in the beginning, it is easy to modify the ml approach on the fly. I have enjoyed
 working with tidy models, and plan to continue with it for a while. The only regret I have about the
-tidymodels is a near lack of documentation. The website is definitely rich in articles, but I am
+`tidymodels` is a near lack of documentation. The website is definitely rich in articles, but I am
 having a tough time finding the minutia about function details. That is to be expected for the time
-being while the package develops further. For those who are not happy with tidymodels, there is the
-alternative ml wrapper 'mlr3'. It is as capable as the tidymodels and does not follow the tidy
+being while the package develops further. For those who are not happy with `tidymodels`, there is the
+alternative ml wrapper 'mlr3'. It is as capable as the `tidymodels` and does not follow the tidy
 approach, which some may find attractive. Plus, I've noticed after writing this article that mlr3
 has a bigger following than I thought. I plan to eventually post about my experiences with mlr3 vs
-tidymodels.
+`tidymodels`.
 
-# References
+# references
 
 https://rviews.rstudio.com/2019/06/19/a-gentle-intro-to-tidymodels/
 http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/#tune-the-parameters

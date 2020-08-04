@@ -2,53 +2,53 @@
 title: "Tidymodels & palmer-penguins"
 author: "SNTag"
 date: '2020-08-04T00:00:00Z'
-output:
-  html_document:
-    number_sections: false
-    toc: false
-    toc_depth: 3
-    fig_caption: true
-    fig_width: 7
-    fig_height: 4
+layout: post
+categories:
+  - machine-learning
+  - tidymodels
+  - tidytuesday
+  - R
+  - programming
 ---
 
 
 
-<p>Oddly enough, I’ve been hearing a lot about tidymodels this week, from reddit to youtube. Plus, the
-tidytuesday dataset this week looks fun.I figure I’ll spend a tidytuesday trying to figure out this
-new and in-development machine-learning package.</p>
-<p>For the newcomer, tidymodels is the planned replacement for the caret package. Complicated machine
-learning (ml) models will continue using caret for a while, because tidymodels is very new to the
-field. I’m taking the word of others more experienced in the matter, but tidymodels does have the
-same abilities as caret. This does not speak to tidymodels potential, for it has successfully tied a
+<p>Oddly enough, I’ve been hearing a lot about <code>tidymodels</code> this week, from reddit to youtube. Plus, the
+<a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-07-28/readme.md">tidytuesday</a>
+dataset this week looks fun.I figure I’ll spend a tidytuesday trying to figure out this new and
+in-development machine-learning package.</p>
+<p>For the newcomer, <code>tidymodels</code> is the planned replacement for the <code>caret</code> package. Complicated
+machine learning (ml) models will continue using <code>caret</code> for a while as <code>tidymodels</code> is very new to
+the field. I’m taking the word of others more experienced in the matter, but it does have the same
+abilities as <code>caret</code>. This does not speak to <code>tidymodels</code> potential, for it has successfully tied a
 large number of ml models under one roof. It’s use of tidy implementation means it could also make
 ml an easier field to break into for the non-computer scientist like me (I’m the classic biologist
 turned programmer).</p>
-<p>This is my exploration into the models, some of my notes, and my implementation of tidymodels. I’ve
+<p>This is my exploration into the models, some of my notes, and my implementation of <code>tidymodels</code>. I’ve
 referred to a number of sites to get a broad idea. I’ve put those references at the very
-bottom. This will be useful to those new to tidymodels or machine learning.</p>
+bottom. This will be useful to those new to the package or machine learning.</p>
 <div id="the-tidymodel-packages" class="section level1">
 <h1>the tidymodel packages</h1>
 <p><code>tidymodels</code> isn’t just one package. It’s a family of packages, each serving a distinct
 purpose. I focus in this post on getting familiar with the essentials; rsample, parsnip, and yardstick.</p>
 <ul>
-<li><p>rsample : Processes data to prepare it for models.</p></li>
-<li><p>recipes : used to create ‘recipes’ for models. Can be used to design preprocessing matrixs, and
+<li><p><code>rsample</code> : Processes data to prepare it for models.</p></li>
+<li><p><code>recipes</code> : used to create ‘recipes’ for models. Can be used to design preprocessing matrixs, and
 useful for reproducible research.</p></li>
-<li><p>parsnip : For running the models. Attempts to provide a singular interface to multiple
-packages. If you haven’t realized, the name is also a pun on the original ‘caret’ package!</p></li>
-<li><p>tune : For fine tuning the models. Can be helpful in getting a model the way you need it. not
+<li><p><code>parsnip</code> : For running the models. Attempts to provide a singular interface to multiple
+packages. If you haven’t realized, the name is also a pun on the original <code>caret</code> package!</p></li>
+<li><p><code>tune</code> : For fine tuning the models. Can be helpful in getting a model the way you need it. not
 attempted here.</p></li>
-<li><p>yardstick : helps in quantifiying models.</p></li>
+<li><p><code>yardstick</code> : helps in quantifiying models.</p></li>
 </ul>
-<p>I began my machine learning journey with caret, which is wonderfully well-built. Any advanced user
-could easily develop sophisticated scripts. Tidymodels has an advantage over caret that I appreciate
+<p>I began my machine learning journey with <code>caret</code>, which is wonderfully well-built. Any advanced user
+could easily develop sophisticated scripts. <code>Tidymodels</code> has an advantage over <code>caret</code> that I appreciate
 as someone still learning ml; it is refreshingly easy to change models, metrics, or other details
 during experimentation.</p>
 </div>
 <div id="palmer-penguins" class="section level1">
 <h1>palmer penguins</h1>
-<p>When I came across tidymodels, this week’s tidytuesday dataset were the palmer penguins. It is
+<p>When I came across <code>tidymodels</code>, this week’s tidytuesday dataset were the palmer penguins. It is
 proposed as an alternative to the classic iris dataset.</p>
 <p>Below, I show a simple ml model to classify penguins based on body features. I hope it is of help to someone.</p>
 <div id="data-exploration" class="section level2">
@@ -61,7 +61,7 @@ proposed as an alternative to the classic iris dataset.</p>
 <p>I’m grabbing the data directly from github, but you can also get it from the CRAN <a href="https://github.com/allisonhorst/palmerpenguins">Palmer
 Penguins</a> package.</p>
 <p>There are two types of files. The smaller and larger penguins dataset. I’ll make use of
-the smaller penguins to minimize the variables while playing with tidymodels.</p>
+the smaller penguins to minimize the variables while playing with <code>tidymodels</code>.</p>
 <pre class="r"><code>penguins     &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-28/penguins.csv&#39;)</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
@@ -312,7 +312,7 @@ penguins.pivot %&gt;%
 </div>
 <div id="machine-learning" class="section level2">
 <h2>machine learning</h2>
-<p>Following chunk makes use of rsample to split the dataset into train/test. As this is a small
+<p>Following chunk makes use of <code>rsample</code> to split the dataset into train/test. As this is a small
 dataset, lets split 65/35. The vfold_cv is necessary downstream when tuning the model.</p>
 <pre class="r"><code>penguins.split &lt;- penguins %&gt;%
     rsample::initial_split(prop = 0.65, strata = species)
@@ -328,14 +328,14 @@ penguins.cv &lt;- penguins.train %&gt;%
 </div>
 <div id="building-a-model" class="section level2">
 <h2>building a model</h2>
-<p>In one of my first real introductions to tidymodel (which was also with the palmer penguins data
+<p>In one of my first real introductions to <code>tidymodels</code> (which was also with the palmer penguins data
 set), the author made a large effort to use logistic regression. That is the wrong way to go,
 because a logistic is expecting two factors for the response. Linear regression is open to a greater
-range of response variables. Multi-class regression is done here with the engine ‘rangr’ which is
-improved over ‘randomForest’.</p>
+range of response variables. Multi-class regression is done here with the engine <code>ranger</code> which is
+improved over <code>randomForest</code>.</p>
 <p>The ‘r set_engine’ is not a necessity here. Depending on the parsnip chosen, it automatically
 sets to rangr. I imagine that for the complicated models, it will be necessary to specify the engine.</p>
-<p>The package tune brings a handy ‘fit_resample’ function. As the name suggests, it adds to the ‘fit’
+<p>The package <code>tune</code> brings a handy <code>fit_resample</code> function. As the name suggests, it adds to the ‘fit’
 function by adding resampling capabilities. Specifically, it measures metrics over multiple
 resamples (folds) for tuning the model.</p>
 <pre class="r"><code>model.fit.prep &lt;- parsnip::rand_forest(mode = &quot;classification&quot;) %&gt;%
@@ -368,7 +368,7 @@ model.fit.prep</code></pre>
 model.fit</code></pre>
 <pre><code>## parsnip model object
 ## 
-## Fit time:  29ms 
+## Fit time:  43ms 
 ## Ranger result
 ## 
 ## Call:
@@ -382,11 +382,11 @@ model.fit</code></pre>
 ## Target node size:                 10 
 ## Variable importance mode:         none 
 ## Splitrule:                        gini 
-## OOB prediction error (Brier s.):  0.02594975</code></pre>
+## OOB prediction error (Brier s.):  0.03363747</code></pre>
 </div>
 <div id="evaluating-classification-model" class="section level2">
 <h2>evaluating classification model</h2>
-<p>Here, yardstick comes into play.</p>
+<p>Here, <code>yardstick</code> comes into play.</p>
 <pre class="r"><code>penguins.fit.pred &lt;- model.fit %&gt;%
     predict(penguins.test) %&gt;%
     bind_cols(penguins.test)</code></pre>
@@ -398,8 +398,8 @@ kappa and accuracy.</p>
 <pre><code>## # A tibble: 2 x 3
 ##   .metric  .estimator .estimate
 ##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
-## 1 accuracy multiclass     0.983
-## 2 kap      multiclass     0.973</code></pre>
+## 1 accuracy multiclass     0.975
+## 2 kap      multiclass     0.960</code></pre>
 <p>Region-Over-Curves (ROC) are a popular measure of success. The smaller the ROC, the greater the
 ability to identify species. ROC curves of this dataset suggests a very high ability to identity
 species with few type 1 or 2 errors. Interestingly, I thought that chinstrap would be difficult to
@@ -417,8 +417,6 @@ penguins.met %&gt;%
     autoplot() +
     ggpubr::theme_pubclean() +
     theme(strip.background = element_blank())</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_polygon, x$x, x$y, index): semi-transparency is
-## not supported on this device: reported only once per page</code></pre>
 <div class="figure" style="text-align: center">
 <img src="/post/2020-08-04-tidymodels-and-palmers-penguins_files/figure-html/curves_study-1.png" alt="ROC" width="672" />
 <p class="caption">
@@ -428,19 +426,19 @@ penguins.met %&gt;%
 </div>
 </div>
 <div id="summary" class="section level1">
-<h1>Summary</h1>
+<h1>summary</h1>
 <p>As mentioned in the beginning, it is easy to modify the ml approach on the fly. I have enjoyed
 working with tidy models, and plan to continue with it for a while. The only regret I have about the
-tidymodels is a near lack of documentation. The website is definitely rich in articles, but I am
+<code>tidymodels</code> is a near lack of documentation. The website is definitely rich in articles, but I am
 having a tough time finding the minutia about function details. That is to be expected for the time
-being while the package develops further. For those who are not happy with tidymodels, there is the
-alternative ml wrapper ‘mlr3’. It is as capable as the tidymodels and does not follow the tidy
+being while the package develops further. For those who are not happy with <code>tidymodels</code>, there is the
+alternative ml wrapper ‘mlr3’. It is as capable as the <code>tidymodels</code> and does not follow the tidy
 approach, which some may find attractive. Plus, I’ve noticed after writing this article that mlr3
 has a bigger following than I thought. I plan to eventually post about my experiences with mlr3 vs
-tidymodels.</p>
+<code>tidymodels</code>.</p>
 </div>
 <div id="references" class="section level1">
-<h1>References</h1>
+<h1>references</h1>
 <p><a href="https://rviews.rstudio.com/2019/06/19/a-gentle-intro-to-tidymodels/" class="uri">https://rviews.rstudio.com/2019/06/19/a-gentle-intro-to-tidymodels/</a>
 <a href="http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/#tune-the-parameters" class="uri">http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/#tune-the-parameters</a>
 <a href="https://semba-blog.netlify.app/05/09/2020/a-unified-machine-learning-in-r-with-tidymodels/" class="uri">https://semba-blog.netlify.app/05/09/2020/a-unified-machine-learning-in-r-with-tidymodels/</a>
