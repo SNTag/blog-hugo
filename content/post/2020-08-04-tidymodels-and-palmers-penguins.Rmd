@@ -12,8 +12,13 @@ output:
     fig_height: 4
 ---
 
-Oddly enough, I've been hearing a lot about tidymodels this week, from reddit to youtube. Plus, the 
-tidytuesday dataset this week looks fun.I figure I'll spend a tidytuesday trying to figure out this 
+```{R self_running, eval=FALSE, include = FALSE}
+knitr::purl("./2020-08-04-tidymodels-and-palmers-penguins.Rmd")
+source("./2020-08-04-tidymodels-and-palmers-penguins.R")
+```
+
+Oddly enough, I've been hearing a lot about tidymodels this week, from reddit to youtube. Plus, the
+tidytuesday dataset this week looks fun.I figure I'll spend a tidytuesday trying to figure out this
 new and in-development machine-learning package.
 
 For the newcomer, tidymodels is the planned replacement for the caret package. Complicated machine
@@ -223,7 +228,7 @@ identify as it always overlapped with one of the other species. This seems to ha
 identification.
 
 ```{R curves_study, fig.align = "center", fig.cap = "ROC"}
-penguins.met <- model.fit.peng %>%
+penguins.met <- model.fit %>%
     predict(penguins.test, type = "prob") %>%
     bind_cols(penguins.test) %>%
     yardstick::gain_curve(species,
