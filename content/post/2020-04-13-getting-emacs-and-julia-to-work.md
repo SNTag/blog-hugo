@@ -6,6 +6,7 @@ categories:
 - Jupyter
 date: "2020-04-13T00:00:00Z"
 date-string: April 13, 2020
+author: "Shayonendra N. Tagore"
 title: Getting Emacs and Julia to work
 summary: I've had a great deal of difficulty in getting emacs and Julia to play well together.
 ---

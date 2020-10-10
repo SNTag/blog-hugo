@@ -1,6 +1,6 @@
 ---
 title: "Digitizing collections"
-author: "SNTag"
+author: "Shayonendra N. Tagore"
 date: "2020-10-09 15:37:17"
 layout: post
 categories:

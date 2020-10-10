@@ -5,6 +5,7 @@ categories:
 - Discipline
 date: "2020-01-19T00:00:00Z"
 date-string: January 19th, 2020
+author: "Shayonendra N. Tagore"
 title: '2020: My non-New Years Resolution'
 ---
 

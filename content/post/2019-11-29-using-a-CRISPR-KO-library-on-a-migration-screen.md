@@ -5,7 +5,8 @@ categories:
 - NGS
 date: "2019-11-29T00:00:00Z"
 date-string: November 29, 2019
-title: How I Planned to use CRISPR and scRNA-seq
+author: "Shayonendra N. Tagore"
+title: "My plan for a CRISPR-KO library and scRNA-seq"
 ---
 
 **DISCLAIMER**
