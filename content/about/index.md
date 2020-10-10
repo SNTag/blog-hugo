@@ -1,13 +1,13 @@
 ---
 layout: post
-author: SNTag
+author: "Shayonendra N. Tagore"
 ---
 
 # About the blog
 
 This blog will be a record of projects completed both professionally and in my spare time.  Beyond that, it will be about programming, history, and a little bit of life.  I started this blog out of a project to figure out static web programming.  It's a little something that's still developing into something else.
 
-# About me
+# About me: Shayonendra N. Tagore
 
 {{< rawhtml >}}
 <IMG align="left" SRC="./profile.png" ALT="my profile" width="315">
