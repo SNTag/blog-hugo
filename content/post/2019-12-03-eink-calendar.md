@@ -11,6 +11,8 @@ date-string: NOVEMBER 12, 2019
 title: 'eink calendar: Part 1'
 ---
 
+**UPDATE 2020, Oct 16** I stopped trying to modify my kobo ereader a long while back. When I started the project, I was enjoy a ready access to nearby libraries and the joys of physical books. I've come to find that there is room for the Kobo in my library, especially for the heavier books like _Les Miserable_ and _The Count of Monte Cristo_ that are just too big to carry around. I imagine I'll return to this project one-day when I get a new ereader, but that probably won't be for a long, long time. I'm more likely to substitute the ereader for a dedicated eink display.
+
 When I first started using org-mode on Emacs, the agenda option seemed like too much hassle.  There was too much programming involved, too many shortcuts to remember (like anything Emacs), and it just wasn't pretty.  But mid-2019, most other methods to become organized just didn't click, and org-agenda seemed ever-more appealing.  With a little bit of effort (or in my case, copy-paste) in the configuration, I've managed to get something that works.  What I need now is someway to get a device to give me daily notifications when something is coming up.  That's when I realized that my eink Kobo reader could be it!
 
 I love my Kobo e-reader, but its not as useful as the newer versions with a direct link to the library.  I've gone back to regular old paper and pen.  Besides, my need to get organized takes priority.
