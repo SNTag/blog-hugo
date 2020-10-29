@@ -12,7 +12,7 @@ min_version = "0.50"
 title = "SNTagore's blog"
 languageCode = "en-us"
 theme = "tale-hugo"
-BaseURL = "https://sntag.github.io"
+BaseURL = "https://sntag.github.io/"
 
 [menu]
   [[menu.main]]
