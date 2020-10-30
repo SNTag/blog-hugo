@@ -5,14 +5,22 @@ author: "Shayonendra N. Tagore"
 
 # About the blog
 
-This blog will be a record of projects completed both professionally and in my spare time.  Beyond that, it will be about programming, history, and a little bit of life.  I started this blog out of a project to figure out static web programming.  It's a little something that's still developing into something else.
+This blog will be a record of projects completed both professionally and in my spare time.  It will
+be about programming, my discoveries, and biology.  I started this blog to figure out static web
+programming.  It's a little something that's still developing into something else.
+
+## Commenting system
+
+You will only be able to comment on this site if you have a github account. Github isn't something
+that everyone is registered to, but getting comments to work as it is took a decent amount of
+trial and error. I'll eventually try adding a system where you can be anonymous.
 
 # About me: Shayonendra N. Tagore
 
 {{< rawhtml >}}
 <IMG align="left" SRC="./profile.png" ALT="my profile" width="315">
 <p>
-Graduated from National University of Singapore with an M.Sc in Molecular Biology and Stony Brook University with a B.Sc.  I am increasingly fond of programming, and picked up Python, Bash, and R.
+Graduated from National University of Singapore with an M.Sc in Molecular Biology and Stony Brook University with a B.Sc.  I am increasingly fond of programming, and picked up R, Python, and Bash.
 </p>
 
 <p>
