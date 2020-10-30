@@ -4,7 +4,6 @@ languageCode: en-us
 author: "SNTag"
 title: SNTagore's blog
 theme: "tale"
-BaseURL: "https://sntag.github.io/"
 #sectionPagesMenu: "main"
 menu:
   main:

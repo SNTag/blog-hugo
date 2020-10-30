@@ -21,11 +21,9 @@
 		{{ end -}}
 
                 <style>
-                  pre.r {
-		      background: #AD9B9B;
-                  }
-		  pre {
-		      background: #e5e5e5;
+                  pre.r { 
+                    border-style: solid; 
+                    border-width: 2px; 
                   }
                 </style>
 
@@ -37,10 +35,3 @@
 		<!-- RSS -->
 		<link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
 	</head>
-
-{{ "<!-- isso -->" | safeHTML }}
-<script data-isso="{{ .Site.BaseURL }}isso/" src="{{ .Site.BaseURL }}isso/js/embed.min.js"></script>
-{{ "<!-- end isso -->" | safeHTML }}
-
-
-<header>

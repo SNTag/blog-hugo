@@ -1,9 +1,0 @@
-{{"<!-- begin comments //-->" | safeHTML}}
-<section id="isso-thread">
-    {{"<!-- include dummy comments when on localhost //-->" | safeHTML}}
-    {{ if eq (printf "%v" $.Site.BaseURL) "http://localhost:1313/" }}
-    {{ partial "dummycomments.html" . }}
-    {{end}}
-    {{"<!-- end include dummy comments when on localhost //-->" | safeHTML}}
-</section>
-{{"<!-- end comments //-->" | safeHTML}}

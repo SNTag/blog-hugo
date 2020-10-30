@@ -7,8 +7,6 @@ author: "Shayonendra N. Tagore"
 
 This blog will be a record of projects completed both professionally and in my spare time.  Beyond that, it will be about programming, history, and a little bit of life.  I started this blog out of a project to figure out static web programming.  It's a little something that's still developing into something else.
 
-I am still developing my comments system, it may not always be online. If you don't see the system after a couple of hours or suspect an error, please let me know through a [https://github.com/SNTag/blog-hugo/issues](github issue).
-
 # About me: Shayonendra N. Tagore
 
 {{< rawhtml >}}
