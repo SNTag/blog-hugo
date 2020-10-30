@@ -1,7 +1,7 @@
 ---
 title: "Generating custom raspberry-pi images"
 author: "SNTag"
-date: "2020-10-30 14:17:40 EDT	"
+date: "2020-10-30 14:17:40"
 layout: post
 categories:
 - blog
