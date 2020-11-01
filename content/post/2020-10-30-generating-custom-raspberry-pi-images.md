@@ -11,19 +11,20 @@ categories:
 
 I've been working on a number of projects involving my raspberry pi; DSLR timelapse, a pi running
 dedicated stocks and notifications systems, and a media server. I have a silly approach of solving
-any critical errors by flashing a new raspbian image to the SD card and continuing as if a critical
-error was never made. The approach can be heavily criticized, but I'm not invested in immediately
-working out the details; I just want to project to start working. Usually, some critical software
-was just installed in the wrong way. I've been looking for easy ways to set up my raspbian images
-from the get-go and found what I think is the best approach:
-[Pi-gen](https://github.com/RPi-Distro/Pi-gen).
+any critical errors by flashing a new raspbian image to the SD card and continuing as if the error
+was never made. The approach can be heavily criticized, but I'm not invested in immediately working
+out the errors; it's usually something obscure. 90% of the time, some critical software was just
+installed the wrong way. I've been looking for easy ways to set up my raspbian images from the
+get-go and found what I think is the best approach: [Pi-gen](https://github.com/RPi-Distro/Pi-gen).
 
-The easiest and most common option is [pi-bakery](https://www.pibakery.org/). I recommend it as an
-incredibly simple way to modify your system. However, take note that it has limitations when moving
-outside the standard code-blocks and is officially unsupported (there may be a pibakery2 at some
-point). An alternative with greater control over the image is
-[pi-gen](https://duckduckgo.com/?t=canonical&q=pi-gen&ia=web). The software creates a custom-made
-raspbian image assuming you have some degree of experience with bash. This post is meant to be an
+The easiest and most common alternative is [pi-bakery](https://www.pibakery.org/). I strongly
+recommend it to those new to the raspberry pi. It modifies the official raspbian image using
+'recipes' (colourful and easy-to-understand codeblocks). However, take note that it has limitations
+when moving outside the standard code-blocks and it is officially unsupported (there may be a pibakery2
+at some point).
+
+[Pi-gen](https://duckduckgo.com/?t=canonical&q=pi-gen&ia=web) creates a custom-made raspbian image
+from scratch. Its use assumes you have some degree of experience with bash. This post is meant to be an
 update of sorts to the original article that got me onto
 [pi-gen](http://kmdouglass.github.io/posts/create-a-custom-raspbian-image-with-pi-gen-part-1/). The
 original article includes steps that are more easily configured as of late.
@@ -34,8 +35,8 @@ original article includes steps that are more easily configured as of late.
 **I want to repeat that I wrote this to add onto the details in [the original
 post](http://kmdouglass.github.io/posts/create-a-custom-raspbian-image-with-pi-gen-part-1/) that
 introduced me to pi-gen.** The original post did not make use of some very handy options available
-to set up a variety of features. It is even easier to make an image than the original post makes it
-seem.
+to set up a variety of features which inspired this post. It is even easier to make an image than
+the original post makes it seem.
 
 The pi-gen software is easy and incredibly useful. Pi-gen is the tool used to generate the official
 raspbian images, so you can be confident that it works. I recommend the first-time user to jump to
