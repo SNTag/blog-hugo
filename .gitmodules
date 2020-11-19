@@ -2,3 +2,7 @@
 [submodule "themes/tale-hugo"]
 	path = themes/tale-hugo
 	url = https://github.com/EmielH/tale-hugo/
+[submodule "public"]
+	path = public
+	url = https://github.com/sntag/sntag.github.io
+	branch = master
