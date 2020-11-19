@@ -24,7 +24,7 @@ If your hugo site does not have jquery, extract from the lightbox2 release the f
 
 ## Modifying the html
 
-The exact details of this bit can change depending on your hugo setup. The main concept is that you have to find the files with the <head> \& <body> tags. In the head section, add `<link rel="stylesheet" href="/css/lightbox.css">`. In the body section, add `<script src="/js/lightbox-plus-jquery.js"></script>`.
+The exact details of this bit can change depending on your hugo setup. The main concept is that you have to find the files with the \<head\> \& \<body\> tags. In the head section, add `<link rel="stylesheet" href="/css/lightbox.css">`. In the body section, add `<script src="/js/lightbox-plus-jquery.js"></script>`.
 
 ## Shortcode: figure
 
@@ -40,6 +40,8 @@ The shortcode written by [Julian Stier](https://julianstier.com/posts/2020/03/hu
 - src : Where the image is
 - class : where. floating.
 - caption : caption
+
+\{\{\< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" \>\}\}
 
 {{< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" >}}
 
