@@ -47,6 +47,8 @@ The shortcode written by [Julian Stier](https://julianstier.com/posts/2020/03/hu
 
 Work in progress.
 
+Followed the guide posted by [Christian Specht](https://christianspecht.de/2020/08/10/creating-an-image-gallery-with-hugo-and-lightbox2/)
+
 # References
 
 1. Figure shortcode and getting me to understand lightbox:
@@ -55,3 +57,5 @@ Work in progress.
 
 
 2. Adding gallery option:
+
+[Christian Specht: Creating an image gallery with Hugo and Lightbox2](https://christianspecht.de/2020/08/10/creating-an-image-gallery-with-hugo-and-lightbox2/)

@@ -16,6 +16,11 @@ BaseURL = "https://sntag.github.io/"
 
 [menu]
   [[menu.main]]
+    identifier = "gallery"
+    name = "gallery"
+    url = "/photos/"
+    weight = -140
+  [[menu.main]]
     identifier = "linkedin"
     name = "linkedin"
     url = "https://www.linkedin.com/in/shayontagore/"
