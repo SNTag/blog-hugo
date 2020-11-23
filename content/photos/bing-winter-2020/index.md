@@ -1,5 +1,5 @@
 ---
-title: "Binghamton Winter - 2020"
+title: "Fall-Winter 2020 Binghamton, NY"
 date: 2020-11-17T00:00:00+05:00
 ---
 

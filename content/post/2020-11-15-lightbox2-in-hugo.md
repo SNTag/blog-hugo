@@ -10,7 +10,7 @@ categories:
   - photography
 ---
 
-This is a quick run-down of how I set up lightbox2 for my hugo site. To be honest, it is my personal documentation to the [shortcode written by Julian Stier in his blog-post about lightbox2](https://julianstier.com/posts/2020/03/hugo-and-lightbox/). His post helped me deal with a number of problems using lightbox2 with hugo when the [main lightbox2 tutorial had failed me](https://lokeshdhakar.com/projects/lightbox2/). This will be a post under constant development as I work out lightbox2 and to remind myself how to implement it.
+This is a quick run-down of how I set up [lightbox2](https://lokeshdhakar.com/projects/lightbox2/) for my hugo site. To be honest, it is my personal documentation to the [shortcode written by Julian Stier in his blog-post about lightbox2](https://julianstier.com/posts/2020/03/hugo-and-lightbox/). His post helped me deal with a number of problems using lightbox2 with hugo when the [main lightbox2 tutorial had failed me](https://lokeshdhakar.com/projects/lightbox2/). This will be a post under constant development as I work out lightbox2 and to remind myself how to implement it.
 
 # Setup
 
@@ -49,7 +49,17 @@ The shortcode written by [Julian Stier](https://julianstier.com/posts/2020/03/hu
 
 Work in progress.
 
-Followed the guide posted by [Christian Specht](https://christianspecht.de/2020/08/10/creating-an-image-gallery-with-hugo-and-lightbox2/)
+Followed the guide posted by [Christian Specht](https://christianspecht.de/2020/08/10/creating-an-image-gallery-with-hugo-and-lightbox2/).
+
+My version of his can be found
+[here](https://github.com/SNTag/blog-hugo/blob/master/layouts/shortcodes/gallery2.html). It will
+display the first image as regular sized, and the rest in a minimized thumbnail.
+
+# Setting up a CDN
+
+CDN - Content Delivery Network. An important feature to have in a large-scale gallery. This website
+is currently hosted on github. [Needs an alternative](https://www.reddit.com/r/gohugo/comments/jxv2vq/making_my_own_instagram_in_hugo/) to accommodate the large number of files I expect
+to display in the future.
 
 # References
 
