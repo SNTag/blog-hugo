@@ -11,6 +11,9 @@ categories:
   - tutorial
 ---
 
+**WARNING** This post was added before its time. It is incomplete (missing a proof-read, some
+pictures), and is only posted as-is in order to test my developing framework for pictures.
+
 I've started a new project: using a Raspberry Pi to create a timelapse on a DSLR. I've recently
 moved to Binghamton NY, and from my 8th floor apartment, I have an amazing view of rolling hills. In
 the morning, clouds cover the summits. Preludes to rain drape the sky in rolling whites and

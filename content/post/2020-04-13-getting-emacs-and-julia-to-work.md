@@ -1,9 +1,9 @@
 ---
 categories:
-- Programming
-- Emacs
-- Julia
-- Jupyter
+- programming
+- emacs
+- julia
+- jupyter
 date: "2020-04-13T00:00:00Z"
 date-string: April 13, 2020
 author: "Shayonendra N. Tagore"

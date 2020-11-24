@@ -7,6 +7,7 @@ categories:
   - digitizing
   - diy
   - raspberry pi
+  - server
 ---
 
 I've begun creating a media server lately. Something that I never thought I would attempt. With the
