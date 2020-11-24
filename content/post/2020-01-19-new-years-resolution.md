@@ -1,8 +1,8 @@
 ---
 categories:
-- programming
-- goal
-- discipline
+- Programming
+- Goal
+- Discipline
 date: "2020-01-19T00:00:00Z"
 date-string: January 19th, 2020
 author: "Shayonendra N. Tagore"

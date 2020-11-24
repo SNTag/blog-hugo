@@ -1,10 +1,10 @@
 ---
 categories:
-- diy
+- project
+- hobby
 - eink
 - python
 - org-mode
-- diy
 date: "2019-12-03T00:00:00Z"
 author: "Shayonendra N. Tagore"
 date-string: NOVEMBER 12, 2019

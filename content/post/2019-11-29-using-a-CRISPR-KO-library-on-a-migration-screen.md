@@ -1,9 +1,8 @@
 ---
 categories:
 - CRISPR
-- research
+- Research
 - NGS
-- biology
 date: "2019-11-29T00:00:00Z"
 date-string: November 29, 2019
 author: "Shayonendra N. Tagore"
@@ -33,3 +32,4 @@ A better solution is in CROP-seq.  The approach does without a barcode and turns
     Gasperini, M. J., Matreyek, K. A., Packer, J., Jackson, D., …
     (2018). On the design of CRISPR-based single-cell molecular
     screens. Nature Methods, (), . <http://dx.doi.org/10.1038/nmeth.4604>
+
