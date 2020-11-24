@@ -1,1 +1,17 @@
-<p><b>Photos temporarily removed while developing the system</b></p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+
+<p><b>Photos temporarily removed while developing the system</b></p>>
+<!-- {{ $image := (.Page.Resources.ByType "image") }} -->
+<!-- {{ with $image }} -->
+<!--     {{ range $i, $e := . }} -->
+<!--       {{ $resized := $e.Fill "900x90 q100" }} -->
+
+<!--       {{ if eq $i 0 }} <\!-- first image -\-> -->
+<!--         {{ $resized = $e.Fill "900x900 q100" }} -->
+<!--       {{ end }} -->
+
+<!--       <a href="{{ $e.Permalink }}" data-lightbox="x"><img src="{{ $resized.Permalink }}" /></a> -->
+<!--     {{ end }} -->
+<!-- {{ end }} -->
