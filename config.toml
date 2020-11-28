@@ -12,7 +12,7 @@ min_version = "0.50"
 title = "SNTagore's blog"
 languageCode = "en-us"
 theme = "tale-hugo"
-BaseURL = "https://sntag.github.io/"
+BaseURL = "https://sntag.netlify.app/"
 
 [menu]
   [[menu.main]]
@@ -44,7 +44,7 @@ BaseURL = "https://sntag.github.io/"
 
 [author]
   name = "Shayon Tagore"
-  homepage = "sntag.github.io"
+  homepage = "sntag.netlify.app"
 
 # If porting an existing theme
 [original]
