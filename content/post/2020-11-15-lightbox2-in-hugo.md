@@ -53,13 +53,28 @@ Followed the guide posted by [Christian Specht](https://christianspecht.de/2020/
 
 My version of his can be found
 [here](https://github.com/SNTag/blog-hugo/blob/master/layouts/shortcodes/gallery2.html). It will
-display the first image as regular sized, and the rest in a minimized thumbnail.
+display the first image as regular sized, and the rest in a minimized thumbnail. Depends on images being locally hosted in a repository. Anything outside using a CDN for example requires third-party intervention.
 
 # Setting up a CDN
 
 CDN - Content Delivery Network. An important feature to have in a large-scale gallery. This website
 is currently hosted on github. [Needs an alternative](https://www.reddit.com/r/gohugo/comments/jxv2vq/making_my_own_instagram_in_hugo/) to accommodate the large number of files I expect
 to display in the future.
+
+Some options as I have seen are Netlify's LFS (not many good tutorials), cloudinary, Blackblaze B2+Cloudflare, or a personal VPS. I'm currently attempting cloudinary after having tried Netlify's LFS.
+
+## Netlify's LFS
+
+I will admit that it sounds great, but I have encountered a number of challenges in getting it to work. there are unfortunately limited tutorials on the topic.
+
+## Cloudinary
+
+[cloudinary](https://cloudinary.com/pricing) has a free tier with 25GB of storage and/or
+bandwitdth. This should be enough for the time being. It has a number of useful
+image-transformations which are done by modifying [the URL
+itself](https://cloudinary.com/documentation/image_transformations). It has been very satisfactory
+to use so far. I expect it will give me a decent bit of breathing room. Unfortunately,
+the next tier up is about [100$ per year](https://cloudinary.com/pricing). It may be cheaper for some to host their site on a VPS.
 
 # References
 
