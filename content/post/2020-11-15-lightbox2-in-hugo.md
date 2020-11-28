@@ -24,7 +24,7 @@ If your hugo site does not have jquery, extract from the lightbox2 release the f
 
 ## Modifying the html
 
-The exact details of this bit can change depending on your hugo setup. The main concept is that you have to find the files with the \<head\> \& \<body\> tags. In the head section, add `<link rel="stylesheet" href="/css/lightbox.css">`. In the body section, add `<script src="/js/lightbox-plus-jquery.js"></script>`.
+The exact details of this bit can change depending on your hugo setup. The main concept is that you have to find the files with the \<head\> \& \<body\> tags. In the head section, add `<link rel="stylesheet" href="/css/lightbox.css">`. In the body section, add `<script src="/js/lightbox-plus-jquery.js"></script>.
 
 ## Shortcode: figure
 
