@@ -35,7 +35,7 @@ I already have a DSLR 700D. I also have a raspberry pi. It's a simple task to co
 - USB to mini-usb or whichever cable connects to your camera
 
 
-# Putting it together: the code
+# Putting it together: code
 
 ## gphoto2
 
