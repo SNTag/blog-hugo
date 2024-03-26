@@ -21,14 +21,14 @@ BaseURL = "https://sntag.netlify.app/"
     url = "/photos/"
     weight = -140
   [[menu.main]]
+    identifier = "makers"
+    name = "makers"
+    url = "/makers/"
+    weight = -130
+  [[menu.main]]
     identifier = "linkedin"
     name = "linkedin"
     url = "https://www.linkedin.com/in/shayontagore/"
-    weight = -130
-  [[menu.main]]
-    identifier = "github"
-    name = "github"
-    url = "https://github.com/sntag"
     weight = -120
   [[menu.main]]
     name = "rss"
