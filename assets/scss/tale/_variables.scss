@@ -1,4 +1,4 @@
-// Colors
+// Colors #886aea
 $default-color: #555;
 $default-color2: #729883;
 $default-shade: #353535;
@@ -12,6 +12,7 @@ $blue: #4a9ae1;
 $shadow-color: rgba(0, 0, 0, .2);
 $shadow-color2: rgba(198, 140, 255, 1);
 $code-color: #bf616a;
+$color-transition: background-color 0.3s ease;
 
 // Fonts
 $serif-primary: 'Libre Baskerville', 'Times New Roman', Times, serif;
@@ -29,4 +30,9 @@ $monospaced: Menlo, Monaco, monospace;
   -webkit-transition: $args;
      -moz-transition: $args;
           transition: $args;
+}
+
+// Use the variable
+.element {
+    transition: $color-transition;
 }
