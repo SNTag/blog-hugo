@@ -5,22 +5,20 @@ author: "Shayonendra N. Tagore"
 
 # About the blog
 
-This blog will be a record of projects completed both professionally and in my spare time.  It will
-be about programming, my discoveries, and biology.  I started this blog to figure out static web
-programming.  It's a little something that's still developing into something else.
-
-## Commenting system
-
-You will only be able to comment on this site if you have a github account. Github isn't something
-that everyone is registered to, but getting comments to work as it is took a decent amount of
-trial and error. I'll eventually try adding a system where you can be anonymous.
+I started this blog to figure out static web programming. It was to be a record of hobbies, programming, 
+and interests, but I've admittedly started using it as a data dump for workflows that I suspect SOMEONE 
+out there might find useful!
 
 # About me: Shayonendra N. Tagore
+
+<p>
+I have a good deal of experience as a wet-lab bench scientist in molecular biology, with a range of multi-disciplinary experience! I've worked on automation, NGS, and assay development. Please feel free to reach out to me at <a href="mailto:snt.scouting879@passmail.com">snt.scouting879@passmail.com</a>.
+</p>
 
 {{< rawhtml >}}
 <IMG align="left" SRC="./profile.png" ALT="my profile" width="315">
 <p>
-Graduated from National University of Singapore with an M.Sc in Molecular Biology and Stony Brook University with a B.Sc.  I am increasingly fond of programming, and picked up R, Python, and Bash.
+Graduated from National University of Singapore with an M.Sc in Molecular Biology and Stony Brook University with a B.Sc. I've picked up R, Python, and Bash.
 </p>
 
 <p>
@@ -28,7 +26,7 @@ My studies have covered a relatively broad spectrum of biology.  My most recent 
 </p>
 
 <p>
-In my spare time, I mess with whatever catches my fancy; reading, piano, tech, or my camera.  More often than not, I'm on my computer trying to find new ways of wrecking my system.
+In my spare time, I mess with whatever catches my fancy; reading, piano, or cooking.
 </p>
 
 <p>
