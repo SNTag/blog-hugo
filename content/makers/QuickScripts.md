@@ -4,7 +4,7 @@ author: "SNTag"
 date: "2024-10-23T00:00:00Z"
 layout: post
 summary:
-    "**System Quick Scripts**: A collection of scripts I've found handy on a linux system."
+    "**System Quick Scripts**: A collection of scripts I've found handy for a linux system. Includes quick-installation scripts."
 categories:
   - Makers
   - md
@@ -12,7 +12,56 @@ categories:
   - linux
 ---
 
-# My System setup
+# Quick Install: Pop-OS
+THIS IS THE SCRIPT TO QUICKLY GET BASIC SOFTWARE UP ONLY. For further config, see "System Setup" Below.
+See "Current install setup" below or install.txt in Files > Documents > org-files.
+
+Current install setup will ONLY install programs to avoid future issues with basic file redundancies.
+
+```
+    # Basics
+    sudo apt install -y gnome-tweaks            # tweaks!!!
+    sudo apt install -y nmap                        # networking!!!
+    sudo apt install -y zsh                        # shell
+    sudo apt install -y htop		# extras
+    sudo apt install -y texlive
+    #sudo apt install -y tlp                   # Confirm before install using
+    #sudo apt install -y tlp-rdwsudo           # what does it do?
+    
+    sudo add-apt-repository universe
+    sudo apt update
+    
+    
+    # Install Nerd Fonts?
+    #git clone https://github.com/ryanoasis/nerd-fonts.git
+    #sudo ./nerd-fonts/install.sh
+    
+    
+    ### tweaks
+    ## https://www.digitalocean.com/community/tutorials/how-to-configure-periodic-trim-for-ssd-storage-on-linux-servers
+    # sudo systemctl enable fstrim.timer     # Confirm before install using sudo systemctl status fstrim.timer
+    
+    
+    # Software
+    sudo apt install -y guake                       # terminal
+    sudo apt install -y grsync
+    sudo apt install -y darktable rawtherapee inkscape gimp		# photography
+    # sudo apt install -y gparted		# tooling # Comes preinstalled in pop OS?
+    sudo apt install -y qbittorrent
+    #### MISSING GNOME TWEAKS
+    
+    #flatpak install flathub com.spotify.Client      # See https://flathub.org/apps/com.spotify.Client
+    flatpak install flathub com.zoho.Notebook        # See https://flathub.org/apps/com.zoho.Notebook
+    #flatpak install flathub com.rtosta.zapzap       # See https://flathub.org/apps/com.rtosta.zapzap
+    
+    # Proton vpn needs intervention. Use flathub instead?                # https://protonvpn.com/support/official-ubuntu-vpn-setup/
+    # webapp-manager needs intervention.                                 # https://fosspost.org/how-to-install-webapps-on-linux/
+    # AppImage Pool needs invervention Pop Shop
+    
+    #Do I need ubuntu-restricted extras? sudo apt install -y ubuntus-restricted-extras
+```
+
+# Scripts
 ## Rapid switch caps, ctrl
 using Gnome Tweak Tools.
 
