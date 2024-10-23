@@ -10,12 +10,12 @@ and interests, but I've admittedly started using it as a data dump for workflows
 out there might find useful!
 
 # About me: Shayonendra N. Tagore
+{{< rawhtml >}}
 
 <p>
 I have a good deal of experience as a wet-lab bench scientist in molecular biology, with a range of multi-disciplinary experience! I've worked on automation, NGS, and assay development. Please feel free to reach out to me at <a href="mailto:snt.scouting879@passmail.com">snt.scouting879@passmail.com</a>.
 </p>
 
-{{< rawhtml >}}
 <IMG align="left" SRC="./profile.png" ALT="my profile" width="315">
 <p>
 Graduated from National University of Singapore with an M.Sc in Molecular Biology and Stony Brook University with a B.Sc. I've picked up R, Python, and Bash.
