@@ -28,10 +28,6 @@ My studies have covered a relatively broad spectrum of biology.  My most recent 
 <p>
 In my spare time, I mess with whatever catches my fancy; reading, piano, or cooking.
 </p>
-
-<p>
-If you want to reach me, my handle online is SNTag.
-</p>
 {{< rawhtml >}}
 
 {{< rawhtml >}}
