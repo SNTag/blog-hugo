@@ -9,7 +9,7 @@ categories:
   - Art
 ---
 
-{{< figure class="floatright" src="../photos/michelangelo-night-day-giuliano-medici-duke-nemours-tomb.jpg" caption="Picture taken from https://visit-florence-italy.global.ssl.fastly.net/pics/churches/medici-new-sacristy/michelangelo-night-day-giuliano-medici-duke-nemours-tomb-new-sacristy-florence-06.jpg" >}}
+{{< figure class="floatright" src="../photos/michelangelo-night-day-giuliano-medici-duke-nemours-tomb.jpg" >}}
 
 > Precious is sleep, better to be of stone,
 > 
