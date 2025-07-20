@@ -12,12 +12,15 @@ categories:
 
 {{< glightbox-figure class="floatright" src="../../photos/michelangelo-night-day-giuliano-medici-duke-nemours-tomb.jpg" >}}
 
-> Precious is sleep, better to be of stone,
-> 
-> while the oppression and the shame still last;
-> 
-> not seeing and not hearing, I am blest;
-> 
-> so do not wake me, hush! keep your voice down
-> 
-> - Michelangelo, 1545–46
+
+
+{{< quote style="elegant" author="Michelangelo, 1545–46" >}}
+Precious is sleep, better to be of stone,
+
+while the oppression and the shame still last;
+
+not seeing and not hearing, I am blest;
+
+so do not wake me, hush! keep your voice down
+{{< /quote >}}
+
