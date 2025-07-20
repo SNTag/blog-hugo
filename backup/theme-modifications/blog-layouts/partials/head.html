@@ -1,6 +1,4 @@
 <head>
-		<!-- Google Analytics -->
-<!-- 		<!-- Google Analytics removed --> -->
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{{- if .IsHome }}
@@ -16,31 +14,36 @@
 		{{- $cssTarget		:= "css/style.css" }}
 		{{- $cssOptions		:= cond ($inServerMode) (dict "targetPath" $cssTarget "enableSourceMap" true) (dict "targetPath" $cssTarget "outputStyle" "compressed") }}
 		{{- $style			:= resources.Get "scss/tale.scss" | toCSS $cssOptions }}
-		<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+  		<link rel="stylesheet" href="{{ $style.RelPermalink }}">
 		<link rel="stylesheet" href="{{ "css/fonts.css" | relURL }}">
 		{{ range .Site.Params.css -}}
 			<link rel="stylesheet" href="{{ . | relURL }}">
 		{{ end -}}
 
+                <style>
+                  pre.r {
+		      background: #AD9B9B;
+                  }
+		  pre {
+		      background: #e5e5e5;
+                  }
+                </style>
+
 		<!-- Favicon -->
-		<link rel="icon" href="{{ "favicon.ico" | relURL }}"/>
 		<link rel="icon" type="image/png" sizes="32x32" href="{{ "images/favicon-32x32.png" | relURL }}">
 		<link rel="icon" type="image/png" sizes="16x16" href="{{ "images/favicon-16x16.png" | relURL }}">
 		<link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relURL }}">
 
+		<!-- lightbox2 -->
+		<!-- note to self: if no issues seen in images, delete this. -->
+		<!-- <link rel="stylesheet" href="/css/lightbox.css"> -->
+
 		<!-- RSS -->
 		<link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
-
-		<script src="{{ "js/darkmode.js" | relURL }}"></script>
 	</head>
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
 <!-- code blocks -->
 {{ $syntaxCSS := resources.Get "css/syntax.css" }}
 {{ if $syntaxCSS }}

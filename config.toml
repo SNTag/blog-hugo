@@ -51,6 +51,7 @@ BaseURL = "https://sntag.netlify.app/"
 
 [params]
   author = "S Tagore"
+  css = ["custom.css"]
 
 # If porting an existing theme
 [original]
