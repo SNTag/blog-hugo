@@ -28,7 +28,7 @@ My studies have covered a relatively broad spectrum of biology.  My most recent 
 <p>
 In my spare time, I mess with whatever catches my fancy; reading, piano, or cooking.
 </p>
-{{< rawhtml >}}
+{{< /rawhtml >}}
 
 {{< rawhtml >}}
 <p>
@@ -40,4 +40,4 @@ In my spare time, I mess with whatever catches my fancy; reading, piano, or cook
 	</p>
 </ul>
 </p>
-{{< rawhtml >}}
+{{< /rawhtml >}}
