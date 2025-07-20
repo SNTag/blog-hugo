@@ -46,6 +46,12 @@ BaseURL = "https://sntag.netlify.app/"
   name = "Shayon Tagore"
   homepage = "sntag.netlify.app"
 
+[taxonomies]
+  author = "S Tagore"
+
+[params]
+  author = "S Tagore"
+
 # If porting an existing theme
 [original]
   name = "Chester How"
@@ -61,3 +67,4 @@ BaseURL = "https://sntag.netlify.app/"
     codeFences = true
     guessSyntax = true
     noClasses = false  # Set to true if you want inline styles
+

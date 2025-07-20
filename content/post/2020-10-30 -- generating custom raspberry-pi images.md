@@ -32,8 +32,7 @@ original article includes steps that are more easily configured as of late.
 
 # Pi-gen
 
-**I want to repeat that I wrote this to add onto the details in [the original
-post](http://kmdouglass.github.io/posts/create-a-custom-raspbian-image-with-pi-gen-part-1/) that
+**I want to repeat that I wrote this to add onto the details in [the original post](http://kmdouglass.github.io/posts/create-a-custom-raspbian-image-with-pi-gen-part-1/) that
 introduced me to pi-gen.** The original post did not make use of some very handy options available
 to set up a variety of features which inspired this post. It is even easier to make an image than
 the original post makes it seem.
@@ -232,8 +231,7 @@ such as installing a program using git or modifying the rc.local.
 
 ## Install programs to the image using git
 
-To have the image install a git program, you can try making a /Pi-gen/stage2/03-git/ folder as [this
-fellow mentioned](https://github.com/RPi-Distro/pi-gen/issues/210). Looking at
+To have the image install a git program, you can try making a /Pi-gen/stage2/03-git/ folder as [this fellow mentioned](https://github.com/RPi-Distro/pi-gen/issues/210). Looking at
 /Pi-gen/stage2/01-sys-tweaks/ as an example, the majority of the commands are decided in
 01-run.sh. Such a file under /Pi-gen/stage2/03-git/01-run.sh may be made to install programs. I have
 not attempted this, but I do plan to try this at some point to get my dotfiles and other programs on
