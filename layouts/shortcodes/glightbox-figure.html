@@ -1,0 +1,87 @@
+{{/* 
+GLightbox Figure Shortcode for TagOS Blog
+Save as: layouts/shortcodes/glightbox-figure.html
+
+Usage: 
+{{< glightbox-figure src="/images/my-photo.jpg" caption="My Photo" >}}
+{{< glightbox-figure src="/images/my-photo.jpg" caption="My Photo" class="float-right" width="300" >}}
+*/}}
+
+{{ $src := .Get "src" }}
+{{ $caption := .Get "caption" }}
+{{ $class := .Get "class" | default "" }}
+{{ $width := .Get "width" | default "auto" }}
+{{ $gallery := .Get "gallery" | default "single" }}
+
+{{ if $src }}
+  <figure class="glightbox-figure {{ $class }}" {{ if ne $width "auto" }}style="width: {{ $width }}px;"{{ end }}>
+    <a href="{{ $src }}" 
+       class="glightbox" 
+       data-gallery="{{ $gallery }}"
+       {{ if $caption }}data-title="{{ $caption }}"{{ end }}>
+      <img src="{{ $src }}" 
+           alt="{{ $caption | default "Image" }}"
+           loading="lazy"
+           {{ if ne $width "auto" }}style="width: {{ $width }}px;"{{ end }}>
+    </a>
+    {{ if $caption }}
+      <figcaption>{{ $caption }}</figcaption>
+    {{ end }}
+  </figure>
+
+  <style>
+    .glightbox-figure {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    
+    .glightbox-figure.float-left {
+      float: left;
+      margin: 0 1.5rem 1rem 0;
+      text-align: left;
+    }
+    
+    .glightbox-figure.float-right {
+      float: right;
+      margin: 0 0 1rem 1.5rem;
+      text-align: right;
+    }
+    
+    .glightbox-figure a {
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .glightbox-figure a:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .glightbox-figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    
+    .glightbox-figure figcaption {
+      margin-top: 0.5rem;
+      font-style: italic;
+      color: #666;
+      font-size: 0.9em;
+    }
+    
+    /* Clear floats after figure */
+    .glightbox-figure.float-left + *,
+    .glightbox-figure.float-right + * {
+      clear: both;
+    }
+  </style>
+
+{{ else }}
+  <div style="color: red; font-weight: bold;">
+    ⚠️ Error: No src specified for glightbox-figure shortcode
+  </div>
+{{ end }}

@@ -168,50 +168,48 @@ using
 This script is run on a terminal from the directory with the files. auto
 runs \'make\' based on changes to the directory.
 
-```sh
-#!/bin/bash
+    #!/bin/bash
 
-# Automatically set WATCH_DIR to the directory where this script is located
-SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-WATCH_DIR="${SCRIPT_DIR}" # Directory to watch for changes
-MEXT="(md|yaml)" # Markdown file extension
-SLEEPTIME=1 # Sleep time between checks in seconds
+    # Automatically set WATCH_DIR to the directory where this script is located
+    SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+    WATCH_DIR="${SCRIPT_DIR}" # Directory to watch for changes
+    MEXT="(md|yaml)" # Markdown file extension
+    SLEEPTIME=1 # Sleep time between checks in seconds
 
-# Function to compile documents
-compile_docs() {
-    echo "Detected changes. Compiling documents..."
-    make all
-    echo "Compilation finished."
-}
+    # Function to compile documents
+    compile_docs() {
+        echo "Detected changes. Compiling documents..."
+        make all
+        echo "Compilation finished."
+    }
 
-# Function to clean generated documents
-clean_docs() {
-    echo "Cleaning up generated documents..."
-    make clean
-    echo "Cleanup finished."
-}
+    # Function to clean generated documents
+    clean_docs() {
+        echo "Cleaning up generated documents..."
+        make clean
+        echo "Cleanup finished."
+    }
 
-# Initial clean and compile
-clean_docs
-compile_docs
+    # Initial clean and compile
+    clean_docs
+    compile_docs
 
-# Get the initial state of the directory
-initial_state=$(ls -lR --time-style=full-iso $WATCH_DIR | grep -E "\.$MEXT")
+    # Get the initial state of the directory
+    initial_state=$(ls -lR --time-style=full-iso $WATCH_DIR | grep -E "\.$MEXT")
 
-echo "Watching for changes in $WATCH_DIR. Press [CTRL+C] to stop."
+    echo "Watching for changes in $WATCH_DIR. Press [CTRL+C] to stop."
 
-# Continuous loop to check for changes
-while true; do
-    sleep $SLEEPTIME
-    current_state=$(ls -lR --time-style=full-iso $WATCH_DIR | grep -E "\.$MEXT")
+    # Continuous loop to check for changes
+    while true; do
+        sleep $SLEEPTIME
+        current_state=$(ls -lR --time-style=full-iso $WATCH_DIR | grep -E "\.$MEXT")
 
-    # Check if anything changed
-    if [ "$initial_state" != "$current_state" ]; then
-        compile_docs
-        initial_state=$current_state
-    fi
-done
-```
+        # Check if anything changed
+        if [ "$initial_state" != "$current_state" ]; then
+            compile_docs
+            initial_state=$current_state
+        fi
+    done
 
 # PDF
 
@@ -225,143 +223,145 @@ done
 
 This is the makefile used to generate the document.
 
-```
-## Put this Makefile in your project directory---i.e., the directory
-## containing the paper you are writing. Assuming you are using the
-## rest of the toolchain here, you can use it to create .html, .tex,
-## and .pdf output files (complete with bibliography, if present) from
-## your markdown file.
-## -    Change the paths at the top of the file as needed.
-## -    Using `make` without arguments will generate html, tex, and pdf
-##  output files from all of the files with the designated markdown
-##  extension. The default is `.md` but you can change this.
-## -    You can specify an output format with `make tex`, `make pdf`,
-## -    `make html`, or `make docx`.
-## -    Doing `make clean` will remove all the .tex, .html, .pdf, and .docx files
-##  in your working directory. Make sure you do not have files in these
-##  formats that you want to keep!
+    ## Put this Makefile in your project directory---i.e., the directory
+    ## containing the paper you are writing. Assuming you are using the
+    ## rest of the toolchain here, you can use it to create .html, .tex,
+    ## and .pdf output files (complete with bibliography, if present) from
+    ## your markdown file.
+    ## -    Change the paths at the top of the file as needed.
+    ## -    Using `make` without arguments will generate html, tex, and pdf
+    ##  output files from all of the files with the designated markdown
+    ##  extension. The default is `.md` but you can change this.
+    ## -    You can specify an output format with `make tex`, `make pdf`,
+    ## -    `make html`, or `make docx`.
+    ## -    Doing `make clean` will remove all the .tex, .html, .pdf, and .docx files
+    ##  in your working directory. Make sure you do not have files in these
+    ##  formats that you want to keep!
 
-## IMPORTANT TODO
-# [B] Two column slides, one with image? Adjusting width of columns
-# [C] Figure out bib
-# [D] What is 'submission'?
+    ## IMPORTANT TODO
+    # [B] Two column slides, one with image? Adjusting width of columns
+    # [C] Figure out bib
+    # [D] What is 'submission'?
 
-## Later things to learn
-# What are slide levels, ex pandoc --slide-level 2
-# Confirm what pandoc --toc does
-# Possible to tell markdown to exclude titles?
+    ## Later things to learn
+    # What are slide levels, ex pandoc --slide-level 2
+    # Confirm what pandoc --toc does
+    # Possible to tell markdown to exclude titles?
 
-OS := $(shell uname)
+    OS := $(shell uname)
 
-## Markdown extension (e.g. md, markdown, mdown).
-MEXT = md
+    ## Markdown extension (e.g. md, markdown, mdown).
+    MEXT = md
 
-## All markdown files in the working directory
-SRC = $(wildcard *.$(MEXT))
+    ## All markdown files in the working directory
+    SRC = $(wildcard *.$(MEXT))
 
-## Final doc
-# This is a document that will be generated containing the sum.
-FINAL_DOC := final_doc.md
+    ## Final doc
+    # This is a document that will be generated containing the sum.
+    FINAL_DOC := final_doc.md
 
-## Location of Pandoc support files.
-PREFIX = ${HOME}/.config/pandoc/
+    ## Location of Pandoc support files.
+    PREFIX = ${HOME}/.config/pandoc/
 
-## Location of parent bibliography
-#LIBRARY=library.bib # TODO Will this function with this line included, as well as the below bib mentions?
+    ## Location of parent bibliography
+    #LIBRARY=library.bib # TODO Will this function with this line included, as well as the below bib mentions?
 
-## Location of your working bibliography file
-# Contains the citations
-#BIB = bibexport.bib
+    ## Location of your working bibliography file
+    # Contains the citations
+    #BIB = bibexport.bib
 
-## CSL stylesheet (located in the csl folder of the PREFIX directory).
-#CSL = acrf  # For styling of Bibliography # TODO are there CSL stylesheets in texlive/pandoc?
+    ## CSL stylesheet (located in the csl folder of the PREFIX directory).
+    #CSL = acrf  # For styling of Bibliography # TODO are there CSL stylesheets in texlive/pandoc?
 
-## TEMPLATE
-# Location for texlive documents is /usr/share/texlive when `sudo apt install texlive-full`
-TEMPLATE    =   metropolis  # TODO where does it search for template? # NOTE Template document.
+    ## TEMPLATE
+    # Location for texlive documents is /usr/share/texlive when `sudo apt install texlive-full`
+    TEMPLATE    =   metropolis  # TODO where does it search for template? # NOTE Template document.
 
-PDFS=$(SRC:.md=.pdf)
-TEX=$(SRC:.md=.tex)
-PPTX=$(SRC:.md=.pptx)
+    PDFS=$(SRC:.md=.pdf)
+    TEX=$(SRC:.md=.tex)
+    PPTX=$(SRC:.md=.pptx)
 
-FILTERS = --filter pandoc-crossref # --filter pandoc-citeproc #--lua-filter=draftnotes # TODO any useful lua filters for presentations?
+    FILTERS = --filter pandoc-crossref # --filter pandoc-citeproc #--lua-filter=draftnotes # TODO any useful lua filters for presentations?
 
-EXTENSIONS := simple_tables+table_captions+yaml_metadata_block+smart # TODO How are these extensions installed/added?
+    EXTENSIONS := simple_tables+table_captions+yaml_metadata_block+smart # TODO How are these extensions installed/added?
 
-##############################
-# DECLARING DOCUMENTS TO USE #
-##############################
+    ##############################
+    # DECLARING DOCUMENTS TO USE #
+    ##############################
 
-SUBMISSION  =   submit/GTK-AcRF-T1-2018.pdf  # TODO Where to save the file?
+    SUBMISSION  =   submit/GTK-AcRF-T1-2018.pdf  # TODO Where to save the file?
 
-PDFENGINE=pdflatex
+    PDFENGINE=pdflatex
 
-# NOTE When Available, add to line below:
-# bibexport.bib $(TEMPLATE).latex $(CSL).csl
-#final_presentation.pdf:    final_presentation.md presentation.md Makefile  # NOTE Files to generate .pdf # TODO Why is Makefile listed here?
-
-all:    $(PDFS) $(TEX) $(PPTX)
-
-pdf:    clean $(PDFS)
-tex:    clean $(TEX)
-pptx:   clean $(PPTX)
-
-# GUIDE:
-# See FINAL_DOC variable above
-# NOTE Change this to arrange order of documents.
-# Used to be grant.md.
-$(FINAL_DOC):   00-metadata.yaml \
-	01-presentation.md
-	cat $^ >| $@
-
-##########################
-# FILE TYPES TO GENERATE #
-##########################
-# Guide:
-# -r input format.
-# -s enables titles?
-# -V specifics a theme already in the system. Needs --template for personal theme.
-# -t output format.
-# $(FILTERS) after --pdf-engine.
-# --csl=$(CSL).csl
-# --bibliography=$(BIB)
-# -N
-# --reference-doc Use with pptx templates
-
-%.pdf:  $(FINAL_DOC)
-    pandoc -r markdown+$(EXTENSIONS) -t beamer \
-    -s --pdf-engine=$(PDFENGINE) \
-    $(FILTERS)  \
-    -V theme:$(TEMPLATE) \
-    -o $@ $
-
-%.tex:  $(FINAL_DOC)
-    pandoc -r markdown+$(EXTENSIONS) \
-    -s --pdf-engine=$(PDFENGINE) \
-    $(FILTERS)  \
-    -V theme:$(TEMPLATE) \
-    -o $@ $
-
-# TODO Add  $(FILTERS)  \ to pptx?
-%.pptx: $(FINAL_DOC)
-    pandoc -r markdown+$(EXTENSIONS) -s -t pptx \
-    -o $@ $
-    
-clean:
-    rm -f *.pdf *.tex *.pptx\
+    # NOTE When Available, add to line below:
+    # bibexport.bib $(TEMPLATE).latex $(CSL).csl
+    #final_presentation.pdf:    final_presentation.md presentation.md Makefile  # NOTE Files to generate .pdf # TODO Why is Makefile listed here?
 
 
-#########################################
-# # TO PUT TOGETHER THE FINALE DOCUMENT #
-#########################################
-# Guide:
-# This segment will combine parts from multiple documents
-# In this setup, it takes the $(GRANT_SHELL) page 1-8, places grant.pdf first 11 pages for 9-19, and back to $(GRANT_SHELL) for 20 onwards.
-# TODO figure out this section
-# $(SUBMISSION): final_presentation.pdf
-#   pdfjam --a4paper $< \
-#        --outfile $@
-```
+    all:    $(PDFS) $(TEX) $(PPTX)
+
+    pdf:    clean $(PDFS)
+    tex:    clean $(TEX)
+    pptx:   clean $(PPTX)
+
+    # GUIDE:
+    # See FINAL_DOC variable above
+    # NOTE Change this to arrange order of documents.
+    # Used to be grant.md.
+    $(FINAL_DOC):   00-metadata.yaml \
+        01-presentation.md
+        cat $^ >| $@
+
+    ##########################
+    # FILE TYPES TO GENERATE #
+    ##########################
+
+    # Guide:
+    # -r input format.
+    # -s enables titles?
+    # -V specifics a theme already in the system. Needs --template for personal theme.
+    # -t output format.
+    # $(FILTERS) after --pdf-engine.
+    # --csl=$(CSL).csl
+    # --bibliography=$(BIB)
+    # -N
+    # --reference-doc Use with pptx templates
+
+    %.pdf:  $(FINAL_DOC)
+        pandoc -r markdown+$(EXTENSIONS) -t beamer \
+        -s --pdf-engine=$(PDFENGINE) \
+        $(FILTERS)  \
+        -V theme:$(TEMPLATE) \
+        -o $@ $<
+
+    %.tex:  $(FINAL_DOC)
+        pandoc -r markdown+$(EXTENSIONS) \
+        -s --pdf-engine=$(PDFENGINE) \
+        $(FILTERS)  \
+        -V theme:$(TEMPLATE) \
+        -o $@ $<
+
+    # TODO Add  $(FILTERS)  \ to pptx?
+    %.pptx: $(FINAL_DOC)
+        pandoc -r markdown+$(EXTENSIONS) -s -t pptx \
+        -o $@ $<
+
+    clean:
+        rm -f *.pdf *.tex *.pptx
+
+
+    #########################################
+    # # TO PUT TOGETHER THE FINALE DOCUMENT #
+    #########################################
+
+    # Guide:
+    # This segment will combine parts from multiple documents
+    # In this setup, it takes the $(GRANT_SHELL) page 1-8, places grant.pdf first 11 pages for 9-19, and back to $(GRANT_SHELL) for 20 onwards.
+    # TODO figure out this section
+
+    # $(SUBMISSION): final_presentation.pdf
+    #   pdfjam --a4paper $< \
+    #        --outfile $@
 
 ## How To
 

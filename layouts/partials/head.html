@@ -35,8 +35,97 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relURL }}">
 
 		<!-- lightbox2 -->
-		<link rel="stylesheet" href="/css/lightbox.css">
+		<!-- note to self: if no issues seen in images, delete this. -->
+		<!-- <link rel="stylesheet" href="/css/lightbox.css"> -->
 
 		<!-- RSS -->
 		<link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
 	</head>
+
+
+
+<!-- code blocks -->
+{{ $syntaxCSS := resources.Get "css/syntax.css" }}
+{{ if $syntaxCSS }}
+<link rel="stylesheet" href="{{ $syntaxCSS.Permalink }}">
+{{ end }}
+
+{{ $codeBlockCSS := resources.Get "css/code-blocks.css" }}
+{{ if $codeBlockCSS }}
+<link rel="stylesheet" href="{{ $codeBlockCSS.Permalink }}">
+{{ end }}
+
+
+<!-- code blocks: Copy-Paste -->	
+{{ $codeJS := resources.Get "js/code-copy.js" }}
+{{ if $codeJS }}
+<script src="{{ $codeJS.Permalink }}" defer></script>
+{{ end }}
+
+
+	
+<!-- GLightbox CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" integrity="sha512-T+KoG3fbDoSnlgEXFQqwcTC9AdkFIxhBlmoaFqYaIjq2ShhNwNao9AKaLUPMfwiBPL0ScxAtc+UYbHAgvd+sjQ==" crossorigin="anonymous" />
+
+<!-- GLightbox JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js" integrity="sha512-S/H9RQ6govCzeA7F9D0m8NGfsGf0/HjJEiLEfWGaMCjFzavo+DkRbYtZLSO+X6cZsIXAmWOf1LGHjUSxowa/8Q==" crossorigin="anonymous"></script>
+
+<!-- Initialize GLightbox -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize GLightbox with custom settings
+    const lightbox = GLightbox({
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: false,
+        skin: 'clean', // Available: 'clean', 'modern'
+        selector: '.glightbox', // Default selector
+        closeButton: true,
+        touchFollowAxis: true,
+        keyboardNavigation: true,
+        plyr: {
+            css: 'https://cdn.plyr.io/3.6.8/plyr.css', // Optional for videos
+            js: 'https://cdn.plyr.io/3.6.8/plyr.js'
+        }
+    });
+});
+</script>
+
+<!-- Optional: Custom CSS for better integration -->
+<style>
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 8px;
+    }
+    
+    .gallery-item img {
+        height: 150px;
+    }
+}
+</style>

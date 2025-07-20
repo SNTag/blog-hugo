@@ -10,8 +10,6 @@ categories:
   - photography
 ---
 
-**Warning:** Changes in how I run this site has lead to broken links here.
-
 This is a quick run-down of how I set up [lightbox2](https://lokeshdhakar.com/projects/lightbox2/) for my hugo site. To be honest, it is my personal documentation to the [shortcode written by Julian Stier in his blog-post about lightbox2](https://julianstier.com/posts/2020/03/hugo-and-lightbox/). His post helped me deal with a number of problems using lightbox2 with hugo when the [main lightbox2 tutorial had failed me](https://lokeshdhakar.com/projects/lightbox2/). This will be a post under constant development as I work out lightbox2 and to remind myself how to implement it.
 
 # Setup
@@ -45,7 +43,7 @@ The shortcode written by [Julian Stier](https://julianstier.com/posts/2020/03/hu
 
 \{\{\< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" \>\}\}
 
-{{< glightbox-figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" >}}
+{{< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" >}}
 
 ## Gallery
 

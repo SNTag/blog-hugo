@@ -190,12 +190,12 @@ sudo apt install blender
 
 After starting blender, there should be an options menu. Select 'video editing'.
 
-{{< glightbox-figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_17-29.png" caption="Starting blender" >}}
+{{< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_17-29.png" caption="Starting blender" >}}
 
 From there, import pictures by clicking 'add > Image/Sequence' button. It should be roughly in the
 middle-left of the screen. Move to the directory with the deflickered photos and import.
 
-{{< glightbox-figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_17-30.png" caption="Add images to a track" >}}
+{{< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_17-30.png" caption="Add images to a track" >}}
 
 You should now have your photos in blender and running as a timelapse! Now it's time for some
 adjustments to the video itself. On the bottom right corner, you should see 'start' and 'end'. You
@@ -208,20 +208,20 @@ Move to 'Output Properties', and modify the frame rate in 'Output Properties > D
 below. Each 'frame' in frame rate is a picture. So 24fps is 24 images per second. That may be too
 fast or too slow depending on the number of pictures you took.
 
-{{< glightbox-figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-34.png" caption="Changing Output Properties" >}}
+{{< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-34.png" caption="Changing Output Properties" >}}
 
 Move to 'Output Properties > Output', and select the file format you want it as. I used
 FFmpeg. Importantly, under 'Output', you will see where rendered videos will go to. On my computer,
 its '/tmp/'. Make sure to remember this or change it as appropriate. You may also want to mess with
 compression with change the picture quality, its up to you.
 
-{{< glightbox-figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-36.png" caption="File type to export as" >}}
+{{< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-36.png" caption="File type to export as" >}}
 
 Finally, on the task menu, select 'Render > Render animation'. A separate window will pop up,
 showing each frame of your time-lapse in slow motion. This is the system rendering your movie. Don't
 close this window and wait for it to finish. This step will take a while.
 
-{{< glightbox-figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-37.png" caption="Rendering image" >}}
+{{< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-37.png" caption="Rendering image" >}}
 
 Once it's done, you can close the extra window. The final movie has been rendered to the directory
 mentioned above (for me, '/tmp/'). Go to that directory and look for the right video file.

@@ -9,7 +9,7 @@ categories:
   - Art
 ---
 
-{{< glightbox-figure class="floatright" src="../../photos/michelangelo-night-day-giuliano-medici-duke-nemours-tomb.jpg" >}}
+{{< figure class="floatright" src="../photos/michelangelo-night-day-giuliano-medici-duke-nemours-tomb.jpg" >}}
 
 > Precious is sleep, better to be of stone,
 > 

@@ -1,0 +1,446 @@
+---
+title: "Tidymodels & palmer-penguins"
+author: "Shayonendra N. Tagore"
+date: '2020-08-04T00:00:00Z'
+layout: post
+categories:
+  - machine-learning
+  - tidymodels
+  - tidytuesday
+  - R
+  - programming
+---
+
+
+
+<p>Oddly enough, I’ve been hearing a lot about <code>tidymodels</code> this week, from reddit to youtube. Plus, the
+<a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-07-28/readme.md">tidytuesday</a>
+dataset this week looks fun.I figure I’ll spend a tidytuesday trying to figure out this new and
+in-development machine-learning package.</p>
+<p>For the newcomer, <code>tidymodels</code> is the planned replacement for the <code>caret</code> package. Complicated
+machine learning (ml) models will continue using <code>caret</code> for a while as <code>tidymodels</code> is very new to
+the field. I’m taking the word of others more experienced in the matter, but it does have the same
+abilities as <code>caret</code>. This does not speak to <code>tidymodels</code> potential, for it has successfully tied a
+large number of ml models under one roof. It’s use of tidy implementation means it could also make
+ml an easier field to break into for the non-computer scientist like me (I’m the classic biologist
+turned programmer).</p>
+<p>This is my exploration into the models, some of my notes, and my implementation of <code>tidymodels</code>. I’ve
+referred to a number of sites to get a broad idea. I’ve put those references at the very
+bottom. This will be useful to those new to the package or machine learning.</p>
+<div id="the-tidymodel-packages" class="section level1">
+<h1>the tidymodel packages</h1>
+<p><code>tidymodels</code> isn’t just one package. It’s a family of packages, each serving a distinct
+purpose. I focus in this post on getting familiar with the essentials; <code>rsample</code>, <code>parsnip</code>, and <code>yardstick</code>.</p>
+<ul>
+<li><p><code>rsample</code> : Processes data to prepare it for models.</p></li>
+<li><p><code>recipes</code> : used to create ‘recipes’ for models. Can be used to design preprocessing matrixs, and
+useful for reproducible research.</p></li>
+<li><p><code>parsnip</code> : For running the models. Attempts to provide a singular interface to multiple
+packages. If you haven’t realized, the name is also a pun on the original <code>caret</code> package!</p></li>
+<li><p><code>tune</code> : For fine tuning the models. Can be helpful in getting a model the way you need it. not
+attempted here.</p></li>
+<li><p><code>yardstick</code> : helps in quantifiying models.</p></li>
+</ul>
+<p>I began my machine learning journey with <code>caret</code>, which is wonderfully well-built. Any advanced user
+could easily develop sophisticated scripts. <code>Tidymodels</code> has an advantage over <code>caret</code> that I appreciate
+as someone still learning ml; it is refreshingly easy to change models, metrics, or other details
+during experimentation.</p>
+</div>
+<div id="palmer-penguins" class="section level1">
+<h1>palmer penguins</h1>
+<p>When I came across <code>tidymodels</code>, this week’s tidytuesday dataset were the palmer penguins. It is
+proposed as an alternative to the classic iris dataset.</p>
+<p>Below, I show a simple ml model to classify penguins based on body features. I hope it is of help to someone.</p>
+<div id="data-exploration" class="section level2">
+<h2>data exploration</h2>
+<pre class="r"><code>pacman::p_load(magrittr,
+               tidyverse,
+               ggplot2,
+               tidymodels
+               )</code></pre>
+<p>I’m grabbing the data directly from github, but you can also get it from the CRAN <a href="https://github.com/allisonhorst/palmerpenguins">Palmer
+Penguins</a> package.</p>
+<p>There are two types of files. The smaller and larger penguins dataset. I’ll make use of
+the smaller penguins to minimize the variables while playing with <code>tidymodels</code>.</p>
+<pre class="r"><code>penguins     &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-28/penguins.csv&#39;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   species = col_character(),
+##   island = col_character(),
+##   bill_length_mm = col_double(),
+##   bill_depth_mm = col_double(),
+##   flipper_length_mm = col_double(),
+##   body_mass_g = col_double(),
+##   sex = col_character(),
+##   year = col_double()
+## )</code></pre>
+<pre class="r"><code>penguins %&gt;% dim</code></pre>
+<pre><code>## [1] 344   8</code></pre>
+<pre class="r"><code>summary(penguins)</code></pre>
+<pre><code>##    species             island          bill_length_mm  bill_depth_mm
+##  Length:344         Length:344         Min.   :32.10   Min.   :13.10
+##  Class :character   Class :character   1st Qu.:39.23   1st Qu.:15.60
+##  Mode  :character   Mode  :character   Median :44.45   Median :17.30
+##                                        Mean   :43.92   Mean   :17.15
+##                                        3rd Qu.:48.50   3rd Qu.:18.70
+##                                        Max.   :59.60   Max.   :21.50
+##                                        NA&#39;s   :2       NA&#39;s   :2
+##  flipper_length_mm  body_mass_g       sex                 year
+##  Min.   :172.0     Min.   :2700   Length:344         Min.   :2007
+##  1st Qu.:190.0     1st Qu.:3550   Class :character   1st Qu.:2007
+##  Median :197.0     Median :4050   Mode  :character   Median :2008
+##  Mean   :200.9     Mean   :4202                      Mean   :2008
+##  3rd Qu.:213.0     3rd Qu.:4750                      3rd Qu.:2009
+##  Max.   :231.0     Max.   :6300                      Max.   :2009
+##  NA&#39;s   :2         NA&#39;s   :2</code></pre>
+<pre class="r"><code>penguins %&gt;%
+    skimr::skim()</code></pre>
+<table>
+<caption>(#tab:prepping_data)Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">344</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">species</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">island</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">5</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">sex</td>
+<td align="right">11</td>
+<td align="right">0.97</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bill_length_mm</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">43.92</td>
+<td align="right">5.46</td>
+<td align="right">32.1</td>
+<td align="right">39.23</td>
+<td align="right">44.45</td>
+<td align="right">48.5</td>
+<td align="right">59.6</td>
+<td align="left">▃▇▇▆▁</td>
+</tr>
+<tr class="even">
+<td align="left">bill_depth_mm</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">17.15</td>
+<td align="right">1.97</td>
+<td align="right">13.1</td>
+<td align="right">15.60</td>
+<td align="right">17.30</td>
+<td align="right">18.7</td>
+<td align="right">21.5</td>
+<td align="left">▅▅▇▇▂</td>
+</tr>
+<tr class="odd">
+<td align="left">flipper_length_mm</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">200.92</td>
+<td align="right">14.06</td>
+<td align="right">172.0</td>
+<td align="right">190.00</td>
+<td align="right">197.00</td>
+<td align="right">213.0</td>
+<td align="right">231.0</td>
+<td align="left">▂▇▃▅▂</td>
+</tr>
+<tr class="even">
+<td align="left">body_mass_g</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">4201.75</td>
+<td align="right">801.95</td>
+<td align="right">2700.0</td>
+<td align="right">3550.00</td>
+<td align="right">4050.00</td>
+<td align="right">4750.0</td>
+<td align="right">6300.0</td>
+<td align="left">▃▇▆▃▂</td>
+</tr>
+<tr class="odd">
+<td align="left">year</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">2008.03</td>
+<td align="right">0.82</td>
+<td align="right">2007.0</td>
+<td align="right">2007.00</td>
+<td align="right">2008.00</td>
+<td align="right">2009.0</td>
+<td align="right">2009.0</td>
+<td align="left">▇▁▇▁▇</td>
+</tr>
+</tbody>
+</table>
+<p>I need species as a factor. All rows with nas will be removed to enable downstream analysis.</p>
+<pre class="r"><code>penguins$species &lt;- penguins$species %&gt;%
+    as.factor()
+penguins &lt;- penguins[-(penguins$bill_length_mm %&gt;% is.na() %&gt;% which()),]</code></pre>
+<p>Some rapid fire exploration. The graphs below suggest that each of the metrics can help identify a
+specific penguin. All four metrics measuring the body have a multi-modal distribution. It’s obvious
+that in every case, a peak is representative of one species. For example, <code>bill_depth_mm</code> can
+identify Gentoo, <code>bill_length_mm</code> for Adelie, while Chinstrap has a strong overlap with either
+species in all metrics. I imagine that this overlap will not interfere with the identification.</p>
+<pre class="r"><code>penguins.pivot &lt;- penguins %&gt;%
+    pivot_longer(cols = bill_length_mm:body_mass_g,
+                 names_to = &quot;metrics&quot;,
+                 values_to = &quot;values&quot;)
+
+penguins.pivot %&gt;%
+    ggplot(aes(values, fill = species)) +
+    geom_histogram(bins = 20) +
+    facet_wrap(~ metrics, scales = &quot;free_x&quot;)</code></pre>
+<div class="figure" style="text-align: center">
+<img src="/post/2020-08-04-tidymodels-and-palmers-penguins_files/figure-html/met_vs_spc-1.png" alt="metrics vs species" width="672" />
+<p class="caption">
+(#fig:met_vs_spc)metrics vs species
+</p>
+</div>
+<p>I don’t make use of the pivot functions often enough. They can be incredibly handy.</p>
+<!-- ```{R} -->
+<!-- penguins.species <- penguins$species %>% unique() -->
+<!-- cors.list <- list() -->
+<!-- for (i in 1:length(penguins.species)) { -->
+<!--     cors.list[[i]] <- penguins %>% -->
+<!--         filter(species == penguins.species[i]) %>% -->
+<!--         subset(select = c(3:6)) %>% -->
+<!--         cor(method = c("spearman")) %>% -->
+<!--         corrplot::corrplot() -->
+<!-- } -->
+<!-- pdf("plots.pdf") -->
+<!-- for (i in 1:3) { -->
+<!--     print(cors.list[[i]]) -->
+<!-- } -->
+<!-- dev.off() -->
+<!-- ``` -->
+</div>
+<div id="machine-learning" class="section level2">
+<h2>machine learning</h2>
+<p>Following chunk makes use of <code>rsample</code> to split the dataset into train/test. As this is a small
+dataset, lets split 65/35. The vfold_cv is necessary downstream when tuning the model.</p>
+<pre class="r"><code>penguins.split &lt;- penguins %&gt;%
+    rsample::initial_split(prop = 0.65, strata = species)
+
+penguins.train &lt;- penguins.split %&gt;%
+    rsample::training()
+
+penguins.test &lt;- penguins.split %&gt;%
+    rsample::testing()
+
+penguins.cv &lt;- penguins.train %&gt;%
+    rsample::vfold_cv(v = 10)</code></pre>
+</div>
+<div id="building-a-model" class="section level2">
+<h2>building a model</h2>
+<p>In one of my first real introductions to <code>tidymodels</code> (which was also with the palmer penguins data
+set), the author made a large effort to use logistic regression. That is the wrong way to go,
+because a logistic is expecting two factors for the response. Linear regression is open to a greater
+range of response variables. Multi-class regression is done here with the engine <code>ranger</code> which is
+improved over <code>randomForest</code>.</p>
+<p>The ‘r set_engine’ is not a necessity here. Depending on the parsnip chosen, it automatically
+sets to rangr. I imagine that for the complicated models, it will be necessary to specify the engine.</p>
+<p>The package <code>tune</code> brings a handy <code>fit_resample</code> function. As the name suggests, it adds to the ‘fit’
+function by adding resampling capabilities. Specifically, it measures metrics over multiple
+resamples (folds) for tuning the model.</p>
+<pre class="r"><code>model.fit.prep &lt;- parsnip::rand_forest(mode = &quot;classification&quot;) %&gt;%
+    parsnip::set_engine(&quot;ranger&quot;) %&gt;%
+    tune::fit_resamples(species ~ bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g,
+                        resamples = penguins.cv)
+
+model.fit.prep</code></pre>
+<pre><code>## # Resampling results
+## # 10-fold cross-validation
+## # A tibble: 10 x 4
+##    splits           id     .metrics         .notes
+##    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;
+##  1 &lt;split [201/23]&gt; Fold01 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+##  2 &lt;split [201/23]&gt; Fold02 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+##  3 &lt;split [201/23]&gt; Fold03 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+##  4 &lt;split [201/23]&gt; Fold04 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+##  5 &lt;split [202/22]&gt; Fold05 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+##  6 &lt;split [202/22]&gt; Fold06 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+##  7 &lt;split [202/22]&gt; Fold07 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+##  8 &lt;split [202/22]&gt; Fold08 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+##  9 &lt;split [202/22]&gt; Fold09 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+## 10 &lt;split [202/22]&gt; Fold10 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;</code></pre>
+<p>Now that we have a basic model, lets build a training example.</p>
+<pre class="r"><code>model.fit &lt;- parsnip::rand_forest(mode = &quot;classification&quot;) %&gt;%
+    parsnip::set_engine(&quot;ranger&quot;) %&gt;%
+    fit(species ~ bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g,
+                        data = penguins.train)
+
+model.fit</code></pre>
+<pre><code>## parsnip model object
+##
+## Fit time:  43ms
+## Ranger result
+##
+## Call:
+##  ranger::ranger(formula = species ~ bill_length_mm + bill_depth_mm +      flipper_length_mm + body_mass_g, data = data, num.threads = 1,      verbose = FALSE, seed = sample.int(10^5, 1), probability = TRUE)
+##
+## Type:                             Probability estimation
+## Number of trees:                  500
+## Sample size:                      224
+## Number of independent variables:  4
+## Mtry:                             2
+## Target node size:                 10
+## Variable importance mode:         none
+## Splitrule:                        gini
+## OOB prediction error (Brier s.):  0.03363747</code></pre>
+</div>
+<div id="evaluating-classification-model" class="section level2">
+<h2>evaluating classification model</h2>
+<p>Here, <code>yardstick</code> comes into play.</p>
+<pre class="r"><code>penguins.fit.pred &lt;- model.fit %&gt;%
+    predict(penguins.test) %&gt;%
+    bind_cols(penguins.test)</code></pre>
+<p>Looking at the metrics, the model is acceptable. Other metrics could be observed
+through ‘metric_set’ which I will not elaborate here. I’m satisfied by looking at
+kappa and accuracy.</p>
+<pre class="r"><code>penguins.fit.pred %&gt;%
+    metrics(species, estimate = .pred_class)</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   .metric  .estimator .estimate
+##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
+## 1 accuracy multiclass     0.975
+## 2 kap      multiclass     0.960</code></pre>
+<p>Region-Over-Curves (ROC) are a popular measure of success. The smaller the ROC, the greater the
+ability to identify species. ROC curves of this dataset suggests a very high ability to identity
+species with few type 1 or 2 errors. Interestingly, I thought that chinstrap would be difficult to
+identify as it always overlapped with one of the other species. This seems to have been a benefit in
+identification.</p>
+<pre class="r"><code>penguins.met &lt;- model.fit %&gt;%
+    predict(penguins.test, type = &quot;prob&quot;) %&gt;%
+    bind_cols(penguins.test) %&gt;%
+    yardstick::gain_curve(species,
+                          .pred_Adelie,
+                          .pred_Chinstrap,
+                          .pred_Gentoo)
+
+penguins.met %&gt;%
+    autoplot() +
+    ggpubr::theme_pubclean() +
+    theme(strip.background = element_blank())</code></pre>
+<div class="figure" style="text-align: center">
+<img src="/post/2020-08-04-tidymodels-and-palmers-penguins_files/figure-html/curves_study-1.png" alt="ROC" width="672" />
+<p class="caption">
+(#fig:curves_study)ROC
+</p>
+</div>
+</div>
+</div>
+<div id="summary" class="section level1">
+<h1>summary</h1>
+<p>As mentioned in the beginning, it is easy to modify the ml approach on the fly. I have enjoyed
+working with tidy models, and plan to continue with it for a while. The only regret I have about the
+<code>tidymodels</code> is a near lack of documentation. The website is definitely rich in articles, but I am
+having a tough time finding the minutia about function details. That is to be expected for the time
+being while the package develops further. For those who are not happy with <code>tidymodels</code>, there is the
+alternative ml wrapper ‘mlr3’. It is as capable as the <code>tidymodels</code> and does not follow the tidy
+approach, which some may find attractive. Plus, I’ve noticed after writing this article that mlr3
+has a bigger following than I thought. I plan to eventually post about my experiences with mlr3 vs
+<code>tidymodels</code>.</p>
+</div>
+<div id="references" class="section level1">
+<h1>references</h1>
+<p><a href="https://rviews.rstudio.com/2019/06/19/a-gentle-intro-to-tidymodels/" class="uri">https://rviews.rstudio.com/2019/06/19/a-gentle-intro-to-tidymodels/</a>
+<a href="http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/#tune-the-parameters" class="uri">http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/#tune-the-parameters</a>
+<a href="https://semba-blog.netlify.app/05/09/2020/a-unified-machine-learning-in-r-with-tidymodels/" class="uri">https://semba-blog.netlify.app/05/09/2020/a-unified-machine-learning-in-r-with-tidymodels/</a>
+<a href="https://www.youtube.com/watch?v=ImpXawPNCfM" class="uri">https://www.youtube.com/watch?v=ImpXawPNCfM</a></p>
+</div>

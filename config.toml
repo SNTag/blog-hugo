@@ -51,3 +51,13 @@ BaseURL = "https://sntag.netlify.app/"
   name = "Chester How"
   homepage = "https://github.com/chesterhow/tale"
   repo = "https://github.com/chesterhow/tale"
+  
+[markup]
+  [markup.highlight]
+    style = "solarized-dark"  # or "monokai", "dracula", "vs", etc.
+    lineNos = true
+    lineNumbersInTable = false
+    tabWidth = 4
+    codeFences = true
+    guessSyntax = true
+    noClasses = false  # Set to true if you want inline styles

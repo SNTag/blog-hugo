@@ -1,0 +1,102 @@
+/* Base code block styling */
+.highlight {
+  position: relative;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+/* Dark theme alternative */
+@media (prefers-color-scheme: dark) {
+  .highlight {
+    background-color: #1e1e1e;
+    border-color: #333;
+  }
+}
+
+/* Code content styling */
+.highlight pre {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  tab-size: 4;
+}
+
+/* Inline code styling */
+code {
+  background-color: #f1f3f4;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 0.85em;
+}
+
+/* Language label */
+.highlight::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #6c757d;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-bottom-left-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Line numbers styling */
+.highlight .lntd:first-child {
+  background-color: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+  padding-right: 0.5rem;
+  user-select: none;
+}
+
+.highlight .lnt {
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+/* Copy button styling */
+.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.highlight:hover .copy-button {
+  opacity: 1;
+}
+
+.copy-button:hover {
+  background: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .highlight pre {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .copy-button {
+    opacity: 1; /* Always visible on mobile */
+  }
+}
