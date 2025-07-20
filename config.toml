@@ -28,7 +28,6 @@ BaseURL = "https://sntag.netlify.app/"
   [[menu.main]]
     name = "rss"
     url = "/index.xml"
-    url = "/getting-started/"
     weight = -110
   [[menu.main]]
     identifier = "about"
