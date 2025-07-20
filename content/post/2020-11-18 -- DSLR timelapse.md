@@ -42,8 +42,7 @@ I already have a DSLR 700D. I also have a raspberry pi. It's a simple task to co
 The code is extremely simple. But like most of my DIY projects, I came across problems that are
 caused because tech hates me as much as I love it. I will say now that the tutorials I used to put
 my project together are somewhat outdated or have an inefficent approach. For example, in the
-[pimylife: Raspberry Pi DSLR Camera
-Control](https://pimylifeup.com/raspberry-pi-dslr-camera-control/) tutorial, don't install gphoto2
+[pimylife: Raspberry Pi DSLR Camera Control](https://pimylifeup.com/raspberry-pi-dslr-camera-control/) tutorial, don't install gphoto2
 to the raspberry pi from GitHub. I recommend just using your package manager.
 
 ```{bash}
