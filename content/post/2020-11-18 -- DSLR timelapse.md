@@ -45,7 +45,7 @@ my project together are somewhat outdated or have an inefficent approach. For ex
 [pimylife: Raspberry Pi DSLR Camera Control](https://pimylifeup.com/raspberry-pi-dslr-camera-control/) tutorial, don't install gphoto2
 to the raspberry pi from GitHub. I recommend just using your package manager.
 
-```{bash}
+```bash
 # debian/ubuntu/pop-os
 sudo apt install gphoto2
 
@@ -54,7 +54,7 @@ sudo apt install gphoto2
 Installing gphoto2 from github gave me a headache. It would detect the camera, but unable to capture
 photos. If gphoto2 installed correctly, run the following:
 
-```{bash}
+```bash
 # is gphoto2 installed?
 gphoto2 --version
 
@@ -62,7 +62,7 @@ gphoto2 --version
 
 If it worked, try connecting your DSLR to the pi and running the following. It should return the name of your camera:
 
-```{bash}
+```bash
 gphoto2 --auto-detect
 
 ```
@@ -76,7 +76,7 @@ avilable configurations change camera-to-camera. See the
 configurations can be set using --set-config. The first thing you want to state in the script is
 where to save the photos. This was one of my original headaches.
 
-```{bash}
+```bash
 # Where to save the script: DSLR's SD-card (1)
 gphoto2 --set-config capturetarget=1
 
@@ -84,7 +84,7 @@ gphoto2 --set-config capturetarget=1
 
 after that, I created a simple loop that waited for x period of time before taking another photo:
 
-```{bash}
+```bash
 x=1
 until [ $x -gt 10 ]
 do
@@ -103,7 +103,7 @@ its every 2 minutes. You can set it up for every x seconds (`sleep xs`), x hours
 fraction of time (`sleep xs ym zh`). This gives this very simple bash script that will take photos
 non-stop until the script is ended.
 
-```{bash}
+```bash
 #!/usr/bin/env
 # Author: SNTag
 # Date: 2020-Oct-25th
@@ -155,7 +155,7 @@ consistent. There is a simple script on github to do
 [this](https://github.com/cyberang3l/timelapse-deflicker). Don't worry, this script will NOT affect
 your original photos! You will want to download this repo to your computer:
 
-```{bash}
+```bash
 # download timelapse-deflicker. will require 'git'
 git clone https://github.com/cyberang3l/timelapse-deflicker
 
@@ -166,7 +166,7 @@ determine the luminosity per photo in the directory and average them to reduce f
 final steps of making a timelapse! The modified photos will be placed in the same directory under
 './Deflickered'. To run the script, run this command in the directory:
 
-```{bash}
+```bash
 ./timelapse-deflicker.pl -p 2 -v
 
 ```
@@ -181,7 +181,7 @@ time-being. But I did manage to get it working, and this is how I did it.
 
 The obvious first step is to get blender:
 
-```{bash}
+```bash
 # install blender (debian/ubuntu/pop-os)
 sudo apt install blender
 
@@ -201,7 +201,7 @@ adjustments to the video itself. On the bottom right corner, you should see 'sta
 will want to modify the 'end' value to end around where your timelapse ends. If you cant get the
 exact value, you can drag the end of the photo-region to extend/compress it.
 
-<img align="center" src="../photos/DSLR-timelapse/EMPTY" alt="Editing length of the track">
+<!-- <img align="center" src="../photos/DSLR-timelapse/EMPTY" alt="Editing length of the track"> -->
 
 Move to 'Output Properties', and modify the frame rate in 'Output Properties > Dimensions' as shown
 below. Each 'frame' in frame rate is a picture. So 24fps is 24 images per second. That may be too

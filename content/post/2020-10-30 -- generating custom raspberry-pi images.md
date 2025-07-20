@@ -62,7 +62,7 @@ You will need 'docker' to run Pi-gen. Instructions to install it can be found
 
 The first step is to get the software.
 
-```{bash}
+```bash
 cd ~
 git clone https://github.com/RPi-Distro/Pi-gen
 
@@ -83,7 +83,7 @@ stage5 - the normal raspbian image. installs bloatware.
 I'm interested in setting up a headerless raspberry pi, so I disable stage 3, 4, 5 by making simple
 files. To make a full raspbian image with desktop enabled, ignore the following.
 
-```{bash}
+```bash
 touch ./stage3/SKIP ./stage4/SKIP ./stage5/SKIP
 touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
@@ -93,7 +93,7 @@ touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
 It is very easy to configure Pi-gen. Make a config file ( /pi-gen/config ) and add the following:
 
-```{bash}
+```bash
 # image name
 IMG_NAME=puck
 
@@ -124,7 +124,7 @@ This line decides the name of the image you are creating. for me, I called it si
 ['Puck'](https://en.wikipedia.org/wiki/Puck_(A_Midsummer_Night%27s_Dream)), after the main
 user-account that will be assigned to the image.
 
-```{bash}
+```bash
 IMG_NAME=puck
 
 ```
@@ -138,7 +138,7 @@ The first line says what the main user-name should be. The default is `pi`, and 
 change that to reduce chances of a security breach. To have any mischief nought go ill, you should
 change the password too by setting the variable `FIRST_USER_PASS`.
 
-```{bash}
+```bash
 FIRST_USER_NAME="Puck"
 FIRST_USER_PASS="JackShallHaveJillNoughtShallGoIll"
 
@@ -148,7 +148,7 @@ FIRST_USER_PASS="JackShallHaveJillNoughtShallGoIll"
 
 I want the raspberry to be on the same time as me. Both of these lines inform the timezone.
 
-```{bash}
+```bash
 LOCALE_DEFAULT="en_US.UTF-8"
 TIMEZONE_DEFAULT="America/New_York"
 
@@ -164,7 +164,7 @@ If you are going with a desktop image, I recommend disabling ssh (`ENABLE_SSH=0`
 what you are doing. It will be safer.
 
 
-```{bash}
+```bash
 ENABLE_SSH=1
 WPA_ESSID="MinisTirith"
 WPA_PASSWORD="Gandalf"
@@ -215,7 +215,7 @@ is `/dev/mmcblk0`. Otherwise you can use the terminal command `df`. Simply obser
 list without the SD card inserted and with it in. Navigate to the directory where you have unzipped
 your image and give the path to the SD card to the variable `of=`, as I have below.
 
-```{bash}
+```bash
 sudo dd if=2020-10-27-puck-lite.img of=/dev/mmcblk0 bs=4096; sync
 
 ```
