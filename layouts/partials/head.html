@@ -56,11 +56,26 @@
 {{ end }}
 
 
+
+
 <!-- code blocks: Copy-Paste -->	
 {{ $codeJS := resources.Get "js/code-copy.js" }}
 {{ if $codeJS }}
 <script src="{{ $codeJS.Permalink }}" defer></script>
 {{ end }}
+
+
+
+
+<!-- quotes -->
+{{ $quotesCSS := resources.Get "css/quotes.css" }}
+{{ if $quotesCSS }}
+<link rel="stylesheet" href="{{ $quotesCSS.Permalink }}">
+{{ end }}
+
+
+
+
 
 
 	

@@ -1,0 +1,109 @@
+/* Enhanced blockquote styling */
+blockquote {
+  position: relative;
+  font-style: italic;
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin: 2rem 0;
+  padding: 1.5rem 2rem 1.5rem 3rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-left: 4px solid #007bff;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  blockquote {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    color: #e2e8f0;
+    border-left-color: #4299e1;
+  }
+}
+
+/* Quote marks */
+blockquote::before {
+  content: '"';
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 3rem;
+  font-family: Georgia, serif;
+  color: #007bff;
+  opacity: 0.3;
+  line-height: 1;
+}
+
+/* Attribution styling */
+blockquote cite,
+blockquote footer {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9em;
+  font-style: normal;
+  color: #6c757d;
+}
+
+blockquote cite::before,
+blockquote footer::before {
+  content: "— ";
+}
+
+/* Nested blockquotes */
+blockquote blockquote {
+  margin: 1rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 2px solid #6c757d;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Alternative quote styles */
+.quote-style-minimal {
+  background: none;
+  border-left: 3px solid #007bff;
+  padding: 1rem 2rem;
+  font-style: italic;
+  box-shadow: none;
+}
+
+.quote-style-elegant {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-left: 4px solid #28a745;
+  padding: 2rem;
+  position: relative;
+  font-family: Georgia, serif;
+}
+
+.quote-style-elegant::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 2rem;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-top-color: #28a745;
+}
+
+/* Pullquote style for standout quotes */
+.pullquote {
+  float: right;
+  width: 300px;
+  margin: 0 0 1rem 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-top: 3px solid #007bff;
+  border-bottom: 3px solid #007bff;
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .pullquote {
+    float: none;
+    width: 100%;
+    margin: 1rem 0;
+  }
+}

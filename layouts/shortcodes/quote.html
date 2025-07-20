@@ -1,0 +1,14 @@
+{{ $style := .Get "style" | default "default" }}
+{{ $author := .Get "author" }}
+{{ $source := .Get "source" }}
+
+<blockquote class="quote-style-{{ $style }}">
+  {{ .Inner | markdownify }}
+  {{ if or $author $source }}
+  <footer>
+    {{ if $author }}{{ $author }}{{ end }}
+    {{ if and $author $source }}, {{ end }}
+    {{ if $source }}<cite>{{ $source }}</cite>{{ end }}
+  </footer>
+  {{ end }}
+</blockquote>
