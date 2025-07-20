@@ -16,11 +16,6 @@ BaseURL = "https://sntag.netlify.app/"
 
 [menu]
   [[menu.main]]
-    identifier = "gallery"
-    name = "gallery"
-    url = "/photos/"
-    weight = -140
-  [[menu.main]]
     identifier = "makers"
     name = "makers"
     url = "/makers/"
@@ -32,7 +27,7 @@ BaseURL = "https://sntag.netlify.app/"
     weight = -120
   [[menu.main]]
     name = "rss"
-#    post = <span class='alert'>New!</span>
+    url = "/index.xml"
     url = "/getting-started/"
     weight = -110
   [[menu.main]]
@@ -52,6 +47,7 @@ BaseURL = "https://sntag.netlify.app/"
 [params]
   author = "S Tagore"
   css = ["custom.css"]
+  rss = true
 
 # If porting an existing theme
 [original]
@@ -69,3 +65,6 @@ BaseURL = "https://sntag.netlify.app/"
     guessSyntax = true
     noClasses = false  # Set to true if you want inline styles
 
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
