@@ -141,3 +141,49 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 </style>
+
+
+
+
+
+
+<!-- Fig # style -->
+<style>
+/* Figure numbering and styling */
+.post-content, .page-content, article {
+  counter-reset: figure-counter;
+}
+
+figure {
+  counter-increment: figure-counter;
+}
+
+figcaption::before {
+  content: "Fig " counter(figure-counter) ". ";
+  font-weight: bold;
+}
+
+figcaption {
+  text-align: center;
+  margin-top: 0.75rem;
+  color: #666;
+}
+</style>
+
+
+
+
+
+
+
+
+
+{{ if .Site.IsServer }}
+  {{ $cssOpts := (dict "targetPath" "css/typography.css" "enableSourceMap" true ) }}
+  {{ $styles := resources.Get "css/typography/main.css" | resources.ExecuteAsTemplate "css/typography.css" . | toCSS $cssOpts }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
+{{ else }}
+  {{ $cssOpts := (dict "targetPath" "css/typography.css" ) }}
+  {{ $styles := resources.Get "css/typography/main.css" | resources.ExecuteAsTemplate "css/typography.css" . | toCSS $cssOpts | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
+{{ end }}

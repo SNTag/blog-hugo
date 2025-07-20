@@ -1,0 +1,53 @@
+/* assets/css/typography/main.css */
+
+/* Style all Markdown-generated links - Typomagical inspired */
+a {
+    color: #6b7280 !important;
+    text-decoration: none !important;
+    font-variant: small-caps !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.025em !important;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #374151 !important;
+    background-color: rgba(107, 114, 128, 0.1) !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+a:visited {
+    color: #9ca3af !important;
+}
+
+.content a, article a, main a {
+    color: #6b7280 !important;
+    text-decoration: none !important;
+    font-variant: small-caps !important;
+    font-weight: 600 !important;
+}
+
+a[href^="mailto:"] {
+    color: #059669 !important;
+    font-weight: 500 !important;
+    font-variant: small-caps !important;
+}
+
+a[href^="http"]:not([href*="sntag.netlify.app"])::after {
+    content: " ↗" !important;
+    font-size: 0.8em !important;
+    font-variant: normal !important;
+    opacity: 0.7 !important;
+}
+
+/* Base typography settings */
+/*
+body {
+    font-family: 'Your-Font', Georgia, serif;
+    line-height: 1.6;
+    color: #333;
+}
+*/
+
+/* You can add other typography rules here later */
