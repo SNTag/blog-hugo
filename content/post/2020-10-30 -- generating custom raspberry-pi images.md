@@ -188,14 +188,14 @@ interest in a new line, and it will be installed using the command `sudo apt-get
 Even if you haven't done the above steps, you can build an image. It only requires maximum of two
 lines too. Go to the root directory of Pi-gen, and:
 
-```{R}
+```bash
 ./build-docker.sh
 
 ```
 
 There is a decent chance for the build to get interrupted. In most cases, the following will save you:
 
-```{R}
+```bash
 CONTINUE=1 ./build-docker.sh
 
 ```
