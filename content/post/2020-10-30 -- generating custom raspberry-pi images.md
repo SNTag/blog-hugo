@@ -13,17 +13,16 @@ I've been working on a number of projects involving my raspberry pi; DSLR timela
 dedicated stocks and notifications systems, and a media server. I have a silly approach of solving
 any critical errors by flashing a new raspbian image to the SD card and continuing as if the error
 was never made. The approach can be heavily criticized, but I'm not invested in immediately working
-out the errors; it's usually something obscure. 90% of the time, some critical software was just
+out the errors; it's usually something obscure. 90\% of the time, some critical software was just
 installed the wrong way. I've been looking for easy ways to set up my raspbian images from the
-get-go and found what I think is the best approach: [Pi-gen](https://github.com/RPi-Distro/Pi-gen).
+get-go and found what I think is the best approach: Pi-gen.
 
 The easiest and most common alternative is [pi-bakery](https://www.pibakery.org/). I strongly
 recommend it to those new to the raspberry pi. It modifies the official raspbian image using
 'recipes' (colourful and easy-to-understand codeblocks). However, take note that it has limitations
-when moving outside the standard code-blocks and it is officially unsupported (there may be a pibakery2
-at some point).
+when moving outside the standard code-blocks and it is officially unsupported (there may be a pibakery2 at some point).
 
-[Pi-gen](https://duckduckgo.com/?t=canonical&q=pi-gen&ia=web) creates a custom-made raspbian image
+[Pi-gen](https://github.com/RPi-Distro/Pi-gen) creates a custom-made raspbian image
 from scratch. Its use assumes you have some degree of experience with bash. This post is meant to be an
 update of sorts to the original article that got me onto
 [pi-gen](http://kmdouglass.github.io/posts/create-a-custom-raspbian-image-with-pi-gen-part-1/). The

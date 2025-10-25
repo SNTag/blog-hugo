@@ -1,35 +1,41 @@
 {{ define "main" }}
-
-<main>
-	<div class="post">
-		{{ partial "single/post-info.html" . }}
-		{{ partial "single/title.html" . }}
-
-		{{ partial "single/header.html" . }}
-
-		{{ .Content }}
-
-		{{ partial "single/footer.html" . }}
-	</div>
-
-        <script src="https://utteranc.es/client.js"
-                repo="sntag/blog-hugo"
-                issue-term="title"
-                theme="github-light"
-                crossorigin="anonymous"
-                async>
-        </script>
-
-	<div class="pagination">
-		{{- if .PrevPage }}
-		<a href="{{ .PrevPage.RelPermalink }}" class="left arrow">&#8592;</a>
-		{{- end }}
-		{{- if .NextPage }}
-		<a href="{{ .NextPage.RelPermalink }}" class="right arrow">&#8594;</a>
-		{{- end }}
-
-		<a href="#" class="top">Top</a>
-	</div>
-</main>
-
+<div class="post-container">
+	<main class="post-content">
+		<div class="post">
+			{{ partial "single/post-info.html" . }}
+			{{ partial "single/title.html" . }}
+			{{ partial "single/header.html" . }}
+			{{ .Content }}
+			{{ partial "single/footer.html" . }}
+		</div>
+		<!-- Adds a comments section -->
+		<!-- =========================== -->
+		<script src="https://utteranc.es/client.js"
+				repo="sntag/blog-hugo"
+				issue-term="title"
+				theme="github-light"
+				crossorigin="anonymous"
+				async>
+		</script>
+		<!-- --------------------------- -->
+		<div class="pagination">
+			{{- if .Page.Prev }}
+			<a href="{{ .Page.Prev.RelPermalink }}" class="left arrow">&#8592;</a>
+			{{- end }}
+			{{- if .Page.Next }}
+			<a href="{{ .Page.Next.RelPermalink }}" class="right arrow">&#8594;</a>
+			{{- end }}
+			<a href="#" class="top">Top</a>
+		</div>
+	</main>
+	
+	<!-- Effort to add a ToC -->
+	<!-- =========================== -->
+	{{ if .TableOfContents }}
+	<aside class="toc">
+		<h3>Contents</h3>
+		{{ .TableOfContents }}
+	</aside>
+	{{ end }}
+</div>
 {{ end }}

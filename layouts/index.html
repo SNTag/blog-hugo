@@ -1,13 +1,9 @@
 {{ define "main" }}
 
 <main>
-  {{ partial "index/introduction.html" . }}
+  <a href="/"><img src="/images/header/clean-and-simple-header.png"></a>
 
-  <center>
-    <span class="main-header-image">
-      <a href="/"><img src="/images/header/clean-and-simple-header.png"></a>
-    </span>
-  </center>
+  {{ partial "index/introduction.html" . }}
 
   <div class="catalogue">
     {{ range (.Paginate .Site.RegularPages).Pages }}

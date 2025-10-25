@@ -1,0 +1,26 @@
+<article class="book-item">
+  {{ if .Params.cover }}
+  <div class="book-cover">
+    <a href="{{ .Permalink }}">
+      <img src="{{ .Params.cover }}" alt="{{ .Title }} cover">
+    </a>
+  </div>
+  {{ end }}
+  
+  <div class="book-details">
+    <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    <time>{{ .Date.Format "January 2, 2006" }}</time>
+    
+    {{ if .Params.author }}
+    <p class="book-author">by {{ .Params.author }}</p>
+    {{ end }}
+    
+    {{ if .Params.rating }}
+    <p class="book-rating">Rating: {{ .Params.rating }}/5</p>
+    {{ end }}
+    
+    <div class="book-summary">
+      {{ .Summary }}
+    </div>
+  </div>
+</article>

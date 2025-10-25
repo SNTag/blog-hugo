@@ -18,34 +18,11 @@ categories:
   - linux
 ---
 
-
--   [Overview](#overview){#toc-overview}
-    -   [Setup/Install](#setupinstall){#toc-setupinstall}
-    -   [Sites to go through for
-        details:](#sites-to-go-through-for-details){#toc-sites-to-go-through-for-details}
-    -   [TO SOLVE FOR EASIER DOCUMENT
-        MAKING](#to-solve-for-easier-document-making){#toc-to-solve-for-easier-document-making}
-    -   [My Makefile General
-        Guide](#my-makefile-general-guide){#toc-my-makefile-general-guide}
-    -   [To develop](#to-develop){#toc-to-develop}
-    -   [Autostart sh](#autostart-sh){#toc-autostart-sh}
--   [PDF](#pdf){#toc-pdf}
-    -   [Future
-        developments](#future-developments){#toc-future-developments}
--   [Presentations](#presentations){#toc-presentations}
-    -   [Makefile (Mar 26th,
-        2024)](#makefile-mar-26th-2024){#toc-makefile-mar-26th-2024}
-    -   [How To](#how-to){#toc-how-to}
-
-:title: Document Generator
-
 # Overview
-
 This document is a summary of my document making process in markdown \>
-latex \> document. Setup on linux, pop~os~!
+latex \> document. Setup on linux, pop~os. I'll admit that I stopped this attempt shortly after starting this documentation to make my system robust. I'm in the process of learning Obsidian and adapting it to my uses. I'll eventually come back around to incorporating obsidian into this at some point.
 
 Requires:
-
 -   latex
 -   pandoc
 
@@ -53,9 +30,7 @@ Requires:
 manual](https://pandoc.org/MANUAL)
 
 ## Setup/Install
-
 ### Texlive or Latex
-
 To install, run \`sudo apt install -y texlive texlive-full\`
 
 NOTE: texlive-full gets stuck at \'Pregenerating ConTeXt MarkIV
@@ -63,7 +38,6 @@ format\'. Solved by letting it run for a while, and then pressing
 \"Enter\" a whole lot, as mentioned by one user online.
 
 ### Pandoc
-
 Make sure to install at the same version as
 [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases/tag/v0.3.17.0e).
 See [here](https://github.com/jgm/pandoc/blob/main/INSTALL.md#linux) for
@@ -82,7 +56,6 @@ Extra note: handy to remove tags in url to find packages by version.
     show until restart.
 
 ## Sites to go through for details:
-
 <https://alvinalexander.com/blog/post/latex/reference-figure-or-table-within-latex-document/>
 Nicely comprehensive:
 <https://opensource.com/article/18/9/pandoc-research-paper>
@@ -93,26 +66,18 @@ Nice list of features:
 <https://deatrich.github.io/doc-with-pandoc-markdown/current/doc-with-pandoc-markdown.html#fenced-code-blocks>
 
 ## TO SOLVE FOR EASIER DOCUMENT MAKING
-
 ### \[#B\] alt txt font size
-
 I suspect best option is not to use markdown approach but latex or html
 
 ### \[#B\] MAKEFILE: Edits for handouts & regular slides?
-
 <https://gist.github.com/lmullen/c3d4c7883f081ed8692a#file-makefile>
 
 ## My Makefile General Guide
-
 ### Start
-
 Location for texlive documents is /usr/share/texlive when \`sudo apt
 install texlive-full\`
-
 ### Declaring Documents to Use
-
 ### File Types to Generate
-
 Guide: -r input format.
 [-s](https://pandoc.org/MANUAL#option--standalone) Produce output with
 an appropriate header and footer. -V specifics a theme already in the
@@ -121,27 +86,16 @@ system. Needs --template for personal theme. -t output format.
 -N --reference-doc Use with pptx templates
 \[\[[https://pandoc.org/MANUAL#option\--toc\\](https://pandoc.org/MANUAL#option--toc\)\[\]\[--toc\]\]
 Table of Contents. Useless without the -s option
-
 ### To Put Together The Finale Document
-
 ## To develop
-
 ### To put columns?
-
 [pandoc manual](https://pandoc.org/MANUAL.html#columns)
-
 ### \[#C\] spelling
-
 yaml header: \"spellchecker: hunspell\" lua-filter=spellcheck
-
 ### \[#C\] Figure out bib (NEEDS PANDOC-CROSSREF?)
-
 ### \[#A\] PANDOC: crossref
-
 -   <https://emacs.stackexchange.com/questions/35775/how-to-kill-magit-diffs-buffers-on-quit>
-
 ### \[#A\] PDF: Figures prefix/reference using markdown syntax (NEEDS PANDOC-CROSSREF?)
-
 Following seems specific to document making with markdown syntax. Needs
 pandoc-crossref? [see stackoverflow
 response](https://stackoverflow.com/questions/9434536/how-do-i-make-a-reference-to-a-figure-in-markdown-using-pandoc)
@@ -160,11 +114,8 @@ tblPrefix:
 
 using md syntax, add \`{#fig:scatter-matrix}\` to end of figure. Ref
 using
-
 ### \[#C\] PDF: Controlling image location
-
 ## Autostart sh
-
 This script is run on a terminal from the directory with the files. auto
 runs \'make\' based on changes to the directory.
 
@@ -212,17 +163,11 @@ while true; do
     fi
 done
 ```
-
 # PDF
-
 ## Future developments
-
 ### [Tuft handouts](https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html)
-
 # Presentations
-
 ## Makefile (Mar 26th, 2024)
-
 This is the makefile used to generate the document.
 
 ```
@@ -364,16 +309,13 @@ clean:
 ```
 
 ## How To
-
 ### Notes
-
 [stack
 overflow](https://stackoverflow.com/questions/44906264/add-speaker-notes-to-beamer-presentations-using-rmarkdown)
 
 Use either `\note{}`{=latex} or ::: note :::
 
 ### Figures (LATEX)
-
 Font size follows that in
 [here](https://www.overleaf.com/learn/latex/Font_sizes%2C_families%2C_and_styles#Reference_guide)
 
@@ -388,9 +330,7 @@ header-includes:
     \caption{something here}
 \end{figure}
 ```
-
 ### Figures (MARKDOWN)
-
 Haven\'t confirmed whether \`#fig\` works in this context
 
 ``` md_figure

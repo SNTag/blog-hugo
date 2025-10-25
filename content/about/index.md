@@ -2,9 +2,13 @@
 layout: post
 author: "Shayonendra N. Tagore"
 ---
-
 # About the blog
 I started this blog to figure out static web programming. It is a record of hobbies, programming, and interests. I'm admittedly also using it as a data dump for workflows that I suspect SOMEONE out there might find useful!
+
+If you want to see some of the places me and my wife see, check out our Instagram page [here](https://www.instagram.com/earl.n.affogato?igsh=NmV3YWdzYjc5bWNk)!
+
+[RSS link here](http://localhost:1313/about/)
+
 {{< rawhtml >}}
 <br>
 <br>
@@ -32,7 +36,6 @@ My interests in biology started with a fascination in ants! I ran across <i>Oeco
 In my spare time, I mess with whatever catches my fancy; reading, piano, or cooking. I recently moved to South Boston, and taking the opportunity to enjoy MFA, Isabella Stewart Gardner Museum, and the Boston Public Central Library!
 </p>
 <br>
-{{< rawhtml >}}
 <div style="background: linear-gradient(135deg, #f8fafc, #e2e8f0); border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 30px 0; text-align: center;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
         <div style="background: #0077b5; width: 50px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">in</div>
@@ -48,7 +51,6 @@ In my spare time, I mess with whatever catches my fancy; reading, piano, or cook
         </a>
     </div>
 </div>
-{{< /rawhtml >}}
 <br>
 {{< /rawhtml >}}
 ## My Book Recommendations From The Last Year
@@ -104,8 +106,8 @@ For now, I'll say that the three books I've finished recently and can recommend 
 <br>
 <br>
 {{< /rawhtml >}}
-# My Papers (last updated 19th Jan, 2020)
 {{< rawhtml >}}
+# My Papers (last updated 19th Jan, 2020)
 <p>
 <ul style="list-style-type:disc;">
     <li><a href="https://scholarbank.nus.edu.sg/handle/10635/162732">NUS Thesis: Pathway Mechanisms For Cancer Cell Migration Through CRISPR-KO And scRNA-Seq</a></li>

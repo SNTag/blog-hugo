@@ -17,12 +17,10 @@ backup when needed. I'm still surprised today by some backup hidden deep in my f
 imagine I've learnt something from my last few years with linux, where I've learned rules to file
 managment.
 
-
 The appeal of a media server has been the BYOM (Bring Your Own Media) approach. I have a number of
 CDs and movies in the house which are not easy to find online (think Criterion collection DVDs, the tv
 show Eureka, or the number of classical music around the house). Plus, I did spend a decent bit of
 cash in the past on digital media, and I did not want it to have been for naught!
-
 
 I'm going to write here a general guide to how I got my system running, because many of the details
 are ridiculously simple, and it should have been easier. I'll start by introducing my media server,

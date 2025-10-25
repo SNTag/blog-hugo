@@ -14,20 +14,22 @@ languageCode = "en-us"
 theme = "tale-hugo"
 BaseURL = "https://sntag.netlify.app/"
 
+
 [menu]
   [[menu.main]]
-    identifier = "makers"
-    name = "makers"
-    url = "/makers/"
+    identifier = "books"
+    name = "books"
+    url = "/books/"
     weight = -130
+  [[menu.main]]
+    identifier = "Tech"
+    name = "Tech"
+    url = "/Tech/"
+    weight = -120
   [[menu.main]]
     identifier = "linkedin"
     name = "linkedin"
     url = "https://www.linkedin.com/in/shayontagore/"
-    weight = -120
-  [[menu.main]]
-    name = "rss"
-    url = "/index.xml"
     weight = -110
   [[menu.main]]
     identifier = "about"
@@ -35,16 +37,16 @@ BaseURL = "https://sntag.netlify.app/"
     url = "/about/"
     weight = -100
 
+[permalinks]
+  posts = "/:slug/"
 
 [author]
   name = "Shayon Tagore"
   homepage = "sntag.netlify.app"
 
-[taxonomies]
-  author = "S Tagore"
-
 [params]
-  author = "S Tagore"
+  [params.author]
+    name = "S Tagore"
   css = ["custom.css"]
   rss = true
 
@@ -63,6 +65,10 @@ BaseURL = "https://sntag.netlify.app/"
     codeFences = true
     guessSyntax = true
     noClasses = false  # Set to true if you want inline styles
+  [markup.tableOfContents]
+    startLevel = 2  # Start from ## headers
+    endLevel = 2    # End at #### headers
+    ordered = false # Use <ul> instead of <ol>
 
 [outputs]
   home = ["HTML", "RSS"]

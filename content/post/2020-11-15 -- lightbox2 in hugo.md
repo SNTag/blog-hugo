@@ -12,9 +12,13 @@ categories:
 
 **Warning:** Changes in how I run this site has lead to broken links here.
 
-This is a quick run-down of how I set up [lightbox2](https://lokeshdhakar.com/projects/lightbox2/) for my hugo site. To be honest, it is my personal documentation to the [shortcode written by Julian Stier in his blog-post about lightbox2](https://julianstier.com/posts/2020/03/hugo-and-lightbox/). His post helped me deal with a number of problems using lightbox2 with hugo when the [main lightbox2 tutorial had failed me](https://lokeshdhakar.com/projects/lightbox2/). This will be a post under constant development as I work out lightbox2 and to remind myself how to implement it.
+This is a quick run-down of how I set up lightbox2 for my hugo site. To be honest, it is my personal documentation to the shortcode written by Julian Stier in his blog-post about lightbox2. His post helped me deal with a number of problems using lightbox2 with hugo when the main lightbox2 tutorial had failed me. This will be a post under constant development as I work out lightbox2 and to remind myself how to implement it.
 
 # Setup
+
+[lightbox2](https://lokeshdhakar.com/projects/lightbox2/)
+[shortcode written by Julian Stier](https://julianstier.com/posts/2020/03/hugo-and-lightbox/)
+[main lightbox2 tutorial](https://lokeshdhakar.com/projects/lightbox2/)
 
 ## Preparing the directories and files
 
@@ -26,7 +30,7 @@ If your hugo site does not have jquery, extract from the lightbox2 release the f
 
 ## Modifying the html
 
-The exact details of this bit can change depending on your hugo setup. The main concept is that you have to find the files with the \<head\> \& \<body\> tags. In the head section, add `<link rel="stylesheet" href="/css/lightbox.css">`. In the body section, add `<script src="/js/lightbox-plus-jquery.js"></script>.
+The exact details of this bit can change depending on your hugo setup. The main concept is that you have to find the files with the \<head\> \& \<body\> tags. In the head section, add `<link rel="stylesheet" href="/css/lightbox.css">`. In the body section, add \<script src="/js/lightbox-plus-jquery.js"\>\<\/script\>.
 
 ## Shortcode: figure
 
@@ -45,7 +49,9 @@ The shortcode written by [Julian Stier](https://julianstier.com/posts/2020/03/hu
 
 \{\{\< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" \>\}\}
 
+```
 {{< glightbox-figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" >}}
+```
 
 ## Gallery
 
