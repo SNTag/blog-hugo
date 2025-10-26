@@ -1,0 +1,134 @@
+/* Book list layout - Grid format */
+.books-catalogue {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 2rem;
+}
+
+.book-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.book-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-color: #0066cc;
+}
+
+.book-cover {
+  margin-bottom: 1rem;
+}
+
+.book-cover a {
+  display: block;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  transition: none;
+  transform: none;
+}
+
+.book-cover a:hover {
+  transform: none;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.book-cover img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.book-cover img:hover {
+  opacity: 0.9;
+}
+
+.book-details h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.book-details h2 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.book-details h2 a:hover {
+  color: #0066cc;
+}
+
+.book-author {
+  font-style: italic;
+  color: #666;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.book-rating {
+  font-weight: bold;
+  color: #f39c12;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.book-summary {
+  margin-top: 1rem;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  color: #333;
+  flex-grow: 1;
+}
+
+/* Pagination styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding: 1rem;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #0066cc;
+  font-size: 1.2rem;
+}
+
+.pagination a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .books-catalogue {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .book-item {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .books-catalogue {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+(RSS)[http://localhost:1313/index.xml]
