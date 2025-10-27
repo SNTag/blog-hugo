@@ -19,7 +19,7 @@ BaseURL = "https://sntag.netlify.app/"
   [[menu.main]]
     identifier = "Home"
     name = "Home"
-    url = ""
+    url = "/"
     weight = -140
   [[menu.main]]
     identifier = "books"

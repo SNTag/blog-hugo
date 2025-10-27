@@ -9,18 +9,24 @@
   
   <div class="book-details">
     <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    {{ with index .Params "published date" }}
+    <time>{{ . | time.Format "January 2, 2006" }}</time>
+    {{ else }}
     <time>{{ .Date.Format "January 2, 2006" }}</time>
+    {{ end }}
     
     {{ if .Params.author }}
-    <p class="book-author">by {{ .Params.author }}</p>
+    <p class="book-author">by 
+    {{ if reflect.IsSlice .Params.author }}
+      {{ delimit .Params.author ", " }}
+    {{ else }}
+      {{ .Params.author }}
+    {{ end }}
+    </p>
     {{ end }}
     
     {{ if .Params.rating }}
     <p class="book-rating">Rating: {{ .Params.rating }}/5</p>
     {{ end }}
-    
-    <div class="book-summary">
-      {{ .Summary }}
-    </div>
   </div>
 </article>
