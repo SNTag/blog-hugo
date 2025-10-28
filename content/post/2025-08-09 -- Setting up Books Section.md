@@ -17,7 +17,7 @@ To access this growing section, see the Header section: "Books".
 
 Obsidian Bases has been an incredible way to sort through my notes. I wouldn't recommend Obsidian for everyone unless you are somewhat Tech Literacy, but it has enabled my system in a way that I'm surprised.
 
-{{< figure src="../about/Example of Obsidian Book Library.png" alt="Example of my Obsidian Book Library" width="500" >}}
+{{< figure src="../about/Example\ of\ Obsidian\ Book\ Library.png" alt="Example of my Obsidian Book Library" width="500" >}}
 
 {{< rawhtml >}}
 <br>
