@@ -106,8 +106,9 @@ For now, I'll say that the three books I've finished recently and can recommend 
 <br>
 <br>
 {{< /rawhtml >}}
-{{< rawhtml >}}
+
 # My Papers (last updated 19th Jan, 2020)
+{{< rawhtml >}}
 <p>
 <ul style="list-style-type:disc;">
     <li><a href="https://scholarbank.nus.edu.sg/handle/10635/162732">NUS Thesis: Pathway Mechanisms For Cancer Cell Migration Through CRISPR-KO And scRNA-Seq</a></li>
