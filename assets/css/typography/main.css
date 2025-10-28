@@ -1,7 +1,7 @@
 /* assets/css/typography/main.css */
 
 /* Style all Markdown-generated links - Typomagical inspired */
-a {
+/*a {
     color: #6b7280 !important;
     text-decoration: none !important;
     font-variant: small-caps !important;
@@ -15,7 +15,138 @@ a:hover {
     background-color: rgba(107, 114, 128, 0.1) !important;
     padding: 2px 4px;
     border-radius: 3px;
+} */
+/* Apply to navigation links */
+.nav a {
+    color: #6b7280 !important;
+    text-decoration: none !important;
+    font-variant: small-caps !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.025em !important;
+    transition: all 0.3s ease;
 }
+
+.nav a:hover {
+    color: #374151 !important;
+    background-color: rgba(107, 114, 128, 0.1) !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Apply to text links inside post content (NOT wrapping images) */
+.post p a,
+.post li a,
+.post-content p a,
+.post-content li a,
+article.post p a,
+article.post li a {
+    color: #6b7280 !important;
+    text-decoration: none !important;
+    font-variant: small-caps !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.025em !important;
+    transition: all 0.3s ease;
+}
+
+.post p a:hover,
+.post li a:hover,
+.post-content p a:hover,
+.post-content li a:hover,
+article.post p a:hover,
+article.post li a:hover {
+    color: #374151 !important;
+    background-color: rgba(107, 114, 128, 0.1) !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Visited state */
+.post p a:visited,
+.post li a:visited,
+.post-content p a:visited,
+.post-content li a:visited {
+    color: #9ca3af !important;
+}
+
+/* Mailto links */
+a[href^="mailto:"] {
+    color: #059669 !important;
+    font-weight: 500 !important;
+    font-variant: small-caps !important;
+}
+
+/* External link indicator */
+.post p a[href^="http"]:not([href*="sntag.netlify.app"])::after,
+.post li a[href^="http"]:not([href*="sntag.netlify.app"])::after {
+    content: " ↗" !important;
+    font-size: 0.8em !important;
+    font-variant: normal !important;
+    opacity: 0.7 !important;
+}
+
+/* Explicitly EXCLUDE links wrapping images/figures */
+figure a,
+.glightbox,
+a.glightbox,
+.gallery-item a {
+    all: revert !important;
+}
+
+figure a:hover,
+.glightbox:hover,
+a.glightbox:hover,
+.gallery-item a:hover {
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+/* Apply to text links inside post content */
+.post p a,
+.post li a,
+.post a:not(figure a):not(.glightbox),  /* ADD THIS LINE */
+.post-content p a,
+.post-content li a,
+.post-content a:not(figure a):not(.glightbox),  /* ADD THIS LINE */
+article.post p a,
+article.post li a,
+article.post a:not(figure a):not(.glightbox) {  /* ADD THIS LINE */
+    color: #6b7280 !important;
+    text-decoration: none !important;
+    font-variant: small-caps !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.025em !important;
+    transition: all 0.3s ease;
+}
+
+.post p a:hover,
+.post li a:hover,
+.post a:not(figure a):not(.glightbox):hover,  /* ADD THIS LINE */
+.post-content p a:hover,
+.post-content li a:hover,
+.post-content a:not(figure a):not(.glightbox):hover,  /* ADD THIS LINE */
+article.post p a:hover,
+article.post li a:hover,
+article.post a:not(figure a):not(.glightbox):hover {  /* ADD THIS LINE */
+    color: #374151 !important;
+    background-color: rgba(107, 114, 128, 0.1) !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.post p a:visited,
+.post li a:visited,
+.post a:not(figure a):not(.glightbox):visited,  /* ADD THIS LINE */
+.post-content p a:visited,
+.post-content li a:visited,
+.post-content a:not(figure a):not(.glightbox):visited {  /* ADD THIS LINE */
+    color: #9ca3af !important;
+}
+
+
+
+
+/*EVERYTHING BELOW THIS IS UNTESTED*/
+
 
 a:visited {
     color: #9ca3af !important;
