@@ -11,9 +11,9 @@ Currently Reading (left widget):
   and its `completed` field is empty.
 
 Recommendations (right widget):
-  Pulls from content/post/*.md (and content/tech/*.md).
-  Posts are selected when they match at least one of the categories
-  listed in RECOMMEND_CATEGORIES below.
+  Pulls from content/books/*.md.
+  Books are selected when they match at least one of the tags
+  listed in RECOMMEND_TAGS below, or all books if the list is empty.
 
 Run from the repo root:
     python3 scripts/update_books_widgets.py
@@ -40,12 +40,10 @@ import yaml
 READING_TAG_PREFIXES = []
 
 # Recommendations widget:
-# Posts with ANY of these categories (case-insensitive) are included.
-# Set to [] to include ALL posts.
-RECOMMEND_CATEGORIES = []
-
-# Directories to scan for recommendation posts (relative to repo root).
-RECOMMEND_DIRS = ["content/post", "content/tech"]
+# Books with ANY of these tag prefixes (case-insensitive) are included.
+# e.g. ["books/fic"] means only books tagged books/fic/... are recommended.
+# Set to [] to include ALL books as recommendations.
+RECOMMEND_TAG_PREFIXES = []
 
 # ─── Helpers ────────────────────────────────────────────────────
 
@@ -158,36 +156,37 @@ def collect_currently_reading(root):
 
 
 def collect_recommendations(root):
-    """Return a list of dicts for recommended blog posts."""
-    results = []
-    filter_cats = [c.lower() for c in RECOMMEND_CATEGORIES]
+    """Return a list of dicts for recommended books (links to book pages)."""
+    books_dir = root / "content" / "books"
+    if not books_dir.exists():
+        return []
 
-    for reldir in RECOMMEND_DIRS:
-        scan_dir = root / reldir
-        if not scan_dir.exists():
+    results = []
+    filter_prefixes = [p.lower() for p in RECOMMEND_TAG_PREFIXES]
+
+    for md in sorted(books_dir.glob("*.md")):
+        if md.name == "_index.md":
             continue
 
-        section = reldir.split("/")[-1]  # "post" or "tech"
+        fm = parse_front_matter(md)
+        if fm is None:
+            continue
 
-        for md in sorted(scan_dir.glob("*.md")):
-            if md.name == "_index.md":
+        # Optional tag-prefix filter
+        if filter_prefixes:
+            tags = [t.lower() for t in to_list(fm.get("tags"))]
+            if not any(
+                t.startswith(prefix)
+                for t in tags
+                for prefix in filter_prefixes
+            ):
                 continue
 
-            fm = parse_front_matter(md)
-            if fm is None:
-                continue
+        title = fm.get("title", md.stem)
+        slug = slug_from_filename(md)
+        url = f"/books/{slug}/"
 
-            # Category filter (skip if filter is active and no match)
-            if filter_cats:
-                cats = [c.lower() for c in to_list(fm.get("categories"))]
-                if not any(c in filter_cats for c in cats):
-                    continue
-
-            title = fm.get("title", md.stem)
-            slug = slug_from_filename(md)
-            url = f"/{section}/{slug}/"
-
-            results.append({"title": title, "url": url})
+        results.append({"title": title, "url": url})
 
     return results
 
@@ -220,7 +219,7 @@ def write_toml(root, reading, recommendations):
     lines.append("")
     lines.append("# ── Recommendations ──")
     if not recommendations:
-        lines.append("# (no posts matched the category filter)")
+        lines.append("# (no books matched the tag filter)")
     for entry in recommendations:
         lines.append("")
         lines.append("[[recommendations]]")
@@ -245,7 +244,7 @@ def main():
         print(f"  - {r['title']} ({r['format']})")
 
     recommendations = collect_recommendations(root)
-    print(f"Recommendations:  {len(recommendations)} post(s)")
+    print(f"Recommendations:  {len(recommendations)} book(s)")
     for r in recommendations:
         print(f"  - {r['title']}  ->  {r['url']}")
 
