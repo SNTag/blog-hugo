@@ -1,0 +1,59 @@
+# Books page widgets configuration
+# Edit this file to update the "Currently Reading" carousel
+# and the "Recommendations" scrolling list.
+
+# ---------------------------------------------------------
+# Currently Reading / Listening
+# Each [[currently_reading]] entry is one slide in the carousel.
+# Fields:
+#   title  – book or audiobook title
+#   author – author name
+#   cover  – URL or local path to cover image
+#   format – "book" or "audiobook" (shown as a small badge)
+# ---------------------------------------------------------
+
+[[currently_reading]]
+title  = "The Narrow Road to the Deep North"
+author = "Richard Flanagan"
+cover  = "https://images-us.bookshop.org/ingram/9780804171472.jpg?v=enc-v1"
+format = "book"
+
+[[currently_reading]]
+title  = "The Story of Art"
+author = "Eh Gombrich"
+cover  = "https://images-us.bookshop.org/ingram/9781838666583.jpg?v=enc-v1"
+format = "audiobook"
+
+[[currently_reading]]
+title  = "The Swerve"
+author = "Stephen Greenblatt"
+cover  = "https://images-us.bookshop.org/ingram/9780393343403.jpg?v=enc-v1"
+format = "book"
+
+# ---------------------------------------------------------
+# Recommendations
+# Each [[recommendations]] entry appears in the scrolling list.
+# Fields:
+#   title – display text for the recommendation
+#   url   – link to the blog post on this site
+# ---------------------------------------------------------
+
+[[recommendations]]
+title = "Setting up a Books Section in Hugo"
+url   = "/post/2025-08-09=setting-up-books-section/"
+
+[[recommendations]]
+title = "Michelangelo"
+url   = "/post/2024-11-06=michelangelo/"
+
+[[recommendations]]
+title = "Maker's Notes"
+url   = "/post/2024-03-26=makers-notes/"
+
+[[recommendations]]
+title = "Digitizing Collections"
+url   = "/post/2020-10-08--digitizing-collections/"
+
+[[recommendations]]
+title = "Using a CRISPR-KO Library on a Migration Screen"
+url   = "/post/2019-11-29--using-a-crispr-ko-library-on-a-migration-screen/"

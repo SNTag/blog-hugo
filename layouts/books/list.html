@@ -1,5 +1,66 @@
 {{ define "main" }}
 <link rel="stylesheet" href="{{ "css/books.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/books-widgets.css" | relURL }}">
+
+{{/* ── Books Widgets ────────────────────────────────────── */}}
+{{ with .Site.Data.books_widgets }}
+<section class="books-widgets">
+
+  {{/* ── Left: Currently Reading Carousel ── */}}
+  <div class="widget widget-reading">
+    <h3 class="widget-title">Currently Reading</h3>
+    <div class="reading-carousel" aria-label="Currently reading carousel">
+      <div class="carousel-track">
+        {{ range .currently_reading }}
+        <div class="carousel-slide">
+          <div class="carousel-cover">
+            <img src="{{ .cover }}" alt="{{ .title }} cover" loading="lazy">
+          </div>
+          <div class="carousel-info">
+            <span class="carousel-book-title">{{ .title }}</span>
+            <span class="carousel-book-author">{{ .author }}</span>
+            {{ if eq .format "audiobook" }}
+            <span class="carousel-badge audiobook-badge">Audiobook</span>
+            {{ else }}
+            <span class="carousel-badge book-badge">Book</span>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      <div class="carousel-dots">
+        {{ range $i, $_ := .currently_reading }}
+        <button class="carousel-dot{{ if eq $i 0 }} active{{ end }}"
+                aria-label="Go to slide {{ add $i 1 }}"
+                data-index="{{ $i }}"></button>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  {{/* ── Right: Recommendations Scroll ── */}}
+  <div class="widget widget-recommendations">
+    <h3 class="widget-title">Recommendations</h3>
+    <div class="recommendations-viewport" aria-label="Book recommendations">
+      <ul class="recommendations-list">
+        {{ range .recommendations }}
+        <li class="recommendation-item">
+          <a href="{{ .url }}">{{ .title }}</a>
+        </li>
+        {{ end }}
+        {{/* Duplicate items for seamless infinite scroll */}}
+        {{ range .recommendations }}
+        <li class="recommendation-item" aria-hidden="true">
+          <a href="{{ .url }}" tabindex="-1">{{ .title }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+
+</section>
+{{ end }}
+
 <main>
   <h1>Books</h1>
   <div class="books-catalogue">
@@ -17,4 +78,6 @@
     <span>{{ .Paginator.PageNumber }}</span>
   </div>
 </main>
+
+<script src="{{ "js/books-widgets.js" | relURL }}"></script>
 {{ end }}
