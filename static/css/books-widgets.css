@@ -330,3 +330,44 @@
     padding: 1rem;
   }
 }
+
+/* ── Dark mode overrides ── */
+:root:not(.light) .widget {
+  border-color: #3a3a3a;
+}
+
+:root:not(.light) .carousel-book-author {
+  color: #aaa;
+}
+
+:root:not(.light) .book-badge {
+  background: #1a2e3d;
+  color: #5a9ae1;
+}
+
+:root:not(.light) .audiobook-badge {
+  background: #2d2010;
+  color: #f0a830;
+}
+
+:root:not(.light) .carousel-arrow,
+:root:not(.light) .rec-arrow {
+  border-color: #444;
+  color: #bbb;
+}
+
+:root:not(.light) .carousel-dot {
+  background: #444;
+}
+
+:root:not(.light) .carousel-dot:hover {
+  background: #777;
+}
+
+:root:not(.light) .recommendation-item {
+  border-bottom-color: #333;
+}
+
+:root:not(.light) .recommendation-item a:hover {
+  color: #5a9ae1;
+}

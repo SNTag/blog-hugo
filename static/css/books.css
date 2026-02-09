@@ -169,3 +169,39 @@
     gap: 1rem;
   }
 }
+
+/* ── Dark mode overrides ── */
+:root:not(.light) .book-item {
+  border-color: #3a3a3a;
+}
+
+:root:not(.light) .book-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border-color: #5a9ae1;
+}
+
+:root:not(.light) .book-author {
+  color: #aaa;
+}
+
+:root:not(.light) .book-details h2 a:hover {
+  color: #5a9ae1;
+}
+
+:root:not(.light) .book-summary {
+  color: #bbb;
+}
+
+:root:not(.light) .pagination a {
+  color: #5a9ae1;
+}
+
+:root:not(.light) .book-tags {
+  border-top-color: #333 !important;
+}
+
+:root:not(.light) .book-tag {
+  background: linear-gradient(135deg, #1e1c18, #2a2620) !important;
+  border-color: #4a4030 !important;
+  color: #c4b99a !important;
+}
