@@ -42,6 +42,12 @@
   outline: none;
 }
 
+/* Hide external-link arrow (↗) on book card links */
+.book-cover a::after,
+.book-details h2 a::after {
+  content: none !important;
+}
+
 .book-cover img {
   width: 100%;
   height: auto;
