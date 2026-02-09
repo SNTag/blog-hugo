@@ -77,4 +77,4 @@ BaseURL = "https://sntag.netlify.app/"
 
 [outputs]
   home = ["HTML", "RSS"]
-  section = ["HTML", "RSS"]
+  section = ["HTML", "RSS", "JSON"]
