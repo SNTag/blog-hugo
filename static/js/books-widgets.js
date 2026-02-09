@@ -1,7 +1,7 @@
 /**
  * Books Page Widgets
- * - Currently Reading carousel: rotates every 15 seconds with a swipe animation
- * - Recommendations list: auto-scrolls via CSS, pauses on hover
+ * - Currently Reading carousel: rotates every 10 seconds with a swipe animation
+ * - Recommendations list: auto-scrolls via CSS, with manual arrow controls
  */
 
 (function () {
@@ -13,9 +13,11 @@
 
   var slides = track.querySelectorAll(".carousel-slide");
   var dots = document.querySelectorAll(".carousel-dot");
+  var prevBtn = document.querySelector(".carousel-prev");
+  var nextBtn = document.querySelector(".carousel-next");
   var current = 0;
   var total = slides.length;
-  var intervalMs = 15000; // 15 seconds
+  var intervalMs = 10000; // 10 seconds
   var timer = null;
 
   if (total === 0) return;
@@ -33,14 +35,13 @@
     outgoing.classList.remove("active");
     outgoing.classList.add("exiting");
 
-    // After the exit animation completes, clean up and show the new slide
     function onExitEnd() {
       outgoing.classList.remove("exiting");
       outgoing.removeEventListener("animationend", onExitEnd);
     }
     outgoing.addEventListener("animationend", onExitEnd);
 
-    // Show incoming slide (it will animate in via CSS)
+    // Show incoming slide
     incoming.classList.add("active");
 
     // Update dots
@@ -54,6 +55,24 @@
 
   function next() {
     goTo((current + 1) % total);
+  }
+
+  function prev() {
+    goTo((current - 1 + total) % total);
+  }
+
+  // Arrow click handlers
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function () {
+      prev();
+      resetTimer();
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      next();
+      resetTimer();
+    });
   }
 
   // Dot click handlers
@@ -85,4 +104,25 @@
 
   // Start
   resetTimer();
+
+  // ── Recommendations Arrow Controls ──────────────────────
+  var recViewport = document.querySelector(".recommendations-viewport");
+  var recList = document.querySelector(".recommendations-list");
+  var recPrev = document.querySelector(".rec-prev");
+  var recNext = document.querySelector(".rec-next");
+
+  if (recViewport && recList && recPrev && recNext) {
+    var scrollStep = 40; // pixels to jump per click
+
+    recPrev.addEventListener("click", function () {
+      // Pause auto-scroll, manually shift up
+      recList.style.animationPlayState = "paused";
+      recViewport.scrollTop = Math.max(0, recViewport.scrollTop - scrollStep);
+    });
+
+    recNext.addEventListener("click", function () {
+      recList.style.animationPlayState = "paused";
+      recViewport.scrollTop += scrollStep;
+    });
+  }
 })();

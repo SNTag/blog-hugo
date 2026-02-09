@@ -28,5 +28,13 @@
 			<a href="#" class="top">Top</a>
 		</div>
 	</main>
+
+	<!-- Table of Contents – books section only -->
+	{{ if .TableOfContents }}
+	<aside class="toc">
+		<h3>Contents</h3>
+		{{ .TableOfContents }}
+	</aside>
+	{{ end }}
 </div>
 {{ end }}
