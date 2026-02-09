@@ -1,0 +1,388 @@
+/* ===================================================
+   Books Page Widgets – Currently Reading & Recommendations
+   =================================================== */
+
+/* ── Widget Container ── */
+.books-widgets {
+  display: flex;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 2rem;
+}
+
+.widget {
+  flex: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1.25rem;
+  background: var(--background-color, #fff);
+  overflow: hidden;
+}
+
+.widget-title {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--default-color, #333);
+  border-bottom: 2px solid #f39c12;
+  padding-bottom: 0.4rem;
+}
+
+/* ── Left Widget: Currently Reading Carousel ── */
+.widget-reading {
+  max-width: 50%;
+}
+
+.reading-carousel {
+  position: relative;
+}
+
+/* ── Shared arrow styles ── */
+.carousel-arrow,
+.rec-arrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: var(--background-color, #fff);
+  color: var(--default-color, #555);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  padding: 0;
+}
+
+.carousel-arrow:hover,
+.rec-arrow:hover {
+  background: #f39c12;
+  border-color: #f39c12;
+  color: #fff;
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.carousel-slide.active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+  animation: carouselFadeIn 0.8s ease-in-out;
+}
+
+@keyframes carouselFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Outgoing slide animation (applied via JS) */
+.carousel-slide.exiting {
+  position: absolute;
+  opacity: 1;
+  pointer-events: none;
+  animation: carouselFadeOut 0.8s ease-in-out forwards;
+}
+
+@keyframes carouselFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+}
+
+.carousel-cover {
+  flex-shrink: 0;
+  width: 120px;
+}
+
+.carousel-cover a {
+  display: block;
+  text-decoration: none;
+  border: none;
+}
+
+.carousel-cover img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.carousel-book-title {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: var(--default-color, #333);
+  text-decoration: none;
+}
+
+a.carousel-book-title:hover {
+  color: #0066cc;
+}
+
+.carousel-book-author {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.carousel-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  width: fit-content;
+  margin-top: 0.25rem;
+}
+
+.book-badge {
+  background: #e8f4fd;
+  color: #0066cc;
+}
+
+.audiobook-badge {
+  background: #fef3e2;
+  color: #e67e22;
+}
+
+/* Carousel bottom controls: [prev] [dots] [next] */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.carousel-dot.active {
+  background: #f39c12;
+  transform: scale(1.3);
+}
+
+.carousel-dot:hover {
+  background: #999;
+}
+
+.carousel-dot.active:hover {
+  background: #f39c12;
+}
+
+/* ── Right Widget: Recommendations Scroll ── */
+.widget-recommendations {
+  max-width: 50%;
+}
+
+/* Recommendations bottom controls */
+.rec-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.recommendations-viewport {
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 12%,
+    black 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 12%,
+    black 88%,
+    transparent 100%
+  );
+}
+
+.recommendations-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: scrollUp 30s linear infinite;
+}
+
+.recommendations-viewport:hover .recommendations-list {
+  animation-play-state: paused;
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.recommendation-item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.recommendation-item:last-child {
+  border-bottom: none;
+}
+
+.recommendation-item a {
+  text-decoration: none;
+  color: var(--default-color, #333);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  transition: color 0.2s;
+  display: block;
+}
+
+.recommendation-item a::before {
+  content: "\2192\00a0";
+  color: #f39c12;
+  font-weight: bold;
+}
+
+.recommendation-item a:hover {
+  color: #0066cc;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .books-widgets {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .widget-reading,
+  .widget-recommendations {
+    max-width: 100%;
+  }
+
+  .recommendations-viewport {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .books-widgets {
+    padding: 0 1rem;
+  }
+
+  .carousel-cover {
+    width: 90px;
+  }
+
+  .carousel-book-title {
+    font-size: 0.9rem;
+  }
+
+  .widget {
+    padding: 1rem;
+  }
+}
+
+/* ── Dark mode overrides ── */
+:root:not(.light) .widget {
+  border-color: #3a3a3a;
+}
+
+:root:not(.light) .carousel-book-author {
+  color: #aaa;
+}
+
+:root:not(.light) .book-badge {
+  background: #1a2e3d;
+  color: #5a9ae1;
+}
+
+:root:not(.light) .audiobook-badge {
+  background: #2d2010;
+  color: #f0a830;
+}
+
+:root:not(.light) a.carousel-book-title:hover {
+  color: #5a9ae1;
+}
+
+:root:not(.light) .carousel-arrow,
+:root:not(.light) .rec-arrow {
+  border-color: #444;
+  color: #bbb;
+}
+
+:root:not(.light) .carousel-dot {
+  background: #444;
+}
+
+:root:not(.light) .carousel-dot:hover {
+  background: #777;
+}
+
+:root:not(.light) .recommendation-item {
+  border-bottom-color: #333;
+}
+
+:root:not(.light) .recommendation-item a:hover {
+  color: #5a9ae1;
+}

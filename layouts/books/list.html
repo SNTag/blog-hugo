@@ -1,5 +1,81 @@
 {{ define "main" }}
 <link rel="stylesheet" href="{{ "css/books.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/books-widgets.css" | relURL }}">
+
+{{/* ── Books Widgets ────────────────────────────────────── */}}
+{{ with .Site.Data.books_widgets }}
+<section class="books-widgets">
+
+  {{/* ── Left: Currently Reading Carousel ── */}}
+  {{ with .currently_reading }}
+  <div class="widget widget-reading">
+    <h3 class="widget-title">Currently Reading</h3>
+    <div class="reading-carousel" aria-label="Currently reading carousel">
+      <div class="carousel-track">
+        {{ range . }}
+        <div class="carousel-slide">
+          <div class="carousel-cover">
+            {{ if .url }}<a href="{{ .url }}">{{ end }}
+            <img src="{{ .cover }}" alt="{{ .title }} cover" loading="lazy">
+            {{ if .url }}</a>{{ end }}
+          </div>
+          <div class="carousel-info">
+            {{ if .url }}<a href="{{ .url }}" class="carousel-book-title">{{ .title }}</a>
+            {{ else }}<span class="carousel-book-title">{{ .title }}</span>{{ end }}
+            <span class="carousel-book-author">{{ .author }}</span>
+            {{ if eq .format "audiobook" }}
+            <span class="carousel-badge audiobook-badge">Audiobook</span>
+            {{ else }}
+            <span class="carousel-badge book-badge">Book</span>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-arrow carousel-prev" aria-label="Previous book">&#8249;</button>
+        <div class="carousel-dots">
+          {{ range $i, $_ := . }}
+          <button class="carousel-dot{{ if eq $i 0 }} active{{ end }}"
+                  aria-label="Go to slide {{ add $i 1 }}"
+                  data-index="{{ $i }}"></button>
+          {{ end }}
+        </div>
+        <button class="carousel-arrow carousel-next" aria-label="Next book">&#8250;</button>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+
+  {{/* ── Right: Recommendations Scroll ── */}}
+  {{ with .recommendations }}
+  <div class="widget widget-recommendations">
+    <h3 class="widget-title">Recommendations</h3>
+    <div class="recommendations-viewport" aria-label="Book recommendations">
+      <ul class="recommendations-list">
+        {{ range . }}
+        <li class="recommendation-item">
+          <a href="{{ .url }}">{{ .title }}</a>
+        </li>
+        {{ end }}
+        {{/* Duplicate items for seamless infinite scroll */}}
+        {{ range . }}
+        <li class="recommendation-item" aria-hidden="true">
+          <a href="{{ .url }}" tabindex="-1">{{ .title }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+    <div class="rec-controls">
+      <button class="rec-arrow rec-prev" aria-label="Scroll up">&#8593;</button>
+      <button class="rec-arrow rec-next" aria-label="Scroll down">&#8595;</button>
+    </div>
+  </div>
+  {{ end }}
+
+</section>
+{{ end }}
+
 <main>
   <h1>Books</h1>
   <div class="books-catalogue">
@@ -17,4 +93,6 @@
     <span>{{ .Paginator.PageNumber }}</span>
   </div>
 </main>
+
+<script src="{{ "js/books-widgets.js" | relURL }}"></script>
 {{ end }}

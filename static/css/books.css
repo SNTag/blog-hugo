@@ -42,6 +42,14 @@
   outline: none;
 }
 
+/* Hide link arrow (↗) on all book card links
+   Needs high specificity to beat: a[href^="http"]:not([href*="..."])::after */
+.books-catalogue .book-item a[href]::after,
+.books-catalogue .book-item a::after {
+  content: none !important;
+  display: none !important;
+}
+
 .book-cover img {
   width: 100%;
   height: auto;
@@ -82,6 +90,37 @@
   color: #f39c12;
   margin: 0.5rem 0;
   font-size: 0.9rem;
+}
+
+.book-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee;
+}
+
+.book-tag {
+  display: inline-block !important;
+  font-size: 0.65rem !important;
+  font-weight: 500 !important;
+  font-variant: normal !important;
+  letter-spacing: 0.03em !important;
+  text-decoration: none !important;
+  padding: 0.2rem 0.55rem !important;
+  border-radius: 10px !important;
+  border: 1px solid #e0d6c8 !important;
+  background: linear-gradient(135deg, #faf8f5, #f3efe9) !important;
+  color: #7a6e5d !important;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.book-tag:hover {
+  background: linear-gradient(135deg, #f39c12, #e67e22) !important;
+  color: #fff !important;
+  border-color: #e67e22 !important;
 }
 
 .book-summary {
@@ -129,4 +168,40 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+}
+
+/* ── Dark mode overrides ── */
+:root:not(.light) .book-item {
+  border-color: #3a3a3a;
+}
+
+:root:not(.light) .book-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border-color: #5a9ae1;
+}
+
+:root:not(.light) .book-author {
+  color: #aaa;
+}
+
+:root:not(.light) .book-details h2 a:hover {
+  color: #5a9ae1;
+}
+
+:root:not(.light) .book-summary {
+  color: #bbb;
+}
+
+:root:not(.light) .pagination a {
+  color: #5a9ae1;
+}
+
+:root:not(.light) .book-tags {
+  border-top-color: #333 !important;
+}
+
+:root:not(.light) .book-tag {
+  background: linear-gradient(135deg, #1e1c18, #2a2620) !important;
+  border-color: #4a4030 !important;
+  color: #c4b99a !important;
 }

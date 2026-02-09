@@ -172,6 +172,13 @@ a[href^="http"]:not([href*="sntag.netlify.app"])::after {
     opacity: 0.7 !important;
 }
 
+/* Exclude book cards and book widgets from external-link arrows */
+.book-item a::after,
+.books-widgets a::after {
+    content: none !important;
+    display: none !important;
+}
+
 /* Base typography settings */
 /*
 body {
