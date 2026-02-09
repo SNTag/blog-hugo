@@ -28,5 +28,13 @@
     {{ if .Params.rating }}
     <p class="book-rating">Rating: {{ .Params.rating }}/5</p>
     {{ end }}
+
+    {{ with .Params.tags }}
+    <div class="book-tags">
+      {{ range . }}
+      <span class="book-tag">{{ . }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
   </div>
 </article>

@@ -92,6 +92,23 @@
   font-size: 0.9rem;
 }
 
+.book-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.book-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  background: #f0f0f0;
+  color: #555;
+  white-space: nowrap;
+}
+
 .book-summary {
   margin-top: 1rem;
   line-height: 1.6;
