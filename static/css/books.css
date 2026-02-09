@@ -102,23 +102,25 @@
 }
 
 .book-tag {
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  padding: 0.2rem 0.55rem;
-  border-radius: 10px;
-  border: 1px solid #e0d6c8;
-  background: linear-gradient(135deg, #faf8f5, #f3efe9);
-  color: #7a6e5d;
+  display: inline-block !important;
+  font-size: 0.65rem !important;
+  font-weight: 500 !important;
+  font-variant: normal !important;
+  letter-spacing: 0.03em !important;
+  text-decoration: none !important;
+  padding: 0.2rem 0.55rem !important;
+  border-radius: 10px !important;
+  border: 1px solid #e0d6c8 !important;
+  background: linear-gradient(135deg, #faf8f5, #f3efe9) !important;
+  color: #7a6e5d !important;
   white-space: nowrap;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .book-tag:hover {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-  color: #fff;
-  border-color: #e67e22;
+  background: linear-gradient(135deg, #f39c12, #e67e22) !important;
+  color: #fff !important;
+  border-color: #e67e22 !important;
 }
 
 .book-summary {
