@@ -23,7 +23,7 @@ blockquote::before {
   font-family: Georgia, serif;
   color: var(--default-shade, #353535);
   line-height: 1;
-  margin-bottom: -0.5rem;
+  margin-bottom: -0.75rem;
 }
 
 /* Collapse paragraph margin inside blockquotes */
@@ -32,7 +32,7 @@ blockquote::before {
 }
 
 blockquote p:last-of-type {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
 /* Tighten gap when no <p> wraps the text (markdownify inline) */
