@@ -78,12 +78,20 @@
 
 <main>
   <h1>Books</h1>
-  <div class="books-catalogue">
+
+  <div class="book-search-container">
+    <input type="text" id="book-search-input" class="book-search-input" placeholder="Search by title, author, tag, keyword..." autocomplete="off" />
+    <span class="book-search-icon">&#128269;</span>
+    <button id="book-search-clear" class="book-search-clear" aria-label="Clear search" style="display:none;">&times;</button>
+    <div id="book-search-status" class="book-search-status"></div>
+  </div>
+
+  <div class="books-catalogue" id="books-catalogue">
     {{ range (.Paginate .Pages).Pages }}
       {{ .Render "summary-books" }}
     {{ end }}
   </div>
-  <div class="pagination">
+  <div class="pagination" id="books-pagination">
     {{ if .Paginator.HasPrev }}
       <a href="{{ .Paginator.Prev.URL }}" class="left arrow">&#8592;</a>
     {{ end }}
@@ -94,5 +102,7 @@
   </div>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+<script src="{{ "js/books-search.js" | relURL }}"></script>
 <script src="{{ "js/books-widgets.js" | relURL }}"></script>
 {{ end }}

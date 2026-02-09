@@ -1,3 +1,88 @@
+/* ── Book Search ── */
+.book-search-container {
+  position: relative;
+  max-width: 500px;
+  margin: 1.5rem auto 0;
+}
+
+.book-search-input {
+  width: 100%;
+  padding: 0.7rem 2.5rem 0.7rem 2.2rem;
+  font-size: 0.95rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.book-search-input:focus {
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+}
+
+.book-search-icon {
+  position: absolute;
+  left: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.book-search-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #999;
+  padding: 0 0.3rem;
+  line-height: 1;
+}
+
+.book-search-clear:hover {
+  color: #333;
+}
+
+.book-search-status {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 0.5rem;
+  min-height: 1.2em;
+}
+
+/* ── Dark mode: search ── */
+:root:not(.light) .book-search-input {
+  background: #1a1a1a;
+  border-color: #3a3a3a;
+  color: #ddd;
+}
+
+:root:not(.light) .book-search-input:focus {
+  border-color: #5a9ae1;
+  box-shadow: 0 0 0 3px rgba(90, 154, 225, 0.15);
+}
+
+:root:not(.light) .book-search-clear {
+  color: #666;
+}
+
+:root:not(.light) .book-search-clear:hover {
+  color: #ccc;
+}
+
+:root:not(.light) .book-search-status {
+  color: #888;
+}
+
 /* Book list layout - Grid format */
 .books-catalogue {
   display: grid;

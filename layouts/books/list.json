@@ -1,0 +1,31 @@
+{{- $books := slice -}}
+{{- range .Pages -}}
+  {{- $authors := "" -}}
+  {{- if .Params.author -}}
+    {{- if reflect.IsSlice .Params.author -}}
+      {{- $authors = delimit .Params.author ", " -}}
+    {{- else -}}
+      {{- $authors = .Params.author -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $tags := slice -}}
+  {{- with .Params.tags -}}
+    {{- $tags = . -}}
+  {{- end -}}
+  {{- $keywords := slice -}}
+  {{- with .Params.keywords -}}
+    {{- $keywords = . -}}
+  {{- end -}}
+  {{- $book := dict
+    "title" .Title
+    "url" .Permalink
+    "author" $authors
+    "rating" (.Params.rating | default 0)
+    "tags" $tags
+    "keywords" $keywords
+    "cover" (.Params.cover | default "")
+    "publisher" (index .Params "publisher" | default "")
+  -}}
+  {{- $books = $books | append $book -}}
+{{- end -}}
+{{- $books | jsonify -}}
