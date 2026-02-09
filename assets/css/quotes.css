@@ -26,6 +26,11 @@ blockquote::before {
   margin-bottom: 0.25rem;
 }
 
+/* Collapse paragraph margin inside blockquotes */
+blockquote p:last-of-type {
+  margin-bottom: 0;
+}
+
 /* Attribution styling */
 blockquote cite,
 blockquote footer {
