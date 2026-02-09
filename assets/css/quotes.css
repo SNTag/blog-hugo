@@ -1,89 +1,86 @@
-/* Enhanced blockquote styling */
+/* Blockquote styling - Obsidian-inspired centered quotes */
 blockquote {
   position: relative;
-  font-style: italic;
+  font-style: normal;
   font-size: 1.1em;
-  line-height: 1.6;
-  margin: 2rem 0;
-  padding: 1.5rem 2rem 1.5rem 3rem;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-left: 4px solid #007bff;
-  border-radius: 0 8px 8px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  line-height: 1.8;
+  margin: 2.5rem auto;
+  padding: 3rem 2rem 1.5rem;
+  max-width: 600px;
+  text-align: center;
+  background: none;
+  border: none;
+  box-shadow: none;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  blockquote {
-    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-    color: #e2e8f0;
-    border-left-color: #4299e1;
-  }
-}
-
-/* Quote marks */
+/* Decorative opening quote mark */
 blockquote::before {
-  content: '"';
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  font-size: 3rem;
+  content: '\201C';
+  display: block;
+  text-align: center;
+  font-size: 4rem;
   font-family: Georgia, serif;
-  color: #007bff;
-  opacity: 0.3;
+  color: var(--default-shade, #353535);
   line-height: 1;
+  margin-bottom: 0.5rem;
 }
 
 /* Attribution styling */
 blockquote cite,
 blockquote footer {
   display: block;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
   font-size: 0.9em;
   font-style: normal;
-  color: #6c757d;
+  color: var(--default-color, #555);
 }
 
 blockquote cite::before,
 blockquote footer::before {
-  content: "— ";
+  content: "\2014\00a0";
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  blockquote {
+    color: var(--default-color, #e2e8f0);
+  }
+
+  blockquote::before {
+    color: var(--default-shade, #989898);
+  }
 }
 
 /* Nested blockquotes */
 blockquote blockquote {
   margin: 1rem 0;
-  padding: 1rem 1.5rem;
-  border-left: 2px solid #6c757d;
-  background: rgba(255, 255, 255, 0.5);
+  padding: 1rem 1.5rem 0.5rem;
 }
 
-/* Alternative quote styles */
-.quote-style-minimal {
-  background: none;
-  border-left: 3px solid #007bff;
-  padding: 1rem 2rem;
-  font-style: italic;
-  box-shadow: none;
+blockquote blockquote::before {
+  font-size: 2.5rem;
 }
 
+/* All named quote styles share the same centered look */
+.quote-style-default,
+.quote-style-minimal,
 .quote-style-elegant {
-  background: white;
-  border: 1px solid #e9ecef;
-  border-left: 4px solid #28a745;
-  padding: 2rem;
   position: relative;
-  font-family: Georgia, serif;
+  font-style: normal;
+  font-size: 1.1em;
+  line-height: 1.8;
+  margin: 2.5rem auto;
+  padding: 3rem 2rem 1.5rem;
+  max-width: 600px;
+  text-align: center;
+  background: none;
+  border: none;
+  box-shadow: none;
+  font-family: inherit;
 }
 
 .quote-style-elegant::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 2rem;
-  width: 0;
-  height: 0;
-  border: 8px solid transparent;
-  border-top-color: #28a745;
+  content: none;
 }
 
 /* Pullquote style for standout quotes */
@@ -91,13 +88,23 @@ blockquote blockquote {
   float: right;
   width: 300px;
   margin: 0 0 1rem 2rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-top: 3px solid #007bff;
-  border-bottom: 3px solid #007bff;
+  padding: 2.5rem 1.5rem 1rem;
+  background: none;
+  border: none;
   font-size: 1.2em;
-  font-style: italic;
+  font-style: normal;
   text-align: center;
+}
+
+.pullquote::before {
+  content: '\201C';
+  display: block;
+  text-align: center;
+  font-size: 3rem;
+  font-family: Georgia, serif;
+  color: var(--default-shade, #353535);
+  line-height: 1;
+  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 768px) {
