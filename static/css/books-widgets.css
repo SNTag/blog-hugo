@@ -42,19 +42,28 @@
 .carousel-track {
   position: relative;
   width: 100%;
+  min-height: 180px;
   overflow: hidden;
 }
 
 .carousel-slide {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
-  animation: carouselFadeIn 0.8s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .carousel-slide.active {
-  display: flex;
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+  animation: carouselFadeIn 0.8s ease-in-out;
 }
 
 @keyframes carouselFadeIn {
@@ -70,7 +79,9 @@
 
 /* Outgoing slide animation (applied via JS) */
 .carousel-slide.exiting {
-  display: flex;
+  position: absolute;
+  opacity: 1;
+  pointer-events: none;
   animation: carouselFadeOut 0.8s ease-in-out forwards;
 }
 
