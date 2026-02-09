@@ -43,7 +43,7 @@ READING_TAG_PREFIXES = []
 # Books with ANY of these tag prefixes (case-insensitive) are included.
 # e.g. ["books/fic"] means only books tagged books/fic/... are recommended.
 # Set to [] to include ALL books as recommendations.
-RECOMMEND_TAG_PREFIXES = []
+RECOMMEND_TAG_PREFIXES = ["Recommended"]
 
 # ─── Helpers ────────────────────────────────────────────────────
 
