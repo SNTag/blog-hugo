@@ -42,10 +42,10 @@
   outline: none;
 }
 
-/* Hide external-link arrow (↗) on book card links */
-.book-cover a::after,
-.book-details h2 a::after {
+/* Hide link arrow (↗) on all book card links */
+.book-item a::after {
   content: none !important;
+  display: none !important;
 }
 
 .book-cover img {
