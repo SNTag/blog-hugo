@@ -30,7 +30,7 @@ blockquote::before {
 blockquote cite,
 blockquote footer {
   display: block;
-  margin-top: 0.25rem;
+  margin-top: 0;
   font-size: 0.9em;
   font-style: normal;
   color: var(--default-color, #555);
