@@ -42,8 +42,10 @@
   outline: none;
 }
 
-/* Hide link arrow (↗) on all book card links */
-.book-item a::after {
+/* Hide link arrow (↗) on all book card links
+   Needs high specificity to beat: a[href^="http"]:not([href*="..."])::after */
+.books-catalogue .book-item a[href]::after,
+.books-catalogue .book-item a::after {
   content: none !important;
   display: none !important;
 }
