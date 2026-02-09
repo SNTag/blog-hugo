@@ -8,9 +8,10 @@ blockquote {
   padding: 3rem 2rem 1.5rem;
   max-width: 600px;
   text-align: center;
-  background: none;
+  background: #f9f9f9;
   border: none;
-  box-shadow: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* Decorative opening quote mark */
@@ -43,7 +44,9 @@ blockquote footer::before {
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   blockquote {
+    background: var(--grey-4, #181818);
     color: var(--default-color, #e2e8f0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   }
 
   blockquote::before {
@@ -73,9 +76,10 @@ blockquote blockquote::before {
   padding: 3rem 2rem 1.5rem;
   max-width: 600px;
   text-align: center;
-  background: none;
+  background: #f9f9f9;
   border: none;
-  box-shadow: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   font-family: inherit;
 }
 
