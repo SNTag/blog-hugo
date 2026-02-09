@@ -128,6 +128,12 @@
   width: 120px;
 }
 
+.carousel-cover a {
+  display: block;
+  text-decoration: none;
+  border: none;
+}
+
 .carousel-cover img {
   width: 100%;
   height: auto;
@@ -146,6 +152,11 @@
   font-size: 1rem;
   line-height: 1.3;
   color: var(--default-color, #333);
+  text-decoration: none;
+}
+
+a.carousel-book-title:hover {
+  color: #0066cc;
 }
 
 .carousel-book-author {
@@ -348,6 +359,10 @@
 :root:not(.light) .audiobook-badge {
   background: #2d2010;
   color: #f0a830;
+}
+
+:root:not(.light) a.carousel-book-title:hover {
+  color: #5a9ae1;
 }
 
 :root:not(.light) .carousel-arrow,

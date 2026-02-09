@@ -15,10 +15,13 @@
         {{ range . }}
         <div class="carousel-slide">
           <div class="carousel-cover">
+            {{ if .url }}<a href="{{ .url }}">{{ end }}
             <img src="{{ .cover }}" alt="{{ .title }} cover" loading="lazy">
+            {{ if .url }}</a>{{ end }}
           </div>
           <div class="carousel-info">
-            <span class="carousel-book-title">{{ .title }}</span>
+            {{ if .url }}<a href="{{ .url }}" class="carousel-book-title">{{ .title }}</a>
+            {{ else }}<span class="carousel-book-title">{{ .title }}</span>{{ end }}
             <span class="carousel-book-author">{{ .author }}</span>
             {{ if eq .format "audiobook" }}
             <span class="carousel-badge audiobook-badge">Audiobook</span>

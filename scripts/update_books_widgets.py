@@ -145,11 +145,15 @@ def collect_currently_reading(root):
         cover = fm.get("cover", "")
         authors = to_list(fm.get("author"))
 
+        slug = slug_from_filename(md)
+        url = f"/books/{slug}/"
+
         results.append({
             "title": fm.get("title", md.stem),
             "author": ", ".join(authors) if authors else "Unknown",
             "cover": cover,
             "format": "book",  # default; override manually for audiobooks
+            "url": url,
         })
 
     return results
@@ -215,6 +219,7 @@ def write_toml(root, reading, recommendations):
         lines.append(f'author = "{escape_toml_string(entry["author"])}"')
         lines.append(f'cover  = "{escape_toml_string(entry["cover"])}"')
         lines.append(f'format = "{entry["format"]}"')
+        lines.append(f'url    = "{escape_toml_string(entry["url"])}"')
 
     lines.append("")
     lines.append("# ── Recommendations ──")
