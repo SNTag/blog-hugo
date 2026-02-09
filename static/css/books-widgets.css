@@ -37,9 +37,6 @@
 
 .reading-carousel {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 /* ── Shared arrow styles ── */
@@ -179,18 +176,18 @@
   color: #e67e22;
 }
 
-/* Carousel dots – sits below the arrow+track row */
-.carousel-dots {
+/* Carousel bottom controls: [prev] [dots] [next] */
+.carousel-controls {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
+  gap: 0.75rem;
   margin-top: 0.75rem;
 }
 
-/* Let reading-carousel wrap so dots go to their own row */
-.reading-carousel {
-  flex-wrap: wrap;
+.carousel-dots {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .carousel-dot {
@@ -222,22 +219,16 @@
   max-width: 50%;
 }
 
-.recommendations-container {
+/* Recommendations bottom controls */
+.rec-controls {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.rec-arrow {
-  transform: rotate(90deg);
-}
-
-.rec-prev {
-  transform: rotate(90deg) scaleX(-1);
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
 }
 
 .recommendations-viewport {
-  flex: 1;
   height: 180px;
   overflow: hidden;
   position: relative;
