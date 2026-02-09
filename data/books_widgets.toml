@@ -3,6 +3,18 @@
 
 # ── Currently Reading / Listening ──
 # (no books matched — set a 'started' date in front matter)
+[[currently_reading]]
+title  = "The Iliad A New Translation by Caroline Alexander"
+author = "Caroline Alexander"
+cover  = "https://images-us.bookshop.org/ingram/9780062046291.jpg?v=f8db94408d5c3d22da2407b7762bb00a"
+format = "ebook"
+
+[[currently_reading]]
+title  = "Winslow Homer"
+author = "Cross, William R"
+cover  = "https://www.syndetics.com/index.aspx?isbn=9780374603793&issn=/LC.JPG&client=notsobplp&type=xw12&oclc=1289388573"
+format = "book"
+
 
 # ── Recommendations ──
 
