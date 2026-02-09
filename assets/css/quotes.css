@@ -3,9 +3,9 @@ blockquote {
   position: relative;
   font-style: normal;
   font-size: 1.1em;
-  line-height: 1.8;
-  margin: 2.5rem auto;
-  padding: 3rem 2rem 1.5rem;
+  line-height: 1.6;
+  margin: 1.5rem auto;
+  padding: 2rem 2rem 1.25rem;
   max-width: 600px;
   text-align: center;
   background: #f9f9f9;
@@ -19,18 +19,18 @@ blockquote::before {
   content: '\201C';
   display: block;
   text-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
   font-family: Georgia, serif;
   color: var(--default-shade, #353535);
   line-height: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 /* Attribution styling */
 blockquote cite,
 blockquote footer {
   display: block;
-  margin-top: 1.25rem;
+  margin-top: 0.75rem;
   font-size: 0.9em;
   font-style: normal;
   color: var(--default-color, #555);
@@ -71,9 +71,9 @@ blockquote blockquote::before {
   position: relative;
   font-style: normal;
   font-size: 1.1em;
-  line-height: 1.8;
-  margin: 2.5rem auto;
-  padding: 3rem 2rem 1.5rem;
+  line-height: 1.6;
+  margin: 1.5rem auto;
+  padding: 2rem 2rem 1.25rem;
   max-width: 600px;
   text-align: center;
   background: #f9f9f9;
