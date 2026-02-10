@@ -216,6 +216,32 @@
   flex-grow: 1;
 }
 
+/* ── Book single page cover ── */
+.book-cover-single {
+  text-align: center;
+  margin: 1.5rem auto 2rem;
+  max-width: 350px;
+}
+
+.book-cover-single img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  display: block;
+}
+
+/* Constrain any inline images in book post content (markdown-rendered) */
+.post-content .post p img {
+  max-width: 350px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
 /* Pagination styling */
 .pagination {
   display: flex;

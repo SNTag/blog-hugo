@@ -1,10 +1,16 @@
 {{ define "main" }}
+<link rel="stylesheet" href="{{ "css/books.css" | relURL }}">
 <div class="post-container">
 	<main class="post-content">
 		<div class="post">
 			{{ partial "single/post-info.html" . }}
 			{{ partial "single/title.html" . }}
 			{{ partial "single/header.html" . }}
+			{{ with .Params.cover }}
+			<div class="book-cover-single">
+				<img src="{{ . }}" alt="{{ $.Title }} cover">
+			</div>
+			{{ end }}
 			{{ .Content }}
 			{{ partial "single/footer.html" . }}
 		</div>
