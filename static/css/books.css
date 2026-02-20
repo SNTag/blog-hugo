@@ -298,17 +298,15 @@
 .book-hero-link {
   display: inline-block;
   font-size: 0.9rem;
-  font-weight: 500;
-  padding: 0.5rem 1.2rem;
-  border-radius: 6px;
-  background: #2a7f3f;
-  color: #fff !important;
+  color: #555 !important;
   text-decoration: none !important;
-  transition: background 0.2s;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.1rem;
 }
 
 .book-hero-link:hover {
-  background: #22663a;
+  color: #333 !important;
+  border-bottom-color: #888;
 }
 
 /* Hide external-link arrow on hero links */
@@ -409,11 +407,13 @@
 }
 
 :root:not(.light) .book-hero-link {
-  background: #2a7f3f;
+  color: #aaa !important;
+  border-bottom-color: #555;
 }
 
 :root:not(.light) .book-hero-link:hover {
-  background: #34994a;
+  color: #ddd !important;
+  border-bottom-color: #999;
 }
 
 :root:not(.light) .book-item {
