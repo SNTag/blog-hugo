@@ -216,19 +216,105 @@
   flex-grow: 1;
 }
 
-/* ── Book single page cover ── */
-.book-cover-single {
-  text-align: center;
-  margin: 1.5rem auto 2rem;
-  max-width: 350px;
+/* ── Book single-page hero (cover + metadata) ── */
+.book-hero {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.book-cover-single img {
+.book-hero-cover {
+  flex-shrink: 0;
+  width: 220px;
+}
+
+.book-hero-cover img {
   width: 100%;
   height: auto;
   border-radius: 4px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   display: block;
+}
+
+.book-hero-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-hero-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.8rem;
+  line-height: 1.3;
+}
+
+.book-hero-author {
+  font-style: italic;
+  color: #555;
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+}
+
+.book-hero-rating {
+  color: #f39c12;
+  font-size: 1.2rem;
+  margin: 0 0 0.6rem;
+}
+
+.book-hero-rating-num {
+  font-size: 0.85rem;
+  color: #888;
+  margin-left: 0.3rem;
+}
+
+.book-hero-publisher {
+  color: #777;
+  font-size: 0.9rem;
+  margin: 0 0 0.8rem;
+}
+
+.book-hero-formats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.book-format-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 12px;
+  border: 1px solid #d0c8bb;
+  background: linear-gradient(135deg, #faf8f5, #f0ebe3);
+  color: #6b5f4f;
+}
+
+.book-hero-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  background: #2a7f3f;
+  color: #fff !important;
+  text-decoration: none !important;
+  transition: background 0.2s;
+}
+
+.book-hero-link:hover {
+  background: #22663a;
+}
+
+/* Hide external-link arrow on hero links */
+.book-hero a[href]::after {
+  content: none !important;
+  display: none !important;
 }
 
 /* Constrain any inline images in book post content (markdown-rendered) */
@@ -268,9 +354,23 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.5rem;
   }
-  
+
   .book-item {
     padding: 1rem;
+  }
+
+  .book-hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .book-hero-cover {
+    width: 180px;
+  }
+
+  .book-hero-formats {
+    justify-content: center;
   }
 }
 
@@ -279,9 +379,43 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
+  .book-hero-cover {
+    width: 160px;
+  }
 }
 
 /* ── Dark mode overrides ── */
+:root:not(.light) .book-hero {
+  border-bottom-color: #3a3a3a;
+}
+
+:root:not(.light) .book-hero-author {
+  color: #aaa;
+}
+
+:root:not(.light) .book-hero-rating-num {
+  color: #999;
+}
+
+:root:not(.light) .book-hero-publisher {
+  color: #999;
+}
+
+:root:not(.light) .book-format-badge {
+  background: linear-gradient(135deg, #1e1c18, #2a2620);
+  border-color: #4a4030;
+  color: #c4b99a;
+}
+
+:root:not(.light) .book-hero-link {
+  background: #2a7f3f;
+}
+
+:root:not(.light) .book-hero-link:hover {
+  background: #34994a;
+}
+
 :root:not(.light) .book-item {
   border-color: #3a3a3a;
 }

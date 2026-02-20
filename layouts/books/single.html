@@ -3,14 +3,56 @@
 <div class="post-container">
 	<main class="post-content">
 		<div class="post">
-			{{ partial "single/post-info.html" . }}
-			{{ partial "single/title.html" . }}
-			{{ partial "single/header.html" . }}
-			{{ with .Params.cover }}
-			<div class="book-cover-single">
-				<img src="{{ . }}" alt="{{ $.Title }} cover">
+
+			<!-- Book hero: cover + metadata -->
+			<div class="book-hero">
+				{{ with .Params.cover }}
+				<div class="book-hero-cover">
+					<img src="{{ . }}" alt="{{ $.Title }} cover">
+				</div>
+				{{ end }}
+
+				<div class="book-hero-meta">
+					<h1 class="book-hero-title">{{ .Title }}</h1>
+
+					{{ with .Params.author }}
+					<p class="book-hero-author">
+						{{- range $i, $a := . -}}
+							{{- if $i }}, {{ end -}}
+							{{ $a }}
+						{{- end -}}
+					</p>
+					{{ end }}
+
+					{{ with .Params.rating }}
+					<p class="book-hero-rating">
+						{{- $full := int . -}}
+						{{- range (seq $full) }}&#9733;{{ end -}}
+						{{- $empty := sub 5 $full -}}
+						{{- range (seq $empty) }}&#9734;{{ end }}
+						<span class="book-hero-rating-num">{{ . }}/5</span>
+					</p>
+					{{ end }}
+
+					{{ with .Params.Publisher }}
+					<p class="book-hero-publisher">{{ . }}</p>
+					{{ end }}
+
+					{{ with .Params.formats }}
+					<div class="book-hero-formats">
+						{{ range . }}
+						<span class="book-format-badge">{{ . }}</span>
+						{{ end }}
+					</div>
+					{{ end }}
+
+					{{ with .Params.link }}
+					<a href="{{ . }}" class="book-hero-link" target="_blank" rel="noopener">Buy on Bookshop.org</a>
+					{{ end }}
+				</div>
 			</div>
-			{{ end }}
+			<!-- /Book hero -->
+
 			{{ .Content }}
 			{{ partial "single/footer.html" . }}
 		</div>
