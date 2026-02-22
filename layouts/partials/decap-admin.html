@@ -1,0 +1,53 @@
+{{/*
+  Decap CMS – Guest Book Review Submissions
+  ──────────────────────────────────────────
+  Toggle:  set params.enableDecapCMS = true  in config.toml to enable.
+           set params.enableDecapCMS = false to hide (default).
+
+  To remove the feature entirely:
+    1. Delete static/admin/
+    2. Delete this file
+    3. Remove the {{ partial "decap-admin.html" . }} call in layouts/books/list.html
+    4. Remove the enableDecapCMS param from config.toml
+*/}}
+{{ if .Site.Params.enableDecapCMS }}
+<div class="submit-review-cta">
+  <a href="/admin/" class="submit-review-btn">+ Submit a Book Review</a>
+  <p class="submit-review-note">
+    Requires a GitHub account &mdash; your submission will be reviewed before publishing.
+  </p>
+</div>
+
+<style>
+/* ── Submit Review CTA ─────────────────────────────────────────────────────
+   Scoped here so all Decap CMS UI styles stay in this one file.           */
+.submit-review-cta {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.submit-review-btn {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  background: #2d2d2d;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.submit-review-btn:hover {
+  background: #444;
+}
+
+.submit-review-note {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: #888;
+}
+</style>
+{{ end }}

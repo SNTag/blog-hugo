@@ -54,6 +54,11 @@ BaseURL = "https://sntag.netlify.app/"
     name = "S Tagore"
   css = ["custom.css"]
   rss = true
+  # ── Decap CMS: Guest Book Review Submissions ──────────────────────────────
+  # Set to true to show a "Submit a Book Review" button on the /books/ page.
+  # All CMS files live in static/admin/ — delete that folder to remove entirely.
+  # See static/admin/config.yml for Netlify setup instructions.
+  enableDecapCMS = false
 
 # If porting an existing theme
 [original]

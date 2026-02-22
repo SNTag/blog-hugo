@@ -79,6 +79,8 @@
 <main>
   <h1>Books</h1>
 
+  {{ partial "decap-admin.html" . }}
+
   <div class="book-search-container">
     <input type="text" id="book-search-input" class="book-search-input" placeholder="Search by title, author, tag, keyword..." autocomplete="off" />
     <span class="book-search-icon">&#128269;</span>

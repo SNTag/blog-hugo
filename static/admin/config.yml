@@ -1,0 +1,99 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Decap CMS configuration – Guest Book Review Submissions
+#
+# Authentication: Netlify acts as the GitHub OAuth proxy.
+# One-time Netlify setup required (free):
+#   1. Go to Netlify → Site settings → Identity → Enable Identity
+#   2. Under Identity → Registration, choose "Invite only" (recommended)
+#      or "Open" to allow any GitHub user to submit
+#   3. Under Identity → External providers, enable GitHub
+#   4. Under Identity → Services → Git Gateway, enable Git Gateway
+#
+# After setup, submissions become Pull Requests on the repo for you to review.
+# ─────────────────────────────────────────────────────────────────────────────
+
+backend:
+  name: git-gateway          # Uses Netlify Identity + Git Gateway (free)
+  branch: main               # PRs will target this branch
+
+# Editorial workflow: submissions become PRs, not direct commits.
+# You review and merge each PR before it goes live.
+publish_mode: editorial_workflow
+
+# Where uploaded images land (cover images pasted/uploaded via the CMS)
+media_folder: static/images/books
+public_folder: /images/books
+
+collections:
+  - name: books
+    label: Book Reviews
+    label_singular: Book Review
+    folder: content/books
+    create: true
+    slug: "{{title}}"        # filename = title (spaces become hyphens automatically)
+    editor:
+      preview: false         # no live preview needed for simple reviews
+
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        hint: Full title of the book
+
+      - label: Author(s)
+        name: author
+        widget: list
+        field:
+          label: Author
+          name: author
+          widget: string
+        hint: Add one author per entry
+
+      - label: Publisher
+        name: Publisher
+        widget: string
+        required: false
+
+      - label: Rating
+        name: rating
+        widget: number
+        value_type: int
+        min: 1
+        max: 5
+        default: 3
+        hint: Your rating out of 5
+
+      - label: Cover Image URL
+        name: cover
+        widget: string
+        required: false
+        hint: Paste a direct URL to the book cover image (e.g. from bookshop.org)
+
+      - label: Buy / Info Link
+        name: link
+        widget: string
+        required: false
+        hint: Link to the book on Bookshop.org or similar
+
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        hint: e.g. fiction, history, science
+
+      - label: Date Started
+        name: started
+        widget: string
+        required: false
+        hint: Optional – when you started reading (e.g. 2024-03-01)
+
+      - label: Date Completed
+        name: completed
+        widget: string
+        required: false
+        hint: Optional – when you finished reading
+
+      - label: Review
+        name: body
+        widget: markdown
+        hint: Write your review here. Markdown is supported.
