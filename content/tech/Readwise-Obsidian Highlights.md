@@ -1,7 +1,7 @@
 ---
 title: "Readwise to Obsidian"
 author: "SNTag"
-date: "2024-10-23T00:00:00Z"
+date: "2026-05-17T00:00:00Z"
 layout: post
 summary:
     "Atomic notes for a designed daily template."
