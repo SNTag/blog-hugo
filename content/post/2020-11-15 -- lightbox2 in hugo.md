@@ -50,7 +50,7 @@ The shortcode written by [Julian Stier](https://julianstier.com/posts/2020/03/hu
 \{\{\< figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" \>\}\}
 
 ```
-{{< glightbox-figure class="floatright" src="../../photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" >}}
+{{< glightbox-figure class="floatright" src="/photos/DSLR-timelapse/2020-10-25_16-28.png" caption="A random image from my gallery" >}}
 ```
 
 ## Gallery
