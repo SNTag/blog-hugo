@@ -16,4 +16,4 @@ Lately, one of my biggest complaints is that I have setup a beautiful daily peri
 
 https://github.com/SNTag/Readwise-to-Obsidian
 
-![[content/photos/Pasted image 20260520083541.png]]
+![](/photos/Pasted%20image%2020260520083541.png)
