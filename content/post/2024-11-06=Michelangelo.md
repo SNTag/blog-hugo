@@ -10,7 +10,7 @@ categories:
   - Art
 ---
 
-{{< glightbox-figure class="floatright" src="../../photos/michelangelo-night-day-giuliano-medici-duke-nemours-tomb.jpg" >}}
+{{< glightbox-figure class="floatright" src="/photos/michelangelo-night-day-giuliano-medici-duke-nemours-tomb.jpg" >}}
 
 
 

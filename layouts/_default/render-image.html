@@ -1,0 +1,21 @@
+{{ $src := .Destination }}
+{{ $alt := .Text }}
+
+{{/* Rewrite Obsidian-generated content/ paths: content/photos/x → /photos/x */}}
+{{ if hasPrefix $src "content/" }}
+  {{ $src = printf "/%s" (strings.TrimPrefix "content/" $src) }}
+{{ end }}
+
+{{/* Ensure relative local paths get a leading slash */}}
+{{ if and (not (hasPrefix $src "/")) (not (hasPrefix $src "http")) }}
+  {{ $src = printf "/%s" $src }}
+{{ end }}
+
+<figure class="glightbox-figure">
+  <a href="{{ $src }}" class="glightbox" data-gallery="content">
+    <img src="{{ $src }}"
+         alt="{{ $alt | default "Image" }}"
+         loading="lazy">
+  </a>
+  {{ with $alt }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>
