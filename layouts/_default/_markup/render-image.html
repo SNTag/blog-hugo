@@ -11,7 +11,7 @@
   {{ $src = printf "/%s" $src }}
 {{ end }}
 
-<figure class="glightbox-figure">
+<figure class="glightbox-figure markdown-image">
   <a href="{{ $src }}" class="glightbox" data-gallery="content">
     <img src="{{ $src }}"
          alt="{{ $alt | default "Image" }}"
@@ -19,3 +19,37 @@
   </a>
   {{ with $alt }}<figcaption>{{ . }}</figcaption>{{ end }}
 </figure>
+
+<style>
+  .markdown-image {
+    margin: 1.5rem auto;
+    text-align: center;
+  }
+
+  .markdown-image a {
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .markdown-image a:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .markdown-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+  }
+
+  .markdown-image figcaption {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9em;
+  }
+</style>
