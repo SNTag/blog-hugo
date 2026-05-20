@@ -22,7 +22,8 @@ Lately, one of my biggest complaints is that I have setup a beautiful daily peri
 ![Example of a quote in my new system](content/photos/Pasted%20image%2020260520083541.png)
 
 The repository works in 2-steps tied together by the values in a config file.
-**Script 1**: 
+
+**Script 1**
 Creates a local CSV with columns taken from Readwise, and adds two: CommonPlace & Updated.
 
 **Script 2**
