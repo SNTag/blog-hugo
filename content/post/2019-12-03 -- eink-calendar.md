@@ -1,14 +1,14 @@
 ---
-categories:
-- project
-- hobby
-- eink
-- python
-- org-mode
-date: "2019-12-03T00:00:00Z"
-author: "Shayonendra N. Tagore"
+tags:
+  - project
+  - hobby
+  - eink
+  - python
+  - org-mode
+date: 2019-12-03T00:00:00Z
+author: Shayonendra N. Tagore
 date-string: NOVEMBER 12, 2019
-title: 'eink calendar: Part 1'
+title: "eink calendar: Part 1"
 ---
 
 **UPDATE 2020, Oct 16** I stopped trying to modify my kobo ereader a long while back. When I started the project, I was enjoy a ready access to nearby libraries and the joys of physical books. I've come to find that there is room for the Kobo in my library, especially for the heavier books like _Les Miserable_ and _The Count of Monte Cristo_ that are just too big to carry around. I imagine I'll return to this project one-day when I get a new ereader, but that probably won't be for a long, long time. I'm more likely to substitute the ereader for a dedicated eink display.

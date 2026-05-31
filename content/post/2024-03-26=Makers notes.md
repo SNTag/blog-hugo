@@ -1,9 +1,9 @@
 ---
-title: "Makers notes"
-author: "SNTag"
-date: "2024-03-26T00:00:00Z"
+title: Makers notes
+author: SNTag
+date: 2024-03-26T00:00:00Z
 layout: post
-categories:
+tags:
   - blog
   - makers
 ---

@@ -1,10 +1,10 @@
 ---
-title: "Night by Michelangelo"
-author: "SNTag"
-date: "2024-11-06T00:00:00Z"
+title: Night by Michelangelo
+author: SNTag
+date: 2024-11-06T00:00:00Z
 layout: post
-summary: "Precious is sleep, better to be of stone..."
-categories:
+summary: Precious is sleep, better to be of stone...
+tags:
   - Michelangelo
   - Poetry
   - Art

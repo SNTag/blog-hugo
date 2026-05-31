@@ -1,11 +1,10 @@
 ---
-title: "Document Generator"
-author: "SNTag"
-date: "2024-03-26T00:00:00Z"
+title: Document Generator
+author: SNTag
+date: 2024-03-26T00:00:00Z
 layout: post
-summary:
-    "**Makers file**: My method to document creation using Pandoc and makefiles into presentations (beamer) or pdfs."
-categories:
+summary: "**Makers file**: My method to document creation using Pandoc and makefiles into presentations (beamer) or pdfs."
+tags:
   - blog
   - Makers
   - makefile

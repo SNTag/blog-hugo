@@ -4,10 +4,10 @@ author: SNTag
 date: 2026-05-17T00:00:00Z
 layout: post
 summary: Atomic notes for a designed daily template.
-categories:
+tags:
   - Obsidian
   - Readwise
-  - CommonPlace Book
+  - CommonPlace_Book
   - Tech
 ---
 

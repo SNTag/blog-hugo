@@ -1,9 +1,9 @@
 ---
-title: "Lightbox2 in hugo"
-author: "SNTag"
-date: "2020-11-15T00:00:00Z"
+title: Lightbox2 in hugo
+author: SNTag
+date: 2020-11-15T00:00:00Z
 layout: post
-categories:
+tags:
   - hugo
   - shortcodes
   - lightbox2

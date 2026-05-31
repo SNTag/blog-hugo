@@ -1,12 +1,12 @@
 ---
-categories:
-- CRISPR
-- Research
-- NGS
-date: "2019-11-29T00:00:00Z"
+tags:
+  - CRISPR
+  - Research
+  - NGS
+date: 2019-11-29T00:00:00Z
 date-string: November 29, 2019
-author: "Shayonendra N. Tagore"
-title: "My plan for a CRISPR-KO library and scRNA-seq"
+author: Shayonendra N. Tagore
+title: My plan for a CRISPR-KO library and scRNA-seq
 ---
 
 **DISCLAIMER**

@@ -1,11 +1,10 @@
 ---
-title: "Quick Scripts"
-author: "SNTag"
-date: "2024-10-23T00:00:00Z"
+title: Quick Scripts
+author: SNTag
+date: 2024-10-23T00:00:00Z
 layout: post
-summary:
-    "**System Quick Scripts**: A collection of scripts I've found handy for a linux system. Includes quick-installation scripts."
-categories:
+summary: "**System Quick Scripts**: A collection of scripts I've found handy for a linux system. Includes quick-installation scripts."
+tags:
   - Makers
   - md
   - pdf

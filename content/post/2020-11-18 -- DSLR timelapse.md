@@ -1,12 +1,12 @@
 ---
-title: "DSLR timelapse"
-author: "SNTag"
-date: "2020-11-18T00:00:00Z"
+title: DSLR timelapse
+author: SNTag
+date: 2020-11-18T00:00:00Z
 layout: post
-categories:
+tags:
   - DSLR
   - diy
-  - raspberry pi
+  - raspberry_pi
   - timelapse
   - tutorial
 ---

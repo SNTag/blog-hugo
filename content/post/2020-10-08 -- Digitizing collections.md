@@ -1,12 +1,12 @@
 ---
-title: "Digitizing collections"
-author: "Shayonendra N. Tagore"
-date: "2020-10-09 15:37:17"
+title: Digitizing collections
+author: Shayonendra N. Tagore
+date: 2020-10-09 15:37:17
 layout: post
-categories:
+tags:
   - digitizing
   - diy
-  - raspberry pi
+  - raspberry_pi
 ---
 
 I've begun creating a media server lately. Something that I never thought I would attempt. With the

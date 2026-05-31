@@ -3,10 +3,10 @@ title: "Generating custom raspberry-pi images"
 author: "SNTag"
 date: "2020-10-30 14:17:40"
 layout: post
-categories:
+tags:
 - blog
 - diy
-- raspberry pi
+- raspberry_pi
 ---
 
 I've been working on a number of projects involving my raspberry pi; DSLR timelapse, a pi running

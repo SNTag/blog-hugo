@@ -2,3 +2,8 @@ public/
 resources/_gen/
 .hugo_build.lock
 .obsidian
+
+/content/post/2026-06-20=AI in Biology.md
+
+**/*IGNORE*
+**/*IGNORE*/**
