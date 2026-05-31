@@ -20,7 +20,9 @@ categories:
 
 # Overview
 This document is a summary of my document making process in markdown \>
-latex \> document. Setup on linux, pop~os. I'll admit that I stopped this attempt shortly after starting this documentation to make my system robust. I'm in the process of learning Obsidian and adapting it to my uses. I'll eventually come back around to incorporating obsidian into this at some point.
+latex \> document. Designed with pop~os Linux.
+
+This setup has been abandoned, because I don't care enough about a perfect system. As of late, I simply use any system capable of handling my immediate challenge. It's easier than fine-tuning these things.
 
 Requires:
 -   latex

@@ -1,13 +1,11 @@
 ---
-title: "Setting up Books Section"
-author: "SNTag"
-date: "2025-08-09T00:00:00Z"
+title: Setting up Books Section
+author: SNTag
+date: 2025-08-09T00:00:00Z
 layout: post
-summary: "I'm working on a new section for my blog. I've been creating a digital library with my reviews and comments using Obsidian. For the fun of it, I've been adapting this information over time to add to this blog. Only thing left is to add this information to the blog website!"
-categories:
-  - Michelangelo
-  - Poetry
-  - Art
+summary: I'm working on a new section for my blog. I've been creating a digital library with my reviews and comments using Obsidian. For the fun of it, I've been adapting this information over time to add to this blog. Only thing left is to add this information to the blog website!
+tags:
+  - books
 ---
 
 # My Book Recommendations From The Last Year
