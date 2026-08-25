@@ -1,5 +1,5 @@
 [build]
-  command = "git submodule update --init --recursive && hugo --gc --minify"
+  command = "git submodule update --init --recursive && python3 scripts/obsidian_to_hugo.py && hugo --gc --minify"
   publish = "public"
 
 [build.environment]

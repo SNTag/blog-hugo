@@ -2,8 +2,10 @@ public/
 resources/_gen/
 .hugo_build.lock
 .obsidian
+.content.bak/
 
 /content/post/2026-06-20=AI in Biology.md
 
 **/*IGNORE*
 **/*IGNORE*/**
+__pycache__/
