@@ -14,7 +14,7 @@ Yesterday morning, I rowed for the last time on the Charles river as I move my h
   
 I am incredibly proud to share that I will be joining the [**NYU Stern School of Business**](https://www.linkedin.com/company/nyu-stern-school-of-business/) Full-time MBA Class of 2028!  
 
-![[Stern Announcement.png]]
+![[Blog/static/images/posts/Stern Announcement.png]]
 
 For the last few years, I have spent a great deal of time reflecting on where I wanted my career to take me. I began by believing that my place was in academic biology. When I slowly realized that it was not where I truly wanted to remain, I found myself afloat, no longer anchored to the path I had once imagined. So, when the Stern application asked me to complete the phrase “Change: ____ it,” the word that came to me was “steer.”  
   
