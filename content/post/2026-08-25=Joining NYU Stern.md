@@ -3,7 +3,7 @@ title: Joining NYU Stern FT MBA
 author: SNTag
 date: 2025-08-09T00:00:00Z
 layout: post
-summary: I am incredibly proud to share that I will be joining the [**NYU Stern School of Business**](https://www.linkedin.com/company/nyu-stern-school-of-business/) Full-time MBA Class of 2028!
+summary: I am incredibly proud to share that I will be joining the NYU Stern School of Business Full-time MBA Class of 2028!
 tags:
   - mba
   - announcement
