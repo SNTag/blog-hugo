@@ -8,6 +8,7 @@ tags:
   - mba
   - announcement
 ---
+
 **Originally Posted on Linkedin on August 13th, 2026. Original post [here](https://www.linkedin.com/feed/update/urn:li:activity:7491157819585589248/)**
 
 Yesterday morning, I rowed for the last time on the Charles river as I move my home to Manhattan.  
