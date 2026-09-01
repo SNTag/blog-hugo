@@ -1,9 +1,14 @@
 ---
-layout: post
+title: index
 author: "Shayonendra N. Tagore"
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 2:45:42 pm
+layout: post
 ---
-# About the blog
-I started this blog to figure out static web programming. It is a record of hobbies, programming, and interests. I'm admittedly also using it as a data dump for workflows that I suspect SOMEONE out there might find useful!
+
+# About the Blog
+
+I started this blog to figure out static web programming. It is a record of hobbies, programming, and interests. Mostly, its an effort to practice public writing.
 
 If you want to see some of the places me and my wife see, check out our Instagram page [here](https://www.instagram.com/earl.n.affogato?igsh=NmV3YWdzYjc5bWNk)!
 
@@ -34,6 +39,7 @@ In my spare time, I mess with whatever catches my fancy; reading, piano, or cook
 {{< linkedin-card >}}
 
 ## My Book Recommendations From The Last Year
+
 I plan to add this soon, but I've got an Obsidian based system of tracking my books! I'm hoping to integrate this approach to generate a list of recommendations into Hugo. It seems simple enough to get something up, but I'm hoping to integrate this system into Obsidian as much as possible.
 {{< figure src="./Example of Obsidian Book Library.png" alt="Example of my Obsidian Book Library" width="500" >}}
 
@@ -87,7 +93,8 @@ For now, I'll say that the three books I've finished recently and can recommend 
 <br>
 {{< /rawhtml >}}
 
-# My Papers (last updated 19th Jan, 2020)
+# My Papers (Last uPdated 19th Jan, 2020)
+
 {{< rawhtml >}}
 <p>
 <ul style="list-style-type:disc;">
