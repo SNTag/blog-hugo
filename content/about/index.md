@@ -1,9 +1,14 @@
 ---
-layout: post
+title: index
 author: "Shayonendra N. Tagore"
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 2:45:42 pm
+layout: post
 ---
-# About the blog
-I started this blog to figure out static web programming. It is a record of hobbies, programming, and interests. I'm admittedly also using it as a data dump for workflows that I suspect SOMEONE out there might find useful!
+
+# About the Blog
+
+I started this blog to figure out static web programming. It is a record of hobbies, programming, and interests. Mostly, its an effort to practice public writing.
 
 If you want to see some of the places me and my wife see, check out our Instagram page [here](https://www.instagram.com/earl.n.affogato?igsh=NmV3YWdzYjc5bWNk)!
 
@@ -13,15 +18,25 @@ If you want to see some of the places me and my wife see, check out our Instagra
 <br>
 <br>
 {{< /rawhtml >}}
-# About me: Shayonendra N. Tagore
-{{< rawhtml >}}
-<p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
-I have a good deal of experience as a wet-lab bench scientist in molecular biology, with a range of multi-disciplinary experience! I've worked on automation, NGS, and assay development. Please feel free to reach out to me at <a href="mailto:snt.scouting879@passmail.com">snt.scouting879@passmail.com</a>.
-</p>
 
+# About Me: Shayonendra N. Tagore
+
+{{< rawhtml >}}
 <IMG align="left" SRC="./profile.png" ALT="my profile" width="300" style="margin-right: 20px;">
 <p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
-Graduated from National University of Singapore with an M.Sc in Molecular Biology and from Stony Brook University with a B.Sc. I've picked up R, Python, and Bash.
+I am an ex-scientist, moving away from the bench. As a scientist, I have been involved in Pfizer's COVID-19 vaccine, NGS screens with CRISPR-KO, and designing parasite animal models. Lately, I've been involved in automation in biotech and begun my FT MBA at NYU Stern.
+
+Please feel free to reach out to me at <a href="mailto:snt.scouting879@passmail.com">snt.scouting879@passmail.com</a>.
+</p>
+<p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
+
+## Education
+
+Currently at NYU Stern as a FT MBA Candidate, class of 2028. 
+</p>
+
+<p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
+I've graduated from National University of Singapore with an M.Sc in Molecular Biology and from Stony Brook University with a B.Sc. I've picked up R, Python, and Bash.
 </p>
 
 <p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
@@ -53,7 +68,9 @@ In my spare time, I mess with whatever catches my fancy; reading, piano, or cook
 </div>
 <br>
 {{< /rawhtml >}}
+
 ## My Book Recommendations From The Last Year
+
 I plan to add this soon, but I've got an Obsidian based system of tracking my books! I'm hoping to integrate this approach to generate a list of recommendations into Hugo. It seems simple enough to get something up, but I'm hoping to integrate this system into Obsidian as much as possible.
 {{< figure src="./Example of Obsidian Book Library.png" alt="Example of my Obsidian Book Library" width="500" >}}
 
@@ -107,7 +124,8 @@ For now, I'll say that the three books I've finished recently and can recommend 
 <br>
 {{< /rawhtml >}}
 
-# My Papers (last updated 19th Jan, 2020)
+# My Papers (Last uPdated 19th Jan, 2020)
+
 {{< rawhtml >}}
 <p>
 <ul style="list-style-type:disc;">
