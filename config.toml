@@ -27,9 +27,9 @@ BaseURL = "https://sntag.netlify.app/"
     url = "/books/"
     weight = -130
   [[menu.main]]
-    identifier = "Tech"
-    name = "Tech"
-    url = "/Tech/"
+    identifier = "TagOS"
+    name = "TagOS"
+    url = "/TagOS/"
     weight = -120
   [[menu.main]]
     identifier = "linkedin"
