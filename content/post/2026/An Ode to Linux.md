@@ -7,13 +7,14 @@ tags:
   - fun
   - windows
 added date: 2026-09-01, 2:04:00 pm
-modified date: 2026-09-01, 3:40:29 pm
+modified date: 2026-09-01, 3:41:42 pm
 date: 2026-09-01
 layout: post
 summary: An ode to Linux as I migrate back to Windows.
 ---
 
 Linux, 
+
 
 We had a great time. I managed to learn so much about programming, wasted so much time nailing your specifics, and you gave me thousands of projects to try.
 
@@ -25,5 +26,7 @@ Unfortunately though, business school needs excel, and you make it REALLY tough 
 
 I hope you'll become my main OS one day, but for now, I'm probably only going to use you on my raspberry pi.
 
+
 Sincerely,
+
 Shayon
