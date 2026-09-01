@@ -2,7 +2,7 @@
 title: index
 author: "Shayonendra N. Tagore"
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 2:45:42 pm
+modified date: 2026-09-01, 3:32:11 pm
 layout: post
 ---
 
@@ -18,7 +18,8 @@ If you want to see some of the places me and my wife see, check out our Instagra
 <br>
 <br>
 {{< /rawhtml >}}
-# About me: Shayonendra N. Tagore
+
+# About Me: Shayonendra N. Tagore
 
 I am an ex-scientist, moving away from the bench. As a scientist, I have been involved in Pfizer's COVID-19 vaccine, NGS screens with CRISPR-KO, and designing parasite animal models. Lately, I've been involved in automation in biotech and begun my FT MBA at NYU Stern. Please feel free to reach out to me at [snt.scouting879@passmail.com](mailto:snt.scouting879@passmail.com).
 

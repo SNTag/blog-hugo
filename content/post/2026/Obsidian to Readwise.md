@@ -1,13 +1,13 @@
 ---
 title: Obsidian to Readwise
-author: SNTag
+author: SNTagore
 tags:
   - Obsidian
   - Readwise
   - CommonPlace_Book
   - Tech
 added date: 2026-09-01, 12:59:50 pm
-modified date: 2026-09-01, 1:53:00 pm
+modified date: 2026-09-01, 3:32:27 pm
 date: 2026-09-01T00:00:00Z
 layout: post
 summary: I've thrown together a quick python script that seeks to identify all quotes in an Obsidian folder and sync them to Readwise.
