@@ -9,3 +9,5 @@ resources/_gen/
 **/*IGNORE*
 **/*IGNORE*/**
 __pycache__/
+
+/content/post/2026-08-25-My Thoughts on Issues with Modern Eink Devices.md
