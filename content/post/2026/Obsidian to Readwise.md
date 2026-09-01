@@ -16,7 +16,7 @@ Obs Category: TagOS
 
 I've thrown together a quick python script that seeks to identify all quotes in an Obsidian folder and sync them to Readwise [here](https://github.com/SNTag/Obsidian-to-Readwise-CommonPlace-Book-Gui).
 
-![[Screenshot 2026-09-01 131218.png]]
+![[Blog/static/images/posts/Screenshot 2026-09-01 131218.png]]
 
 As much as Readwise makes collecting commonplace quotations easier on the internet, it works poorly on one-off quotations. For example, when I get an email in my inbox with something pithy, its a complicated process to forward the email to Readwise and then identify it as a quotation.
 
