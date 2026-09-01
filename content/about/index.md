@@ -15,11 +15,15 @@ If you want to see some of the places me and my wife see, check out our Instagra
 {{< /rawhtml >}}
 # About me: Shayonendra N. Tagore
 
-I have a good deal of experience as a wet-lab bench scientist in molecular biology, with a range of multi-disciplinary experience! I've worked on automation, NGS, and assay development. Please feel free to reach out to me at [snt.scouting879@passmail.com](mailto:snt.scouting879@passmail.com).
+I am an ex-scientist, moving away from the bench. As a scientist, I have been involved in Pfizer's COVID-19 vaccine, NGS screens with CRISPR-KO, and designing parasite animal models. Lately, I've been involved in automation in biotech and begun my FT MBA at NYU Stern. Please feel free to reach out to me at [snt.scouting879@passmail.com](mailto:snt.scouting879@passmail.com).
+
+## Education
+
+Currently at NYU Stern as a FT MBA Candidate, class of 2028.
 
 {{< profile-image >}}
 
-Graduated from National University of Singapore with an M.Sc in Molecular Biology and from Stony Brook University with a B.Sc. I've picked up R, Python, and Bash.
+I've graduated from National University of Singapore with an M.Sc in Molecular Biology and from Stony Brook University with a B.Sc. I've picked up R, Python, and Bash.
 
 I've been trained as a wet-lab scientist first, and have worked on everything from automation solutions, R&D and GMP efforts on Pfizer's mRNA vaccine, and a NGS CRISPR-KO screen.
 
