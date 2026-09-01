@@ -7,10 +7,11 @@ tags:
   - CommonPlace_Book
   - Tech
 added date: 2026-09-01, 12:59:50 pm
-modified date: 2026-09-01, 1:35:49 pm
+modified date: 2026-09-01, 1:53:00 pm
 date: 2026-09-01T00:00:00Z
 layout: post
-summary: I've thrown together a quick python script that seeks to identify all quotes in an Obsidian folder and sync them to Readwise [here](https://github.com/SNTag/Obsidian-to-Readwise-CommonPlace-Book-Gui)
+summary: I've thrown together a quick python script that seeks to identify all quotes in an Obsidian folder and sync them to Readwise.
+Obs Category: TagOS
 ---
 
 I've thrown together a quick python script that seeks to identify all quotes in an Obsidian folder and sync them to Readwise [here](https://github.com/SNTag/Obsidian-to-Readwise-CommonPlace-Book-Gui).

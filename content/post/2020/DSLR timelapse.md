@@ -8,9 +8,10 @@ tags:
   - timelapse
   - tutorial
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:42:34 pm
+modified date: 2026-09-01, 1:54:09 pm
 date: 2020-11-18T00:00:00Z
 layout: post
+Obs Category: TagOS
 ---
 
 **WARNING** This post was added before its time. It is incomplete (missing a proof-read, some

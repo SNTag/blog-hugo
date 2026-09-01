@@ -1,9 +1,6 @@
 ---
-title: Document Generator
+title: Document-Generator
 author: SNTag
-date: 2024-03-26T00:00:00Z
-layout: post
-summary: "**Makers file**: My method to document creation using Pandoc and makefiles into presentations (beamer) or pdfs."
 tags:
   - blog
   - Makers
@@ -15,9 +12,18 @@ tags:
   - md
   - pdf
   - linux
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 1:52:51 pm
+date: 2024-03-26T00:00:00Z
+layout: post
+summary: |-
+  **Makers file**: My method to document creation using Pandoc and makefiles into presentations (beamer) or pdfs.
+  **Archived as I'm streamlining my workflow**
+Obs Category: TagOS
 ---
 
 # Overview
+
 This document is a summary of my document making process in markdown \>
 latex \> document. Designed with pop~os Linux.
 
@@ -31,7 +37,9 @@ Requires:
 manual](https://pandoc.org/MANUAL)
 
 ## Setup/Install
+
 ### Texlive or Latex
+
 To install, run \`sudo apt install -y texlive texlive-full\`
 
 NOTE: texlive-full gets stuck at \'Pregenerating ConTeXt MarkIV
@@ -39,6 +47,7 @@ format\'. Solved by letting it run for a while, and then pressing
 \"Enter\" a whole lot, as mentioned by one user online.
 
 ### Pandoc
+
 Make sure to install at the same version as
 [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases/tag/v0.3.17.0e).
 See [here](https://github.com/jgm/pandoc/blob/main/INSTALL.md#linux) for
@@ -56,7 +65,8 @@ Extra note: handy to remove tags in url to find packages by version.
     \`echo \$PATH\`, pandoc-crossref placed in \~/.local/bin will not
     show until restart.
 
-## Sites to go through for details:
+## Sites to Go through for Details:
+
 <https://alvinalexander.com/blog/post/latex/reference-figure-or-table-within-latex-document/>
 Nicely comprehensive:
 <https://opensource.com/article/18/9/pandoc-research-paper>
@@ -67,18 +77,26 @@ Nice list of features:
 <https://deatrich.github.io/doc-with-pandoc-markdown/current/doc-with-pandoc-markdown.html#fenced-code-blocks>
 
 ## TO SOLVE FOR EASIER DOCUMENT MAKING
-### \[#B\] alt txt font size
+
+### \[#B\] Alt Txt Font Size
+
 I suspect best option is not to use markdown approach but latex or html
 
-### \[#B\] MAKEFILE: Edits for handouts & regular slides?
+### \[#B\] MAKEFILE: Edits for Handouts & Regular Slides?
+
 <https://gist.github.com/lmullen/c3d4c7883f081ed8692a#file-makefile>
 
 ## My Makefile General Guide
+
 ### Start
+
 Location for texlive documents is /usr/share/texlive when \`sudo apt
 install texlive-full\`
+
 ### Declaring Documents to Use
+
 ### File Types to Generate
+
 Guide: -r input format.
 [-s](https://pandoc.org/MANUAL#option--standalone) Produce output with
 an appropriate header and footer. -V specifics a theme already in the
@@ -87,16 +105,27 @@ system. Needs --template for personal theme. -t output format.
 -N --reference-doc Use with pptx templates
 \[\[[https://pandoc.org/MANUAL#option\--toc\\](https://pandoc.org/MANUAL#option--toc\)\[\]\[--toc\]\]
 Table of Contents. Useless without the -s option
+
 ### To Put Together The Finale Document
-## To develop
-### To put columns?
+
+## To Develop
+
+### To Put Columns?
+
 [pandoc manual](https://pandoc.org/MANUAL.html#columns)
-### \[#C\] spelling
+
+### \[#C\] Spelling
+
 yaml header: \"spellchecker: hunspell\" lua-filter=spellcheck
-### \[#C\] Figure out bib (NEEDS PANDOC-CROSSREF?)
-### \[#A\] PANDOC: crossref
+
+### \[#C\] Figure out Bib (NEEDS PANDOC-CROSSREF?)
+
+### \[#A\] PANDOC: Crossref
+
 -   <https://emacs.stackexchange.com/questions/35775/how-to-kill-magit-diffs-buffers-on-quit>
-### \[#A\] PDF: Figures prefix/reference using markdown syntax (NEEDS PANDOC-CROSSREF?)
+
+### \[#A\] PDF: Figures prefix/reference Using Markdown Syntax (NEEDS PANDOC-CROSSREF?)
+
 Following seems specific to document making with markdown syntax. Needs
 pandoc-crossref? [see stackoverflow
 response](https://stackoverflow.com/questions/9434536/how-do-i-make-a-reference-to-a-figure-in-markdown-using-pandoc)
@@ -115,8 +144,11 @@ tblPrefix:
 
 using md syntax, add \`{#fig:scatter-matrix}\` to end of figure. Ref
 using
-### \[#C\] PDF: Controlling image location
-## Autostart sh
+
+### \[#C\] PDF: Controlling Image Location
+
+## Autostart Sh
+
 This script is run on a terminal from the directory with the files. auto
 runs \'make\' based on changes to the directory.
 
@@ -164,11 +196,17 @@ while true; do
     fi
 done
 ```
+
 # PDF
-## Future developments
+
+## Future Developments
+
 ### [Tuft handouts](https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html)
+
 # Presentations
+
 ## Makefile (Mar 26th, 2024)
+
 This is the makefile used to generate the document.
 
 ```
@@ -310,13 +348,16 @@ clean:
 ```
 
 ## How To
+
 ### Notes
+
 [stack
 overflow](https://stackoverflow.com/questions/44906264/add-speaker-notes-to-beamer-presentations-using-rmarkdown)
 
 Use either `\note{}`{=latex} or ::: note :::
 
 ### Figures (LATEX)
+
 Font size follows that in
 [here](https://www.overleaf.com/learn/latex/Font_sizes%2C_families%2C_and_styles#Reference_guide)
 
@@ -331,7 +372,9 @@ header-includes:
     \caption{something here}
 \end{figure}
 ```
+
 ### Figures (MARKDOWN)
+
 Haven\'t confirmed whether \`#fig\` works in this context
 
 ``` md_figure

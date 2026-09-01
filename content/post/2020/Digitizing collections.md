@@ -6,9 +6,10 @@ tags:
   - diy
   - raspberry_pi
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:43:03 pm
+modified date: 2026-09-01, 1:54:27 pm
 date: 2020-10-09 15:37:17
 layout: post
+Obs Category: TagOS
 ---
 
 I've begun creating a media server lately. Something that I never thought I would attempt. With the

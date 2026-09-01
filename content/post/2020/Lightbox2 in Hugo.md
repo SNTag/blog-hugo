@@ -7,9 +7,10 @@ tags:
   - lightbox2
   - photography
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:42:42 pm
+modified date: 2026-09-01, 1:53:39 pm
 date: 2020-11-15T00:00:00Z
 layout: post
+Obs Category: TagOS
 ---
 
 **Warning:** Changes in how I run this site has lead to broken links here.

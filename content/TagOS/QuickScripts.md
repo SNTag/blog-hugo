@@ -1,17 +1,21 @@
 ---
-title: Quick Scripts
+title: QuickScripts
 author: SNTag
-date: 2024-10-23T00:00:00Z
-layout: post
-summary: "**System Quick Scripts**: A collection of scripts I've found handy for a linux system. Includes quick-installation scripts."
 tags:
   - Makers
   - md
   - pdf
   - linux
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 1:53:06 pm
+date: 2024-10-23T00:00:00Z
+layout: post
+summary: "**System Quick Scripts**: A collection of scripts I've found handy for a linux system. Includes quick-installation scripts."
+Obs Category: TagOS
 ---
 
 # Quick Install: Pop-OS
+
 THIS IS THE SCRIPT TO QUICKLY GET BASIC SOFTWARE UP ONLY. For further config, see "System Setup" Below.
 See "Current install setup" below or install.txt in Files > Documents > org-files.
 
@@ -64,21 +68,30 @@ sudo fc-cache -f -v
     
     #Do I need ubuntu-restricted extras? sudo apt install -y ubuntus-restricted-extras
 ```
+
 ## Setting up R
+
 ```
 sudo apt update
 sudo apt install r-base r-base-dev
 ```
+
 ### For RStudio
+
 Code does not download latest version.
+
 ```
 cs ~/
 wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2024.09.0-375-amd64.deb
 sudo apt install ./rstudio-2024.09.0-375-amd64.deb
 ```
+
 # Scripts
+
 Quick collection of scripts that I use day-to-day, and imagine others may find useful.
-## Rapid switch caps, ctrl
+
+## Rapid Switch Caps, Ctrl
+
 using Gnome Tweak Tools.
 
 ```sh
@@ -120,7 +133,9 @@ Add to ~/.local/bin/. Run `chmod +x toggle_caps_ctrl.sh` to make it executable.
 Takes commands:
 ./toggle_caps_ctrl.sh enable
 ./toggle_caps_ctrl.sh disable
+
 ## Keyboard Numlock Check
+
 Will check if numlock is on every 5 minutes, and if on, wait 2 minutes before turning it off. Generated using ChatGPT
 
 needs following : &ldquo;sudo apt-get install xdotool x11-xserver-utils&rdquo;
@@ -157,8 +172,11 @@ while true; do
     sleep 30  # Wait for 30 seconds before checking again
 done
 ```
+
 ## Find the Raspberry Pi IP
+
 Takes either no input or just 'pi'. If you input nothing, finds all IP addresses on your network. If you input 'pi', finds ip of raspberry pi. Not my script, I copied this and added some tweaks from someone else a long time ago on the internet.
+
 ```bash
 function raspPiFinder {
     if [ "${1}" == "pi" ]; then

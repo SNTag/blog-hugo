@@ -7,9 +7,10 @@ tags:
   - Julia
   - Jupyter
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:43:30 pm
+modified date: 2026-09-01, 1:53:44 pm
 date: 2020-04-13T00:00:00Z
 date-string: April 13, 2020
+Obs Category: TagOS
 ---
 
 # Julia and Emacs
