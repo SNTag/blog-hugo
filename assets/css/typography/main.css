@@ -179,6 +179,16 @@ a[href^="http"]:not([href*="sntag.netlify.app"])::after {
     display: none !important;
 }
 
+/* Index catalogue: render post summaries in normal case.
+   The site-wide `main a { font-variant: small-caps }` rule above also catches
+   the summary paragraph (it lives inside the catalogue-item <a>), so undo it
+   just for that paragraph. Titles/dates keep their small-caps styling. */
+.catalogue-item p,
+.catalogue p {
+    font-variant: normal !important;
+    letter-spacing: normal !important;
+}
+
 /* Base typography settings */
 /*
 body {
