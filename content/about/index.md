@@ -14,45 +14,21 @@ If you want to see some of the places me and my wife see, check out our Instagra
 <br>
 {{< /rawhtml >}}
 # About me: Shayonendra N. Tagore
-{{< rawhtml >}}
-<p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
-I have a good deal of experience as a wet-lab bench scientist in molecular biology, with a range of multi-disciplinary experience! I've worked on automation, NGS, and assay development. Please feel free to reach out to me at <a href="mailto:snt.scouting879@passmail.com">snt.scouting879@passmail.com</a>.
-</p>
 
-<IMG align="left" SRC="./profile.png" ALT="my profile" width="300" style="margin-right: 20px;">
-<p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
+I have a good deal of experience as a wet-lab bench scientist in molecular biology, with a range of multi-disciplinary experience! I've worked on automation, NGS, and assay development. Please feel free to reach out to me at [snt.scouting879@passmail.com](mailto:snt.scouting879@passmail.com).
+
+{{< profile-image >}}
+
 Graduated from National University of Singapore with an M.Sc in Molecular Biology and from Stony Brook University with a B.Sc. I've picked up R, Python, and Bash.
-</p>
 
-<p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
 I've been trained as a wet-lab scientist first, and have worked on everything from automation solutions, R&D and GMP efforts on Pfizer's mRNA vaccine, and a NGS CRISPR-KO screen.
-</p>
 
-<p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
-My interests in biology started with a fascination in ants! I ran across <i>Oecophylla smaragdina</i> and <i>Paratrechina longicornis</i> all the time in Singapore, not forgetting all the other kinds of insects. From there, it grew into a fascination into the cellular mechanisms of the body, and into a desire to add to healthcare as an industry. I still have my interests in the creepy-crawlies, and look for chances to be on the water when I can. More often, my nose is in a book.
-</p>
+My interests in biology started with a fascination in ants! I ran across *Oecophylla smaragdina* and *Paratrechina longicornis* all the time in Singapore, not forgetting all the other kinds of insects. From there, it grew into a fascination into the cellular mechanisms of the body, and into a desire to add to healthcare as an industry. I still have my interests in the creepy-crawlies, and look for chances to be on the water when I can. More often, my nose is in a book.
 
-<p style="text-align: justify; text-justify: inter-word; line-height: 1.5;">
 In my spare time, I mess with whatever catches my fancy; reading, piano, or cooking. I recently moved to South Boston, and taking the opportunity to enjoy MFA, Isabella Stewart Gardner Museum, and the Boston Public Central Library!
-</p>
-<br>
-<div style="background: linear-gradient(135deg, #f8fafc, #e2e8f0); border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 30px 0; text-align: center;">
-    <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
-        <div style="background: #0077b5; width: 50px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">in</div>
-        <div style="text-align: left;">
-            <h3 style="margin: 0; color: #1e293b; font-size: 18px;">Shayonendra N. Tagore</h3>
-            <p style="margin: 5px 0 0 0; color: #64748b; font-size: 14px;">Molecular Biology • Data Science • Automation</p>
-        </div>
-        <a href="https://www.linkedin.com/in/shayontagore/" 
-           style="background: #0077b5; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.3s ease;"
-           onmouseover="this.style.background='#005885';"
-           onmouseout="this.style.background='#0077b5';">
-            Connect
-        </a>
-    </div>
-</div>
-<br>
-{{< /rawhtml >}}
+
+{{< linkedin-card >}}
+
 ## My Book Recommendations From The Last Year
 I plan to add this soon, but I've got an Obsidian based system of tracking my books! I'm hoping to integrate this approach to generate a list of recommendations into Hugo. It seems simple enough to get something up, but I'm hoping to integrate this system into Obsidian as much as possible.
 {{< figure src="./Example of Obsidian Book Library.png" alt="Example of my Obsidian Book Library" width="500" >}}

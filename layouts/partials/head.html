@@ -216,9 +216,60 @@ figcaption {
 
 
 
+<!-- About page: profile photo float + LinkedIn card -->
+<style>
+.post img.profile-photo {
+  float: left;
+  width: 300px;
+  margin: 0 20px 0.5rem 0;
+}
+.linkedin-card {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 30px 0;
+  text-align: center;
+}
+.linkedin-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.linkedin-card__badge {
+  background: #0077b5;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+}
+.linkedin-card__meta { text-align: left; }
+.linkedin-card__meta h3 { margin: 0; color: #1e293b; font-size: 18px; }
+.linkedin-card__meta p { margin: 5px 0 0; color: #64748b; font-size: 14px; text-align: left; }
+.linkedin-card__connect {
+  background: #0077b5;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+.linkedin-card__connect:hover { background: #005885; }
+</style>
+
+
+
 <!-- RSS Feed Link -->
-<link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" 
-      rel="alternate" 
-      type="application/rss+xml" 
+<link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}"
+      rel="alternate"
+      type="application/rss+xml"
       title="{{ .Site.Title }} RSS Feed" />
 
