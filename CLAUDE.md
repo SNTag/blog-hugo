@@ -87,9 +87,18 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 
 - **Primary:** push to `master` → Netlify builds
   (`python3 scripts/obsidian_to_hugo.py && hugo --gc --minify`).
-- **Local preview:** `hugo server`. Hugo may not be installed everywhere;
-  don't assume a full build can be run to verify — the converter is unit-tested
-  via its cases.
+- **Local preview:** `hugo server`.
+- **Claude Code on the web:** a `SessionStart` hook
+  (`.claude/hooks/session-start.sh`, wired via `.claude/settings.json`)
+  installs Hugo extended v0.152.1 — the same version Netlify pins — into
+  `~/.hugo` and puts it on `PATH`, so `hugo` / `hugo server` and a full
+  `hugo --gc --minify` build are available to verify changes. The hook is
+  remote-only (gated on `$CLAUDE_CODE_REMOTE`) and idempotent; bump its
+  `HUGO_VERSION` in lockstep with `netlify.toml` if the pin changes. Note the
+  theme lives in a git submodule, so a full build needs
+  `git submodule update --init --recursive themes/tale-hugo` first.
+- There is no automated test suite or linter; the wikilink converter is
+  covered informally by its own cases.
 
 ## Conventions
 

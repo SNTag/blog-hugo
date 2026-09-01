@@ -11,16 +11,26 @@
     {{ end }}
   </div>
 
+  {{ $paginator := .Paginator }}
+  {{ if gt $paginator.TotalPages 1 }}
   <div class="pagination">
-    {{ if .Paginator.HasPrev }}
-    <a href="{{ .Paginator.Prev.URL }}" class="left arrow">&#8592;</a>
-    {{ end }}
-    {{ if .Paginator.HasNext }}
-    <a href="{{ .Paginator.Next.URL }}" class="right arrow">&#8594;</a>
+    {{ if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" class="left arrow">&#8592;</a>
     {{ end }}
 
-    <span>{{ .Paginator.PageNumber }}</span>
+    {{ range $paginator.Pagers }}
+      {{ if eq . $paginator }}
+      <span class="page-number current">{{ .PageNumber }}</span>
+      {{ else }}
+      <a href="{{ .URL }}" class="page-number">{{ .PageNumber }}</a>
+      {{ end }}
+    {{ end }}
+
+    {{ if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" class="right arrow">&#8594;</a>
+    {{ end }}
   </div>
+  {{ end }}
 </main>
 
 {{ end }}
