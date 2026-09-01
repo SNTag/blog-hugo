@@ -1,5 +1,5 @@
 ---
-title: INCOMPLETE- An Ode to Linux
+title: An Ode to Linux
 author: SNTagore
 tags:
   - journalling
@@ -7,7 +7,7 @@ tags:
   - fun
   - windows
 added date: 2026-09-01, 2:04:00 pm
-modified date: 2026-09-01, 3:39:58 pm
+modified date: 2026-09-01, 3:40:29 pm
 date: 2026-09-01
 layout: post
 summary: An ode to Linux as I migrate back to Windows.
