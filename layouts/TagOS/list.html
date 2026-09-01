@@ -3,6 +3,9 @@
 <main>
   <a href="/"><img src="/images/header/clean-and-simple-header.png"></a>
 
+  <h1 class="post-title">{{ .Title }}</h1>
+  <div class="post-line"></div>
+
   {{ with .Content }}{{ . }}{{ end }}
 
   <div class="catalogue">
