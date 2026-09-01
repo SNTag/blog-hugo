@@ -1,12 +1,14 @@
 ---
+title: New-Years Resolution
+author: Shayonendra N. Tagore
 tags:
   - Programming
   - Goal
   - Discipline
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 1:42:11 pm
 date: 2020-01-19T00:00:00Z
 date-string: January 19th, 2020
-author: Shayonendra N. Tagore
-title: "2020: My non-New Years Resolution"
 summary: On 31st Dec, 2019, I was sitting in Kolkata, India, on the lawn of the Kolkata Club.  In front was a stage, musicians and DJs from bollywood.  Around me were relatives and family, ready to celebrate the New Years with a big dinner and lots of musical entertainment.  And for all the excitment around me, it felt like any other New Years. [[https://www.youtube.com/watch?v=eAFnby2184o][John Oliver]] said it well when he described New Years as '/The *Worst*!/'.  My track record hasn't been great with New Years.  For all the hype we put on New Year, New Me, we end up falling back into the same habits.  So ironically, I came up with a goal on New Years to spite to all my failed New Years resolution; to write 1-2 scripts a week for a year in any programming language.
 ---
 

@@ -1,13 +1,15 @@
 ---
+title: Getting Emacs and Julia to Work
+author: Shayonendra N. Tagore
 tags:
   - Programming
   - Emacs
   - Julia
   - Jupyter
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 1:43:30 pm
 date: 2020-04-13T00:00:00Z
 date-string: April 13, 2020
-author: Shayonendra N. Tagore
-title: Getting Emacs and Julia to work
 ---
 
 # Julia and Emacs
@@ -70,20 +72,22 @@ As a little extra, Manjaro users may have had issues with downloading packages t
 
 `export JULIA_PKG_SERVER=pkg.julialang.org`
 
-# Summary of this approach
+# Summary of This Approach
+
 ## Positives:
+
 -Adds ESS support to Julia. This adds a large number of features that currently lack from any other competitors.
 -Adds jupyter support through [EIN](https://github.com/millejoh/emacs-ipython-notebook), enabling literate programming.
 -Source-editing will now have auto-complete for julia.
 -Stable enough to get you going!
 
-## negatives:
+## Negatives:
 
 -No org-mode for now...
 
 If you want to reach out to me about this post, please leave an issue on the [github repo](https://github.com/sntag/sntag.github.io/issues). I will get around to setting up a comments system for a static website eventually.
 
-## discontinued packages for Julia that I had found (in case your interested)
+## Discontinued Packages for Julia that I Had Found (In case yOur iNterested)
 
 - [Julia-shell](https://github.com/dennisog/julia-shell-mode): seemed promising, but was last updated in 2016 as of writing. That was before the
 release of v1. Considering the issues and level of maturity that <v1 Julia had, I'm not keen on

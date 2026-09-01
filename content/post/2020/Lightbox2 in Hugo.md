@@ -1,13 +1,15 @@
 ---
-title: Lightbox2 in hugo
+title: Lightbox2 in Hugo
 author: SNTag
-date: 2020-11-15T00:00:00Z
-layout: post
 tags:
   - hugo
   - shortcodes
   - lightbox2
   - photography
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 1:42:42 pm
+date: 2020-11-15T00:00:00Z
+layout: post
 ---
 
 **Warning:** Changes in how I run this site has lead to broken links here.
@@ -20,7 +22,7 @@ This is a quick run-down of how I set up lightbox2 for my hugo site. To be hones
 [shortcode written by Julian Stier](https://julianstier.com/posts/2020/03/hugo-and-lightbox/)
 [main lightbox2 tutorial](https://lokeshdhakar.com/projects/lightbox2/)
 
-## Preparing the directories and files
+## Preparing the Directories and Files
 
 The first step is to prepare the main hugo directory. If it is not there already, generate the directory `/static/css/` and `/static/js/`.
 
@@ -28,18 +30,17 @@ Download the latest [github release](https://github.com/lokesh/lightbox2/release
 
 If your hugo site does not have jquery, extract from the lightbox2 release the file `dist/js/lightbox-plus-jquery.css` into `/static/js/`.
 
-## Modifying the html
+## Modifying the Html
 
 The exact details of this bit can change depending on your hugo setup. The main concept is that you have to find the files with the \<head\> \& \<body\> tags. In the head section, add `<link rel="stylesheet" href="/css/lightbox.css">`. In the body section, add \<script src="/js/lightbox-plus-jquery.js"\>\<\/script\>.
 
-## Shortcode: figure
+## Shortcode: Figure
 
 The shortcode was taken directly from [Julian Stier's blog post on his lightbox2 implementation](https://julianstier.com/posts/2020/03/hugo-and-lightbox/). This was put under `/layouts/shortcodes/figure.html`.
 
-
 # Implementation
 
-## Single images
+## Single Images
 
 The shortcode written by [Julian Stier](https://julianstier.com/posts/2020/03/hugo-and-lightbox/) has the option for:
 

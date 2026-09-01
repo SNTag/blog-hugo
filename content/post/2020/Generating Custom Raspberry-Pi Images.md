@@ -1,12 +1,14 @@
 ---
-title: "Generating custom raspberry-pi images"
+title: Generating Custom Raspberry-Pi Images
 author: "SNTag"
+tags:
+  - blog
+  - diy
+  - raspberry_pi
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 1:42:57 pm
 date: "2020-10-30 14:17:40"
 layout: post
-tags:
-- blog
-- diy
-- raspberry_pi
 ---
 
 I've been working on a number of projects involving my raspberry pi; DSLR timelapse, a pi running
@@ -27,7 +29,6 @@ from scratch. Its use assumes you have some degree of experience with bash. This
 update of sorts to the original article that got me onto
 [pi-gen](http://kmdouglass.github.io/posts/create-a-custom-raspbian-image-with-pi-gen-part-1/). The
 original article includes steps that are more easily configured as of late.
-
 
 # Pi-gen
 
@@ -54,7 +55,7 @@ The raspbian image will have:
 - SSH and wifi configured
 - custom packages installed (such as git)
 
-## Getting the software
+## Getting the Software
 
 You will need 'docker' to run Pi-gen. Instructions to install it can be found
 [here](https://docs.docker.com/engine/install/).
@@ -88,7 +89,7 @@ touch ./stage4/SKIP_IMAGES ./stage5/SKIP_IMAGES
 
 ```
 
-## Adding custom details
+## Adding Custom Details
 
 It is very easy to configure Pi-gen. Make a config file ( /pi-gen/config ) and add the following:
 
@@ -128,7 +129,7 @@ IMG_NAME=puck
 
 ```
 
-### User settings
+### User Settings
 
 I strongly recommend changing the default username and password. You can always change this again,
 but the default values in a raspbian image are too well known and far too easy a target.
@@ -162,7 +163,6 @@ through `WPA_ESSID` along with the password (`WPA_PASSWORD`) and the country (`W
 If you are going with a desktop image, I recommend disabling ssh (`ENABLE_SSH=0`) unless you know
 what you are doing. It will be safer.
 
-
 ```bash
 ENABLE_SSH=1
 WPA_ESSID="MinisTirith"
@@ -176,13 +176,13 @@ WPA_COUNTRY="US"
 The only other value that you may have an interest in setting (and unmentioned here)
 is `KEYBOARD_LAYOUT`, but as I am typing in English, I'm happy enough leaving it to the default.
 
-## Installing specific packages
+## Installing Specific Packages
 
 There are some packages that I want the image to come pre-built. Git, for one. This is a simple
 issue of modifying the file in /Pi-gen/stage2/01-sys-tweaks/00-packages. Add each package of
 interest in a new line, and it will be installed using the command `sudo apt-get install`.
 
-## Building the image
+## Building the Image
 
 Even if you haven't done the above steps, you can build an image. It only requires maximum of two
 lines too. Go to the root directory of Pi-gen, and:
@@ -203,7 +203,7 @@ The image should now be in `/Pi-gen/deploy/` with the value you passed `IMG_NAME
 as a zipped file. To get to the image, `unzip image_${DATE}_${IMG_NAME}.zip` in the directory of
 your choice.
 
-## Flashing the image
+## Flashing the Image
 
 **WARNING** Be sure of paths in this step! You can easily overwrite/delete/crash you system and your
 data if done improperly! If you want to play it safe, there are software to handle image flashing such as [balenaEtcher](https://www.balena.io/etcher/). I have not used such programs, I cannot tell you how good it is.
@@ -221,14 +221,14 @@ sudo dd if=2020-10-27-puck-lite.img of=/dev/mmcblk0 bs=4096; sync
 
 After this, all that's left is plugging your SD card into the pi and letting it install.
 
-# Tips for those seeking advanced manipulation
+# Tips for Those Seeking Advanced Manipulation
 
 **WARNING: The following are ruminations I had on how to go about doing something. I cannot promise it would work.**
 
 There are some other features people may be interested in, but I have not tried them out. Features
 such as installing a program using git or modifying the rc.local.
 
-## Install programs to the image using git
+## Install Programs to the Image Using Git
 
 To have the image install a git program, you can try making a /Pi-gen/stage2/03-git/ folder as [this fellow mentioned](https://github.com/RPi-Distro/pi-gen/issues/210). Looking at
 /Pi-gen/stage2/01-sys-tweaks/ as an example, the majority of the commands are decided in
@@ -236,7 +236,7 @@ To have the image install a git program, you can try making a /Pi-gen/stage2/03-
 not attempted this, but I do plan to try this at some point to get my dotfiles and other programs on
 there faster.
 
-## modifying rc.local
+## Modifying rc.local
 
 https://github.com/RPi-Distro/pi-gen/issues/246
 

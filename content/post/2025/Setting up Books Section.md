@@ -1,10 +1,10 @@
 ---
-title: 2025-08-09=Setting up Books Section
+title: Setting up Books Section
 author: SNTag
 tags:
   - books
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:17:38 pm
+modified date: 2026-09-01, 1:42:18 pm
 date: 2025-08-09T00:00:00Z
 layout: post
 summary: I'm working on a new section for my blog. I've been creating a digital library with my reviews and comments using Obsidian. For the fun of it, I've been adapting this information over time to add to this blog. Only thing left is to add this information to the blog website!

@@ -1,14 +1,16 @@
 ---
 title: DSLR timelapse
 author: SNTag
-date: 2020-11-18T00:00:00Z
-layout: post
 tags:
   - DSLR
   - diy
   - raspberry_pi
   - timelapse
   - tutorial
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 1:42:34 pm
+date: 2020-11-18T00:00:00Z
+layout: post
 ---
 
 **WARNING** This post was added before its time. It is incomplete (missing a proof-read, some
@@ -26,7 +28,7 @@ help someone else facing the same challenges. I used my DSLR in this tutorial, b
 supported. See [here](http://gphoto.org/doc/remote/) to see compatible cameras and available
 functionality.
 
-# Putting it together: the hardware
+# Putting it Together: the Hardware
 
 I already have a DSLR 700D. I also have a raspberry pi. It's a simple task to connect the two.
 
@@ -34,10 +36,9 @@ I already have a DSLR 700D. I also have a raspberry pi. It's a simple task to co
 - DSLR
 - USB to mini-usb or whichever cable connects to your camera
 
+# Putting it Together: Code
 
-# Putting it together: code
-
-## gphoto2
+## Gphoto2
 
 The code is extremely simple. But like most of my DIY projects, I came across problems that are
 caused because tech hates me as much as I love it. I will say now that the tutorials I used to put
@@ -67,7 +68,7 @@ gphoto2 --auto-detect
 
 ```
 
-## Simple bash script
+## Simple Bash Script
 
 Now you need a script to control the camera. Gphoto2 has a series of
 configurations that can be setup. Things such as aperture, shutter speed, white-balance, etc. The
@@ -125,7 +126,7 @@ done
 
 You might have noticed the commented-out line `x=$((x+1))`. I wrote the code this way initially to limit the number of pictures taken in the timelapse to 10 photos. You might want to make use of this functionality too, just uncomment that line and replace the 10 in `until [ $x -gt 10]` with your own number.
 
-## Running the bash script
+## Running the Bash Script
 
 Running the bash script could be different person-to-person. If you have a screen and keyboard
 attached to the pi, its as simple as starting a terminal and running bash on the script. If you did
@@ -141,14 +142,14 @@ If using tmux, it's a simple task to create a session that can be reconnected to
 want. I'm learning the details about it now and will update this when I have more experience with
 it.
 
-# Putting it together: blender
+# Putting it Together: Blender
 
 Now the final part: creating the actual timelapse. There are probably easier ways to do this, but I
 opted for blender to compile it. It seems to be highly recommended, and I imagine the depth of tools
 will help when I start making good time-lapses. Before getting into blender, move the photos you
 will make a time lapse of to somewhere on your computer and lets do some pre-processing.
 
-## Preparing the photos
+## Preparing the Photos
 
 The first step is to prepare the photos. You will want to make the luminosity for your photos
 consistent. There is a simple script on github to do
@@ -225,8 +226,7 @@ close this window and wait for it to finish. This step will take a while.
 Once it's done, you can close the extra window. The final movie has been rendered to the directory
 mentioned above (for me, '/tmp/'). Go to that directory and look for the right video file.
 
-
-# Future plans
+# Future Plans
 
 After all of this, you should have a final product! The very first timelapse I have made using this
 approach can be found [here](https://www.youtube.com/watch?v=nq9-GD46CHQ)! Its not quite in the
@@ -242,7 +242,6 @@ timelapse was as short as it was because the battery died. I need to get either 
 grip with room for multiple batteries or a dummy battery. Since I can't find a reputable dummy
 camera at a reasonable price (I am not going to risk my DSLR with the 20-30USD batteries I have
 seen), the best option is to increase battery supply.
-
 
 # References
 

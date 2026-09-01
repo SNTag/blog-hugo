@@ -1,12 +1,14 @@
 ---
 title: Digitizing collections
 author: Shayonendra N. Tagore
-date: 2020-10-09 15:37:17
-layout: post
 tags:
   - digitizing
   - diy
   - raspberry_pi
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 1:43:03 pm
+date: 2020-10-09 15:37:17
+layout: post
 ---
 
 I've begun creating a media server lately. Something that I never thought I would attempt. With the
@@ -27,8 +29,7 @@ are ridiculously simple, and it should have been easier. I'll start by introduci
 how I handle CDs, and how I've been ripping DVDs. I will state here that everything I've been
 ripping are from a collection I own.
 
-
-# The media server
+# The Media Server
 
 I'm surprised how powerful the server I made is. I started it as a 'what-if' project, that has
 become an important in-house source of entertainment. I was going to spend a max of 100$ above what
@@ -69,7 +70,6 @@ max_usb_current=1
 
 ```
 
-
 I had concerns at first about HDD lifespans, as a media server would be on 24/7. I imagined I would
 implement a complicated system where the HDD would be spun down when not in use, and there are
 guides for how to do that online. Do keep in mind that not all HDDs have that ability, like the WD
@@ -108,13 +108,11 @@ I went with the free option, and its suiting me just fine.
 I do recommend having more than one hdd to store all your media. Its just proper habit. I have
 another HDD stored separately to which I backup the server to every two weeks.
 
-
-# The music ripping process
+# The Music Ripping Process
 
 I have two pieces of invaluable software for the ripping; abcde and MusicBrainz.
 
-
-## abcde
+## Abcde
 
 abcde is a minimal, terminal based ripping software. The output can be customized with a config file
 in '/etc/abcde.conf'. I have a relatively simple config file that can be seen in my
@@ -130,7 +128,6 @@ I recommend these sites for further information:
 - [abcde man page](https://linux.die.net/man/1/abcde)
 - [rip cd with abcde](https://www.maketecheasier.com/rip-cd-with-abcde/)
 - [reddit: What’s the current best CDDB/musicbrains config for abcde?](https://www.reddit.com/r/DataHoarder/comments/hcvy12/whats_the_current_best_cddbmusicbrains_config_for/)
-
 
 ## MusicBrainz
 
@@ -149,8 +146,7 @@ For more information on setting up MusicBrainz, I recommend these guides:
 - [how to master your music metadata](https://www.techhive.com/article/3192777/how-to-master-your-music-metadata-part-1.html)
 - [Music Organizing with MusicBrainz Picard](https://forums.plex.tv/t/howto-music-organizing-with-musicbrainz-picard/218734)
 
-
-# The DVD ripping process
+# The DVD Ripping Process
 
 My software of choice here is HandBrake. I've been ripping a series of Bergmans, Kurosawa, and
 Satyajit Rays into my server using HandBrake for a few days, and have settled on a process. As I
@@ -163,8 +159,7 @@ commentary option, or add subtitles for foriegn films, nothing too strenuos to d
 
 No real pre-customization is needed to use the software.
 
-
-# In the future
+# In the Future
 
 I have a couple of ideas for how I would improve this media server in the future. For one, this
 system limits audio output to mp3 360kbps. The HDD has flac, and I want to hear that through a
