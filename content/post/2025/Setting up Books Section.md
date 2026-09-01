@@ -1,10 +1,10 @@
 ---
 title: Setting up Books Section
-author: SNTag
+author: SNTagore
 tags:
   - books
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:42:18 pm
+modified date: 2026-09-01, 2:36:53 pm
 date: 2025-08-09T00:00:00Z
 layout: post
 summary: I'm working on a new section for my blog. I've been creating a digital library with my reviews and comments using Obsidian. For the fun of it, I've been adapting this information over time to add to this blog. Only thing left is to add this information to the blog website!
@@ -18,7 +18,7 @@ To access this growing section, see the Header section: "Books".
 
 Obsidian Bases has been an incredible way to sort through my notes. I wouldn't recommend Obsidian for everyone unless you are somewhat Tech Literacy, but it has enabled my system in a way that I'm surprised.
 
-{{< figure src="../../about/Example of Obsidian Book Library.png" alt="Example of my Obsidian Book Library" width="500" >}}
+{{< figure src="../../../about/Example of Obsidian Book Library.png" alt="Example of my Obsidian Book Library" width="500" >}}
 
 {{< rawhtml >}}
 <br>

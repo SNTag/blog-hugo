@@ -5,7 +5,7 @@ tags:
   - mba
   - announcement
 added date: 2026-08-25, 1:21:14 am
-modified date: 2026-09-01, 1:38:19 pm
+modified date: 2026-09-01, 2:36:17 pm
 date: 2026-08-25
 layout: post
 summary: I am incredibly proud to share that I will be joining the NYU Stern School of Business Full-time MBA Class of 2028!
@@ -14,7 +14,7 @@ summary: I am incredibly proud to share that I will be joining the NYU Stern Sch
 **Originally Posted on Linkedin on August 13th, 2026. Original post [here](https://www.linkedin.com/feed/update/urn:li:activity:7491157819585589248/)**
 
 Yesterday morning, I rowed for the last time on the Charles river as I move my home to Manhattan.  
-  
+
 I am incredibly proud to share that I will be joining the [**NYU Stern School of Business**](https://www.linkedin.com/company/nyu-stern-school-of-business/) Full-time MBA Class of 2028!  
 
 ![[Blog/static/images/posts/Stern Announcement.png]]
