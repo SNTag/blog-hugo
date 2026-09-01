@@ -7,8 +7,8 @@ tags:
   - CommonPlace_Book
   - Tech
 added date: 2026-09-01, 12:59:50 pm
-modified date: 2026-09-01, 1:17:15 pm
-date: 2026-05-17T00:00:00Z
+modified date: 2026-09-01, 1:35:49 pm
+date: 2026-09-01T00:00:00Z
 layout: post
 summary: I've thrown together a quick python script that seeks to identify all quotes in an Obsidian folder and sync them to Readwise [here](https://github.com/SNTag/Obsidian-to-Readwise-CommonPlace-Book-Gui)
 ---
