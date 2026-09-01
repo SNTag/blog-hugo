@@ -1,0 +1,13 @@
+{{- $name := .Get "name" | default "Shayonendra N. Tagore" -}}
+{{- $tagline := .Get "tagline" | default "Molecular Biology • Data Science • Automation" -}}
+{{- $url := .Get "url" | default "https://www.linkedin.com/in/shayontagore/" -}}
+<div class="linkedin-card">
+  <div class="linkedin-card__row">
+    <span class="linkedin-card__badge">in</span>
+    <div class="linkedin-card__meta">
+      <h3>{{ $name }}</h3>
+      <p>{{ $tagline }}</p>
+    </div>
+    <a class="linkedin-card__connect" href="{{ $url }}">Connect</a>
+  </div>
+</div>
