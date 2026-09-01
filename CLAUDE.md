@@ -1,13 +1,19 @@
+---
+title: CLAUDE
+added date: 2026-09-01, 1:18:43 pm
+modified date: 2026-09-01, 2:00:48 pm
+---
+
 # CLAUDE.md
 
 Guidance for Claude Code when working in this repository.
 
-## What this is
+## What This is
 
 A personal Hugo blog (theme: `tale-hugo`), deployed on Netlify at
 https://sntag.netlify.app/. Author: Shayon Tagore.
 
-## Authoring workflow — read this first
+## Authoring Workflow — Read This First
 
 Posts are written in **Obsidian**, and this git repo is a subfolder named
 `Blog/` inside a larger Obsidian vault. That has two consequences that trip
@@ -23,7 +29,7 @@ up naive edits:
 Both are handled automatically by a build-time converter (below). Keep the
 wikilink syntax in source; do not "fix" `![[...]]` into Markdown by hand.
 
-## The wikilink converter
+## The Wikilink Converter
 
 `scripts/obsidian_to_hugo.py` rewrites `![[path]]` → `![](/web/path)` at build
 time only (source keeps the wikilink syntax):
@@ -70,7 +76,7 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 - `config.toml` — Hugo config. Taxonomy is `tags` (not categories). Netlify
   pins `HUGO_VERSION = 0.152.1`.
 
-## Build & deploy
+## Build & Deploy
 
 - **Primary:** push to `master` → Netlify builds
   (`python3 scripts/obsidian_to_hugo.py && hugo --gc --minify`).
