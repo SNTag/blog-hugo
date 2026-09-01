@@ -1,12 +1,14 @@
 ---
+title: Using a CRISPR-KO library on a migration screen
+author: Shayonendra N. Tagore
 tags:
   - CRISPR
   - Research
   - NGS
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 1:37:14 pm
 date: 2019-11-29T00:00:00Z
 date-string: November 29, 2019
-author: Shayonendra N. Tagore
-title: My plan for a CRISPR-KO library and scRNA-seq
 ---
 
 **DISCLAIMER**
@@ -32,4 +34,3 @@ A better solution is in CROP-seq.  The approach does without a barcode and turns
     Gasperini, M. J., Matreyek, K. A., Packer, J., Jackson, D., …
     (2018). On the design of CRISPR-based single-cell molecular
     screens. Nature Methods, (), . <http://dx.doi.org/10.1038/nmeth.4604>
-
