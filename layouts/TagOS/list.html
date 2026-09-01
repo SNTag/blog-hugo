@@ -1,0 +1,21 @@
+{{ define "main" }}
+
+<main>
+  <a href="/"><img src="/images/header/clean-and-simple-header.png"></a>
+
+  {{ with .Content }}{{ . }}{{ end }}
+
+  <div class="catalogue">
+    {{/* TagOS posts live under content/post/YYYY/ like everything else; they are
+         identified only by the frontmatter `Obs Category: TagOS`. Hugo lowercases
+         frontmatter keys, so the param key is "obs category" (with a space) and
+         must be read via `index`. */}}
+    {{ range .Site.RegularPages }}
+    {{ if eq (index .Params "obs category") "TagOS" }}
+    {{ .Render "summary" }}
+    {{ end }}
+    {{ end }}
+  </div>
+</main>
+
+{{ end }}
