@@ -62,8 +62,15 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 
 ## Structure
 
-- `content/` — sections: `post/`, `books/`, `tech/`, `about/`. Post filenames
-  are dated, e.g. `2020-11-15 -- title.md`.
+- `content/` — sections: `post/`, `books/`, `about/`, and `TagOS/`. All blog
+  posts (including tech/TagOS ones) live under `content/post/YYYY/` — do not
+  create a separate top-level section directory for them.
+- **The `TagOS` "section" is virtual.** `content/TagOS/` holds only an
+  `_index.md`; it has no posts of its own. A post appears under `/TagOS/` when
+  its frontmatter carries `Obs Category: TagOS` (set in Obsidian). The listing
+  is built by `layouts/TagOS/list.html`, which scans all posts for that key.
+  Note Hugo lowercases frontmatter keys, so it's read as `index .Params
+  "obs category"` (with a space), not `.Params.obs_category`.
 - `layouts/` — project overrides on top of `themes/tale-hugo/`.
 - `scripts/` — `obsidian_to_hugo.py` (above); `update_books_widgets.py`
   regenerates `data/books_widgets.toml` from `content/books/*.md`.
