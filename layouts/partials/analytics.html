@@ -1,0 +1,10 @@
+{{- /*
+  Privacy-friendly visitor counting via GoatCounter.
+  Cookieless, no personal data, private dashboard: https://sntag.goatcounter.com
+  Guarded on hugo.IsProduction so the beacon never fires during `hugo server`
+  or local builds — only the deployed Netlify site is counted.
+*/ -}}
+{{- if hugo.IsProduction }}
+	<script data-goatcounter="https://sntag.goatcounter.com/count"
+	        async src="//gc.zgo.at/count.js"></script>
+{{- end }}
