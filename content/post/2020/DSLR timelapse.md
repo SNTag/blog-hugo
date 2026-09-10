@@ -1,6 +1,6 @@
 ---
 title: DSLR timelapse
-author: SNTag
+author: SNTagore
 tags:
   - DSLR
   - diy
@@ -8,7 +8,7 @@ tags:
   - timelapse
   - tutorial
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:54:09 pm
+modified date: 2026-09-01, 7:04:45 pm
 date: 2020-11-18T00:00:00Z
 layout: post
 Obs Category: TagOS

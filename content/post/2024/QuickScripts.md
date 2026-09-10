@@ -1,13 +1,13 @@
 ---
 title: QuickScripts
-author: SNTag
+author: SNTagore
 tags:
   - Makers
   - md
   - pdf
   - linux
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:53:06 pm
+modified date: 2026-09-01, 7:05:10 pm
 date: 2024-10-23T00:00:00Z
 layout: post
 summary: "**System Quick Scripts**: A collection of scripts I've found handy for a linux system. Includes quick-installation scripts."

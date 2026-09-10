@@ -1,6 +1,6 @@
 ---
 title: Document-Generator
-author: SNTag
+author: SNTagore
 tags:
   - blog
   - Makers
@@ -13,7 +13,7 @@ tags:
   - pdf
   - linux
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:52:51 pm
+modified date: 2026-09-01, 7:05:04 pm
 date: 2024-03-26T00:00:00Z
 layout: post
 summary: |-

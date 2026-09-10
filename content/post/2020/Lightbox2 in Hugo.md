@@ -1,13 +1,13 @@
 ---
 title: Lightbox2 in Hugo
-author: SNTag
+author: SNTagore
 tags:
   - hugo
   - shortcodes
   - lightbox2
   - photography
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:53:39 pm
+modified date: 2026-09-01, 7:04:54 pm
 date: 2020-11-15T00:00:00Z
 layout: post
 Obs Category: TagOS

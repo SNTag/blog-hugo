@@ -1,13 +1,15 @@
 ---
-title: "Getting Back into Piano"
-author: "SNTag"
-date: '2020-06-14T00:00:00Z'
+title: Piano
+author: SNTagore
+tags:
+  - piano
+  - music
+  - chopin
+  - reddit
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 7:04:36 pm
+date: 2020-06-14T00:00:00Z
 layout: post
-categories:
-- piano
-- music
-- chopin
-- reddit
 ---
 
 

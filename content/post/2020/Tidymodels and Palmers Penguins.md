@@ -1,15 +1,17 @@
 ---
-title: "Tidymodels & palmer-penguins"
-author: "Shayonendra N. Tagore"
-date: '2020-08-04T00:00:00Z'
-layout: post
-Summary: 'Oddly enough, I’ve been hearing a lot about tidymodels code week, from reddit to youtube.'
-categories:
+title: Tidymodels and Palmers Penguins
+author: Shayonendra N. Tagore
+tags:
   - machine-learning
   - tidymodels
   - tidytuesday
   - R
   - programming
+added date: 2026-08-25, 1:18:40 am
+modified date: 2026-09-01, 7:04:23 pm
+date: 2020-08-04T00:00:00Z
+layout: post
+Summary: Oddly enough, I’ve been hearing a lot about tidymodels code week, from reddit to youtube.
 ---
 
 
@@ -65,35 +67,62 @@ Penguins</a> package.</p>
 the smaller penguins to minimize the variables while playing with <code>tidymodels</code>.</p>
 <pre class="r"><code>penguins     &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-28/penguins.csv&#39;)</code></pre>
 <pre><code>## Parsed with column specification:
+
 ## cols(
-##   species = col_character(),
-##   island = col_character(),
-##   bill_length_mm = col_double(),
-##   bill_depth_mm = col_double(),
-##   flipper_length_mm = col_double(),
-##   body_mass_g = col_double(),
-##   sex = col_character(),
-##   year = col_double()
+
+## Species = col_character(),
+
+## Island = col_character(),
+
+## bill_length_mm = col_double(),
+
+## bill_depth_mm = col_double(),
+
+## flipper_length_mm = col_double(),
+
+## body_mass_g = col_double(),
+
+## Sex = col_character(),
+
+## Year = col_double()
+
 ## )</code></pre>
+
 <pre class="r"><code>penguins %&gt;% dim</code></pre>
 <pre><code>## [1] 344   8</code></pre>
 <pre class="r"><code>summary(penguins)</code></pre>
 <pre><code>##    species             island          bill_length_mm  bill_depth_mm
-##  Length:344         Length:344         Min.   :32.10   Min.   :13.10
-##  Class :character   Class :character   1st Qu.:39.23   1st Qu.:15.60
-##  Mode  :character   Mode  :character   Median :44.45   Median :17.30
-##                                        Mean   :43.92   Mean   :17.15
-##                                        3rd Qu.:48.50   3rd Qu.:18.70
-##                                        Max.   :59.60   Max.   :21.50
-##                                        NA&#39;s   :2       NA&#39;s   :2
-##  flipper_length_mm  body_mass_g       sex                 year
-##  Min.   :172.0     Min.   :2700   Length:344         Min.   :2007
-##  1st Qu.:190.0     1st Qu.:3550   Class :character   1st Qu.:2007
-##  Median :197.0     Median :4050   Mode  :character   Median :2008
-##  Mean   :200.9     Mean   :4202                      Mean   :2008
-##  3rd Qu.:213.0     3rd Qu.:4750                      3rd Qu.:2009
-##  Max.   :231.0     Max.   :6300                      Max.   :2009
-##  NA&#39;s   :2         NA&#39;s   :2</code></pre>
+
+## Length:344 Length:344 Min. :32.10 Min. :13.10
+
+## Class :character Class :character 1st Qu.:39.23 1st Qu.:15.60
+
+## Mode :character Mode :character Median :44.45 Median :17.30
+
+## Mean :43.92 Mean :17.15
+
+## 3rd Qu.:48.50 3rd Qu.:18.70
+
+## Max. :59.60 Max. :21.50
+
+## NA&#39;s :2 NA&#39;s :2
+
+## flipper_length_mm body_mass_g Sex Year
+
+## Min. :172.0 Min. :2700 Length:344 Min. :2007
+
+## 1st Qu.:190.0 1st Qu.:3550 Class :character 1st Qu.:2007
+
+## Median :197.0 Median :4050 Mode :character Median :2008
+
+## Mean :200.9 Mean :4202 Mean :2008
+
+## 3rd Qu.:213.0 3rd Qu.:4750 3rd Qu.:2009
+
+## Max. :231.0 Max. :6300 Max. :2009
+
+## NA&#39;s :2 NA&#39;s :2</code></pre>
+
 <pre class="r"><code>penguins %&gt;%
     skimr::skim()</code></pre>
 <table>
@@ -346,20 +375,35 @@ resamples (folds) for tuning the model.</p>
 
 model.fit.prep</code></pre>
 <pre><code>## # Resampling results
-## # 10-fold cross-validation
-## # A tibble: 10 x 4
-##    splits           id     .metrics         .notes
-##    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;
-##  1 &lt;split [201/23]&gt; Fold01 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
-##  2 &lt;split [201/23]&gt; Fold02 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
-##  3 &lt;split [201/23]&gt; Fold03 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
-##  4 &lt;split [201/23]&gt; Fold04 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
-##  5 &lt;split [202/22]&gt; Fold05 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
-##  6 &lt;split [202/22]&gt; Fold06 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
-##  7 &lt;split [202/22]&gt; Fold07 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
-##  8 &lt;split [202/22]&gt; Fold08 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
-##  9 &lt;split [202/22]&gt; Fold09 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
+## # 10-fold Cross-validation
+
+## # A Tibble: 10 X 4
+
+## Splits Id .metrics .notes
+
+## &lt;list&gt; &lt;chr&gt; &lt;list&gt; &lt;list&gt;
+
+## 1 &lt;split [201/23]&gt; Fold01 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
+## 2 &lt;split [201/23]&gt; Fold02 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
+## 3 &lt;split [201/23]&gt; Fold03 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
+## 4 &lt;split [201/23]&gt; Fold04 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
+## 5 &lt;split [202/22]&gt; Fold05 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
+## 6 &lt;split [202/22]&gt; Fold06 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
+## 7 &lt;split [202/22]&gt; Fold07 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
+## 8 &lt;split [202/22]&gt; Fold08 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
+## 9 &lt;split [202/22]&gt; Fold09 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;
+
 ## 10 &lt;split [202/22]&gt; Fold10 &lt;tibble [2 × 3]&gt; &lt;tibble [0 × 1]&gt;</code></pre>
+
 <p>Now that we have a basic model, lets build a training example.</p>
 <pre class="r"><code>model.fit &lt;- parsnip::rand_forest(mode = &quot;classification&quot;) %&gt;%
     parsnip::set_engine(&quot;ranger&quot;) %&gt;%
@@ -368,22 +412,36 @@ model.fit.prep</code></pre>
 
 model.fit</code></pre>
 <pre><code>## parsnip model object
+
 ##
-## Fit time:  43ms
-## Ranger result
+## Fit Time: 43ms
+
+## Ranger Result
+
 ##
 ## Call:
-##  ranger::ranger(formula = species ~ bill_length_mm + bill_depth_mm +      flipper_length_mm + body_mass_g, data = data, num.threads = 1,      verbose = FALSE, seed = sample.int(10^5, 1), probability = TRUE)
+
+## ranger::ranger(formula = Species ~ bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g, Data = Data, num.threads = 1, Verbose = FALSE, Seed = sample.int(10^5, 1), Probability = TRUE)
+
 ##
-## Type:                             Probability estimation
-## Number of trees:                  500
-## Sample size:                      224
-## Number of independent variables:  4
-## Mtry:                             2
-## Target node size:                 10
-## Variable importance mode:         none
-## Splitrule:                        gini
-## OOB prediction error (Brier s.):  0.03363747</code></pre>
+## Type: Probability Estimation
+
+## Number of Trees: 500
+
+## Sample Size: 224
+
+## Number of Independent Variables: 4
+
+## Mtry: 2
+
+## Target Node Size: 10
+
+## Variable Importance Mode: None
+
+## Splitrule: Gini
+
+## OOB Prediction Error (Brier s.): 0.03363747</code></pre>
+
 </div>
 <div id="evaluating-classification-model" class="section level2">
 <h2>evaluating classification model</h2>
@@ -397,10 +455,15 @@ kappa and accuracy.</p>
 <pre class="r"><code>penguins.fit.pred %&gt;%
     metrics(species, estimate = .pred_class)</code></pre>
 <pre><code>## # A tibble: 2 x 3
-##   .metric  .estimator .estimate
-##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
-## 1 accuracy multiclass     0.975
-## 2 kap      multiclass     0.960</code></pre>
+
+## .metric .estimator .estimate
+
+## &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+
+## 1 Accuracy Multiclass 0.975
+
+## 2 Kap Multiclass 0.960</code></pre>
+
 <p>Region-Over-Curves (ROC) are a popular measure of success. The smaller the ROC, the greater the
 ability to identify species. ROC curves of this dataset suggests a very high ability to identity
 species with few type 1 or 2 errors. Interestingly, I thought that chinstrap would be difficult to

@@ -1,12 +1,12 @@
 ---
 title: Generating Custom Raspberry-Pi Images
-author: SNTag
+author: SNTagore
 tags:
   - blog
   - diy
   - raspberry_pi
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-09-01, 1:54:03 pm
+modified date: 2026-09-01, 7:04:48 pm
 date: 2020-10-30 14:17:40
 layout: post
 Obs Category: TagOS
