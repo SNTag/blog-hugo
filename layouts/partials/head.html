@@ -176,6 +176,56 @@ figcaption {
 
 
 
+<!-- Index post tags -->
+<style>
+/* Card is positioned so the title's cover link can stretch over it. */
+.catalogue-item { position: relative; }
+.catalogue-cover { color: inherit; text-decoration: none; }
+.catalogue-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.catalogue-tags {
+  position: relative;   /* lift the whole tag row above the cover link */
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+.catalogue-tag {
+  display: inline-block;
+  font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--default-tint);
+  background: transparent;
+  border: 1px solid var(--grey-2);
+  border-radius: 1rem;
+  padding: 0.2rem 0.65rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color .2s ease-out, border-color .2s ease-out, background-color .2s ease-out;
+}
+.catalogue-tag:hover,
+.catalogue-tag:focus {
+  color: var(--background-color);
+  background: var(--grey-2);
+  border-color: var(--grey-2);
+}
+.catalogue-tag:focus-visible {
+  outline: 2px solid var(--grey-2);
+  outline-offset: 2px;
+}
+</style>
+
+
+
 <!-- Numbered pagination -->
 <style>
 .pagination { text-align: center; }
