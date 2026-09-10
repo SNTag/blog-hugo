@@ -1,0 +1,21 @@
+{{- /* Card is a <div>, not a single <a>, so tag links can be real links.
+       The title carries a "cover" link whose ::after fills the whole card
+       (see .catalogue-cover in head.html), keeping click-anywhere-to-post;
+       tags sit above that cover link and stay independently clickable. */ -}}
+<div class="catalogue-item">
+    <div>
+        <time datetime="{{ .PublishDate }}" class="catalogue-time">{{ i18n "publishdate" . }}</time>
+        <h2 class="catalogue-title"><a href="{{ .Permalink }}" class="catalogue-cover">{{ .Title }}</a></h2>
+        <div class="catalogue-line"></div>
+
+        <p>
+            {{ if isset .Params "summary" }}{{ .Params.Summary | markdownify }}{{ else }}{{ .Summary }}{{ end }}
+        </p>
+
+        {{- with .Params.tags }}
+        <div class="catalogue-tags">
+            {{- range . }}<a href="{{ (printf "/tags/%s/" (. | urlize)) | relLangURL }}" class="catalogue-tag">{{ . }}</a>{{ end }}
+        </div>
+        {{- end }}
+    </div>
+</div>
