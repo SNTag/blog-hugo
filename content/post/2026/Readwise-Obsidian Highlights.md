@@ -2,10 +2,10 @@
 title: Readwise-Obsidian Highlights
 author: SNTagore
 tags:
-  - Obsidian
-  - Readwise
+  - obsidian
+  - readwise
   - CommonPlace_Book
-  - Tech
+  - tech
 added date: 2026-08-25, 1:18:40 am
 modified date: 2026-09-01, 3:32:22 pm
 date: 2026-05-17T00:00:00Z

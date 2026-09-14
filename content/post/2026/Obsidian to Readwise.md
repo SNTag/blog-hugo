@@ -2,10 +2,10 @@
 title: Obsidian to Readwise
 author: SNTagore
 tags:
-  - Obsidian
-  - Readwise
+  - obsidian
+  - readwise
   - CommonPlace_Book
-  - Tech
+  - tech
 added date: 2026-09-01, 12:59:50 pm
 modified date: 2026-09-01, 3:32:27 pm
 date: 2026-09-01T00:00:00Z

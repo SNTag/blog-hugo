@@ -2,9 +2,9 @@
 title: New-Years Resolution
 author: Shayonendra N. Tagore
 tags:
-  - Programming
-  - Goal
-  - Discipline
+  - programming
+  - goal
+  - discipline
 added date: 2026-08-25, 1:18:40 am
 modified date: 2026-09-01, 1:42:11 pm
 date: 2020-01-19T00:00:00Z

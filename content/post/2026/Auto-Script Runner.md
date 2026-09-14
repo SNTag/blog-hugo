@@ -6,7 +6,7 @@ tags:
   - script
   - python
 added date: 2026-09-01, 12:59:50 pm
-modified date: 2026-09-10, 7:03:48 pm
+modified date: 2026-09-10, 9:46:42 pm
 date: 2026-09-10T19:04:00
 layout: post
 summary: Quick Windows GUI used to auto-start programs with default options.

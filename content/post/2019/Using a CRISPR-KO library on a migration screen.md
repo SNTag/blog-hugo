@@ -3,7 +3,7 @@ title: Using a CRISPR-KO library on a migration screen
 author: Shayonendra N. Tagore
 tags:
   - CRISPR
-  - Research
+  - research
   - NGS
 added date: 2026-08-25, 1:18:40 am
 modified date: 2026-09-01, 1:37:14 pm

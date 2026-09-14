@@ -2,7 +2,7 @@
 title: QuickScripts
 author: SNTagore
 tags:
-  - Makers
+  - makers
   - md
   - pdf
   - linux

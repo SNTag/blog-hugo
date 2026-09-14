@@ -3,7 +3,7 @@ title: Document-Generator
 author: SNTagore
 tags:
   - blog
-  - Makers
+  - makers
   - makefile
   - pandoc
   - beamer
