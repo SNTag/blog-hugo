@@ -34,20 +34,46 @@
 					</p>
 					{{ end }}
 
-					{{ with .Params.Publisher }}
-					<p class="book-hero-publisher">{{ . }}</p>
-					{{ end }}
-
-					{{ with .Params.formats }}
-					<div class="book-hero-formats">
-						{{ range . }}
-						<span class="book-format-badge">{{ . }}</span>
+					<!-- Metadata pulled from frontmatter YAML -->
+					<dl class="book-hero-details">
+						{{ with (index .Params "published date") }}
+						{{ $pd := printf "%v" . }}
+						{{ if ge (len $pd) 4 }}
+						<div class="book-hero-detail">
+							<dt>Published</dt>
+							<dd>{{ substr $pd 0 4 }}</dd>
+						</div>
 						{{ end }}
-					</div>
-					{{ end }}
+						{{ end }}
 
-					{{ with .Params.link }}
-					<a href="{{ . }}" class="book-hero-link" target="_blank" rel="noopener">Buy on Bookshop.org</a>
+						{{ with .Params.publisher }}
+						<div class="book-hero-detail">
+							<dt>Publisher</dt>
+							<dd>{{ . }}</dd>
+						</div>
+						{{ end }}
+
+						{{ with .Params.bookshelf }}
+						<div class="book-hero-detail">
+							<dt>Shelf</dt>
+							<dd>{{ replaceRE `\[\[(.*?)\]\]` "$1" . }}</dd>
+						</div>
+						{{ end }}
+
+						{{ with .GetTerms "tags" }}
+						<div class="book-hero-detail">
+							<dt>Tags</dt>
+							<dd class="book-hero-tags">
+								{{ range . }}<a href="{{ .RelPermalink }}" class="book-hero-tag">{{ .LinkTitle }}</a>{{ end }}
+							</dd>
+						</div>
+						{{ end }}
+					</dl>
+
+					{{ with .Params.source }}
+					{{ $url := . }}
+					{{ if hasPrefix . "[" }}{{ $url = replaceRE `^\[[^\]]*\]\(([^)]+)\)$` "$1" . }}{{ end }}
+					<a href="{{ $url | safeURL }}" class="book-hero-link" target="_blank" rel="noopener">View this book &rarr;</a>
 					{{ end }}
 				</div>
 			</div>
