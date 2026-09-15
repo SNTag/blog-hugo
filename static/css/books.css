@@ -275,6 +275,55 @@
   margin: 0 0 0.8rem;
 }
 
+/* Frontmatter metadata list */
+.book-hero-details {
+  margin: 0 0 1rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 0.9rem;
+  font-size: 0.9rem;
+}
+
+.book-hero-detail {
+  display: contents;
+}
+
+.book-hero-details dt {
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding-top: 0.15rem;
+}
+
+.book-hero-details dd {
+  margin: 0;
+  color: #555;
+}
+
+.book-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.book-hero-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 12px;
+  border: 1px solid #d0c8bb;
+  background: linear-gradient(135deg, #faf8f5, #f0ebe3);
+  color: #6b5f4f !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid #d0c8bb !important;
+}
+
+.book-hero-tag:hover {
+  border-color: #b8ac97;
+}
+
 .book-hero-formats {
   display: flex;
   flex-wrap: wrap;
@@ -398,6 +447,24 @@
 
 :root:not(.light) .book-hero-publisher {
   color: #999;
+}
+
+:root:not(.light) .book-hero-details dt {
+  color: #888;
+}
+
+:root:not(.light) .book-hero-details dd {
+  color: #bbb;
+}
+
+:root:not(.light) .book-hero-tag {
+  background: linear-gradient(135deg, #1e1c18, #2a2620);
+  border-color: #4a4030 !important;
+  color: #c4b99a !important;
+}
+
+:root:not(.light) .book-hero-tag:hover {
+  border-color: #6a5c40 !important;
 }
 
 :root:not(.light) .book-format-badge {
