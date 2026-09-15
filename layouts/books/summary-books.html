@@ -10,9 +10,10 @@
   <div class="book-details">
     <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
     {{ with index .Params "published date" }}
-    <time>{{ . | time.Format "January 2, 2006" }}</time>
-    {{ else }}
-    <time>{{ .Date.Format "January 2, 2006" }}</time>
+    {{ $pd := printf "%v" . }}
+    {{ if ge (len $pd) 4 }}
+    <time>{{ substr $pd 0 4 }}</time>
+    {{ end }}
     {{ end }}
     
     {{ if .Params.author }}
