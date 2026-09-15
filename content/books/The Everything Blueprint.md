@@ -13,3 +13,9 @@ source: "[Hodder & Stoughton](https://bookshop.org/p/books/the-everything-bluepr
 Publisher:
 bookshelf: "[[2026 Books]]"
 ---
+
+# My Review
+
+stuff
+ tes
+ 

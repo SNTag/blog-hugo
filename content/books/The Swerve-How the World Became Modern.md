@@ -16,3 +16,11 @@ source: https://bookshop.org/p/books/the-swerve-how-the-world-became-modern-step
 publisher: W. W. Norton & Company
 bookshelf: "[[2026 Books]]"
 ---
+
+# My Review
+
+> [!quote] Epicurus
+> Against other things it is possible to obtain security, but when it comes to death we human beings all live in a unwalled city
+
+> [!quote] Philodermus
+> Men suffer the worst while for the sake of the most alien desires, they neglect the most necessary appetites. It is impossible to live pleasurably without living prudently and honorably and justly, and also without living courageously and temperately and magnanimously, and without making friends, and without being philanthropic.
