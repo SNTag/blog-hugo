@@ -121,3 +121,29 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 
 - Work on a feature branch; open a PR into `master` (don't push straight to it).
 - Taxonomy is `tags`; there are no `categories`.
+
+## Future Directions (not started)
+
+Ideas discussed but deliberately deferred. Pick up when working on the MBA
+Recruiting pages.
+
+- **Obsidian note links (`[[Note]]`, `[[Note#Heading|Alias]]`).** The
+  converter only handles image embeds (`![[...]]`); plain note links are left
+  untouched and render as literal bracketed text on the site (e.g. in
+  `content/post/2026/How I Setup an MBA Tracker in Obsidian.md`). Planned
+  approach — extend `scripts/obsidian_to_hugo.py`:
+  - Target is a published page (matched by filename under `content/`) → real
+    Markdown link; `#Heading` → page anchor.
+  - Target not published → render just the alias/name as text (optionally a
+    muted "not published yet" span), never the raw brackets.
+  - Handle Obsidian's table-escaped pipe `\|` inside links.
+  - Caveat: most links in that post point outside `Blog/` (`Calendar/`,
+    `Efforts/`, `Atlas/`) or at `.base` files (Obsidian Bases — no web
+    equivalent). Making those work means publishing the notes, or a table
+    snapshot of each Base, case by case; some are private (CRM, contacts).
+- **Obsidian-style link graph on the MBA Recruiting page.** Builds on the
+  above: have the converter also emit page→page link data (e.g. a JSON file),
+  then draw it with a force-graph JS library (d3 / force-graph) on
+  `layouts/mba-recruiting/list.html`, following light/dark mode. Open
+  questions: show unpublished targets as grey nodes or hide them; scope to MBA
+  posts only or include linked posts from other sections.
