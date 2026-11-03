@@ -97,8 +97,8 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 
 ## Structure
 
-- `content/` — sections: `post/`, `books/`, `about/`, `TagOS/`, and
-  `mba-recruiting/`. All blog
+- `content/` — sections: `post/`, `books/`, `about/`, `TagOS/`,
+  `mba-recruiting/`, and `wiki/`. All blog
   posts (including tech/TagOS ones) live under `content/post/YYYY/` — do not
   create a separate top-level section directory for them.
 - **The `TagOS` "section" is virtual.** `content/TagOS/` holds only an
@@ -110,6 +110,16 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 - **`mba-recruiting` is virtual the same way:** `content/mba-recruiting/` holds
   only an `_index.md`; posts with `Obs Category: MBA Recruiting` are listed by
   `layouts/mba-recruiting/list.html`.
+- **`wiki/` is for pages that aren't blog posts** (reference notes, resources,
+  link targets published from elsewhere in the vault). Any folder layout
+  under `content/wiki/` works; Obsidian links to them as
+  `[[Blog/content/wiki/…]]`. `content/wiki/_index.md` cascades
+  `build.list: local` + `sitemap.disable`, so wiki pages are listed only on
+  `/wiki/` (alphabetical, `layouts/wiki/list.html`) — not on the home feed,
+  RSS, sitemap, or post prev/next arrows. Tag pages don't honour
+  `list: local`, so `layouts/term.html` (a copy of the theme's `list.html`)
+  filters out `Section "wiki"`. Note the home feed otherwise lists *every*
+  regular page (`.Site.RegularPages`), books included.
 - **Header nav dropdowns:** a `[[menu.main]]` entry with `parent = "<id>"` in
   `config.toml` shows in that parent's dropdown (`layouts/partials/header-menu.html`,
   styles in `layouts/partials/head.html`). A parent with no `url` is a plain
