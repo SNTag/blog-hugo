@@ -1,0 +1,24 @@
+{{ define "main" }}
+
+<main>
+	<div class="catalogue">
+		{{/* Tag pages: same as the theme's list.html, but wiki pages (content/wiki/)
+		     are left out; they are listed only on /wiki/ (layouts/wiki/list.html). */}}
+		{{ range (.Paginate (where .Pages "Section" "ne" "wiki")).Pages }}
+			{{ .Render "summary" }}
+		{{ end }}
+	</div>
+	
+	<div class="pagination">
+		{{ if .Paginator.HasPrev }}
+			<a href="{{ .Paginator.Prev.URL }}" class="left arrow">&#8592;</a>
+		{{ end }}
+		{{ if .Paginator.HasNext }}
+			<a href="{{ .Paginator.Next.URL }}" class="right arrow">&#8594;</a>
+		{{ end }}
+	
+		<span>{{ .Paginator.PageNumber }}</span>
+	</div>
+</main>
+
+{{ end }}

@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+<main>
+  <a href="/"><img src="/images/header/clean-and-simple-header.png"></a>
+
+  <div class="post">
+    <h1 class="post-title">{{ .Title }}</h1>
+    <div class="post-line"></div>
+  </div>
+
+  {{ with .Content }}{{ . }}{{ end }}
+
+  {{/* Wiki pages cascade `build.list: local` from content/wiki/_index.md, so
+       they appear only here: not on the home feed, tag pages, RSS, the
+       sitemap, or post prev/next arrows. Listed alphabetically, wiki-style. */}}
+  <ul class="wiki-index">
+    {{ range .RegularPagesRecursive.ByTitle }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+</main>
+
+{{ end }}

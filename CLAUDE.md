@@ -31,13 +31,33 @@ wikilink syntax in source; do not "fix" `![[...]]` into Markdown by hand.
 
 ## The Wikilink Converter
 
-`scripts/obsidian_to_hugo.py` rewrites `![[path]]` → `![](/web/path)` at build
-time only (source keeps the wikilink syntax):
+`scripts/obsidian_to_hugo.py` rewrites Obsidian syntax at build time only
+(source keeps the wikilink syntax). It skips front matter, fenced code blocks
+and inline `code`.
+
+**Image embeds** — `![[path]]` → `![](/web/path)`:
 
 - Strips the `Blog/` vault prefix; maps `static/` and `content/` to the site root.
 - Bare filenames (`![[foo.png]]`) are assumed to live under `/images/posts/`.
 - `![[foo.png|A caption]]` → caption becomes alt text; size hints like
   `|300` are dropped. Spaces are URL-encoded.
+
+**Note links** — `[[target#Heading|Alias]]`:
+
+- Obsidian writes vault-absolute paths, e.g.
+  `[[Blog/content/post/2026/Auto-Script Runner|Auto-Script Runner]]`. The
+  converter strips `Blog/content/`, checks the page exists under `content/`,
+  and emits `[Alias]({{< relref "post/2026/Auto-Script Runner.md" >}})` —
+  Hugo then computes the real URL. Bare names (`[[Auto-Script Runner]]`)
+  resolve by filename when unique.
+- `#Heading` → GitHub-style anchor (`#events--recruiting-tracker`), matching
+  Hugo's heading IDs. `[[#Heading]]` links within the page. `#^block` refs
+  are dropped.
+- `[[Blog/static/…]]` (e.g. a PDF) → a plain link to that file.
+- Anything else — paths outside `Blog/` (`Calendar/`, `Efforts/`, `Atlas/`),
+  `.base` files, drafts, missing pages — renders as just the alias text and
+  is listed in the build log as `not on site, rendered as text`.
+- Handles Obsidian's table-escaped pipe `\|`.
 - Idempotent; only touches `content/*.md`.
 
 Wired into the build in two places:
@@ -77,8 +97,8 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 
 ## Structure
 
-- `content/` — sections: `post/`, `books/`, `about/`, `TagOS/`, and
-  `mba-recruiting/`. All blog
+- `content/` — sections: `post/`, `books/`, `about/`, `TagOS/`,
+  `mba-recruiting/`, and `wiki/`. All blog
   posts (including tech/TagOS ones) live under `content/post/YYYY/` — do not
   create a separate top-level section directory for them.
 - **The `TagOS` "section" is virtual.** `content/TagOS/` holds only an
@@ -90,6 +110,16 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 - **`mba-recruiting` is virtual the same way:** `content/mba-recruiting/` holds
   only an `_index.md`; posts with `Obs Category: MBA Recruiting` are listed by
   `layouts/mba-recruiting/list.html`.
+- **`wiki/` is for pages that aren't blog posts** (reference notes, resources,
+  link targets published from elsewhere in the vault). Any folder layout
+  under `content/wiki/` works; Obsidian links to them as
+  `[[Blog/content/wiki/…]]`. `content/wiki/_index.md` cascades
+  `build.list: local` + `sitemap.disable`, so wiki pages are listed only on
+  `/wiki/` (alphabetical, `layouts/wiki/list.html`) — not on the home feed,
+  RSS, sitemap, or post prev/next arrows. Tag pages don't honour
+  `list: local`, so `layouts/term.html` (a copy of the theme's `list.html`)
+  filters out `Section "wiki"`. Note the home feed otherwise lists *every*
+  regular page (`.Site.RegularPages`), books included.
 - **Header nav dropdowns:** a `[[menu.main]]` entry with `parent = "<id>"` in
   `config.toml` shows in that parent's dropdown (`layouts/partials/header-menu.html`,
   styles in `layouts/partials/head.html`). A parent with no `url` is a plain
@@ -127,22 +157,14 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 Ideas discussed but deliberately deferred. Pick up when working on the MBA
 Recruiting pages.
 
-- **Obsidian note links (`[[Note]]`, `[[Note#Heading|Alias]]`).** The
-  converter only handles image embeds (`![[...]]`); plain note links are left
-  untouched and render as literal bracketed text on the site (e.g. in
-  `content/post/2026/How I Setup an MBA Tracker in Obsidian.md`). Planned
-  approach — extend `scripts/obsidian_to_hugo.py`:
-  - Target is a published page (matched by filename under `content/`) → real
-    Markdown link; `#Heading` → page anchor.
-  - Target not published → render just the alias/name as text (optionally a
-    muted "not published yet" span), never the raw brackets.
-  - Handle Obsidian's table-escaped pipe `\|` inside links.
-  - Caveat: most links in that post point outside `Blog/` (`Calendar/`,
-    `Efforts/`, `Atlas/`) or at `.base` files (Obsidian Bases — no web
-    equivalent). Making those work means publishing the notes, or a table
-    snapshot of each Base, case by case; some are private (CRM, contacts).
-- **Obsidian-style link graph on the MBA Recruiting page.** Builds on the
-  above: have the converter also emit page→page link data (e.g. a JSON file),
+- **Publishing link targets.** Note links now work (see the converter), but
+  most links in `content/post/2026/How I Setup an MBA Tracker in Obsidian.md`
+  point outside `Blog/` (`Calendar/`, `Efforts/`, `Atlas/`) or at `.base`
+  files (Obsidian Bases — no web equivalent), so they render as text. Making
+  them live means publishing those notes under `content/`, or a table
+  snapshot of each Base, case by case; some are private (CRM, contacts).
+- **Obsidian-style link graph on the MBA Recruiting page.** Have the
+  converter also emit page→page link data (e.g. a JSON file),
   then draw it with a force-graph JS library (d3 / force-graph) on
   `layouts/mba-recruiting/list.html`, following light/dark mode. Open
   questions: show unpublished targets as grey nodes or hide them; scope to MBA
