@@ -5,7 +5,7 @@ set -e
 
 printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
 
-# Convert Obsidian ![[wikilink]] embeds to Markdown for the build only.
+# Convert Obsidian ![[embeds]] and [[links]] to Markdown for the build only.
 # We back up content/ and restore it on exit so the working tree keeps the
 # wikilink syntax (and any unpushed edits) untouched.
 restore_content() {
