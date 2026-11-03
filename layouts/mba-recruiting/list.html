@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+<main>
+  <a href="/"><img src="/images/header/clean-and-simple-header.png"></a>
+
+  <div class="post">
+    <h1 class="post-title">{{ .Title }}</h1>
+    <div class="post-line"></div>
+  </div>
+
+  {{ with .Content }}{{ . }}{{ end }}
+
+  <div class="catalogue">
+    {{/* Virtual section, same pattern as layouts/TagOS/list.html: posts stay in
+         content/post/YYYY/ and appear here when their frontmatter has
+         `Obs Category: MBA Recruiting`. Hugo lowercases keys, hence "obs category". */}}
+    {{ range .Site.RegularPages }}
+    {{ if eq (index .Params "obs category") "MBA Recruiting" }}
+    {{ .Render "summary" }}
+    {{ end }}
+    {{ end }}
+  </div>
+</main>
+
+{{ end }}

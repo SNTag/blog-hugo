@@ -22,15 +22,27 @@ BaseURL = "https://sntag.netlify.app/"
     url = "/"
     weight = -140
   [[menu.main]]
+    identifier = "explore"
+    name = "explore"   # no url -> label just opens the dropdown
+    weight = -130
+  [[menu.main]]
     identifier = "books"
     name = "books"
     url = "/books/"
-    weight = -130
+    parent = "explore"
+    weight = -30
   [[menu.main]]
     identifier = "TagOS"
     name = "TagOS"
     url = "/TagOS/"
-    weight = -120
+    parent = "explore"
+    weight = -20
+  [[menu.main]]
+    identifier = "mba-recruiting"
+    name = "MBA Recruiting"
+    url = "/mba-recruiting/"
+    parent = "explore"
+    weight = -10
   [[menu.main]]
     identifier = "me"
     name = "about"     # no url -> label just opens the dropdown
