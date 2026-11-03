@@ -157,6 +157,13 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 
 - Work on a feature branch; open a PR into `master` (don't push straight to it).
 - Taxonomy is `tags`; there are no `categories`.
+- **Posts containing an interactive widget shortcode** (e.g. `base-builder`)
+  must place a `<!--more-->` summary divider — or set a `summary` front-matter
+  field — *before* the widget. The home/tag listings
+  (`layouts/summary.html`) otherwise fall back to Hugo's auto-summary, which
+  truncates the widget's raw HTML mid-structure and leaves unbalanced `<div>`s
+  that wrap the following cards. The divider keeps the widget out of the feed
+  entirely; it only ever renders on the post's own page.
 
 ## Future Directions (not started)
 
