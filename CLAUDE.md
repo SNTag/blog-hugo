@@ -49,6 +49,15 @@ Wired into the build in two places:
 If `![[...]]` ever shows up as literal text on the live site, the converter
 didn't run (e.g. `python3` missing from the build image) — check that first.
 
+## Callouts
+
+Obsidian callouts (`> [!note] Title`, `> [!tip]-` folded, `> [!tip]+` open)
+are rendered by Hugo's blockquote render hook,
+`layouts/_default/_markup/render-blockquote.html`, styled by
+`assets/css/callouts.css`. Obsidian's aliases (caution, error, faq, …) map to
+the base types. `> [!quote] Author` keeps the normal centered quote style and
+shows the title as the attribution. Plain `>` blockquotes are unchanged.
+
 ## Images
 
 | Purpose | Store in | Referenced as |

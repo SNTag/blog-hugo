@@ -70,6 +70,14 @@
 
 
 
+<!-- Obsidian callouts (> [!note]) -->
+{{ $calloutCSS := resources.Get "css/callouts.css" }}
+{{ if $calloutCSS }}
+<link rel="stylesheet" href="{{ $calloutCSS.RelPermalink }}">
+{{ end }}
+
+
+
 <!-- quotes -->
 {{ $quotesCSS := resources.Get "css/quotes.css" }}
 {{ if $quotesCSS }}
