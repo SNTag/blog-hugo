@@ -1,0 +1,50 @@
+{{- /*
+  Overrides the theme's header-menu.html to support dropdowns.
+  Any [[menu.main]] entry with `parent = "<identifier>"` in config.toml is
+  rendered inside a dropdown under that parent. The parent stays a normal link;
+  hovering (desktop) or tapping the caret (touch / keyboard) opens the list.
+*/ -}}
+<ul class="nav-menu">
+    {{- range .Site.Menus.main }}
+        {{- if .HasChildren }}
+        <li class="has-dropdown">
+            <a href="{{ .URL }}">{{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}</a>
+            <button type="button" class="nav-dropdown-toggle" aria-expanded="false"
+                    aria-label="Show {{ .Name }} submenu">&#9662;</button>
+            <ul class="nav-dropdown">
+                {{- range .Children }}
+                <li><a href="{{ .URL }}">{{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}</a></li>
+                {{- end }}
+            </ul>
+        </li>
+        {{- else }}
+        <li>
+            <a href="{{ .URL }}">{{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}</a>
+        </li>
+        {{- end }}
+    {{- end }}
+</ul>
+<script>
+(function () {
+  var toggles = document.querySelectorAll('.nav-dropdown-toggle');
+  function closeAll(except) {
+    toggles.forEach(function (t) {
+      if (t !== except) {
+        t.setAttribute('aria-expanded', 'false');
+        t.parentElement.classList.remove('open');
+      }
+    });
+  }
+  toggles.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      closeAll(btn);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.parentElement.classList.toggle('open', open);
+    });
+  });
+  document.addEventListener('click', function () { closeAll(null); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(null); });
+})();
+</script>

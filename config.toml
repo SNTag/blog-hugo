@@ -35,6 +35,7 @@ BaseURL = "https://sntag.netlify.app/"
     identifier = "linkedin"
     name = "linkedin"
     url = "https://www.linkedin.com/in/shayontagore/"
+    parent = "about"   # nested -> shows in the "about me" dropdown
     weight = -110
   [[menu.main]]
     identifier = "about"
