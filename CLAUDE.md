@@ -68,7 +68,8 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 
 ## Structure
 
-- `content/` — sections: `post/`, `books/`, `about/`, and `TagOS/`. All blog
+- `content/` — sections: `post/`, `books/`, `about/`, `TagOS/`, and
+  `mba-recruiting/`. All blog
   posts (including tech/TagOS ones) live under `content/post/YYYY/` — do not
   create a separate top-level section directory for them.
 - **The `TagOS` "section" is virtual.** `content/TagOS/` holds only an
@@ -77,6 +78,13 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
   is built by `layouts/TagOS/list.html`, which scans all posts for that key.
   Note Hugo lowercases frontmatter keys, so it's read as `index .Params
   "obs category"` (with a space), not `.Params.obs_category`.
+- **`mba-recruiting` is virtual the same way:** `content/mba-recruiting/` holds
+  only an `_index.md`; posts with `Obs Category: MBA Recruiting` are listed by
+  `layouts/mba-recruiting/list.html`.
+- **Header nav dropdowns:** a `[[menu.main]]` entry with `parent = "<id>"` in
+  `config.toml` shows in that parent's dropdown (`layouts/partials/header-menu.html`,
+  styles in `layouts/partials/head.html`). A parent with no `url` is a plain
+  label that only opens the menu.
 - `layouts/` — project overrides on top of `themes/tale-hugo/`.
 - `scripts/` — `obsidian_to_hugo.py` (above); `update_books_widgets.py`
   regenerates `data/books_widgets.toml` from `content/books/*.md`.

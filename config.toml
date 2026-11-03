@@ -22,25 +22,43 @@ BaseURL = "https://sntag.netlify.app/"
     url = "/"
     weight = -140
   [[menu.main]]
+    identifier = "explore"
+    name = "explore"   # no url -> label just opens the dropdown
+    weight = -130
+  [[menu.main]]
     identifier = "books"
     name = "books"
     url = "/books/"
-    weight = -130
+    parent = "explore"
+    weight = -30
   [[menu.main]]
     identifier = "TagOS"
     name = "TagOS"
     url = "/TagOS/"
-    weight = -120
+    parent = "explore"
+    weight = -20
   [[menu.main]]
-    identifier = "linkedin"
-    name = "linkedin"
-    url = "https://www.linkedin.com/in/shayontagore/"
-    weight = -110
+    identifier = "mba-recruiting"
+    name = "MBA Recruiting"
+    url = "/mba-recruiting/"
+    parent = "explore"
+    weight = -10
+  [[menu.main]]
+    identifier = "me"
+    name = "about"     # no url -> label just opens the dropdown
+    weight = -100
   [[menu.main]]
     identifier = "about"
     name = "about me"
     url = "/about/"
-    weight = -100
+    parent = "me"
+    weight = -20
+  [[menu.main]]
+    identifier = "linkedin"
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/shayontagore/"
+    parent = "me"
+    weight = -10
 
 [permalinks]
   posts = "/:slug/"

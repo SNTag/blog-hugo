@@ -317,6 +317,66 @@ figcaption {
 
 
 
+
+<!-- Header nav dropdowns (see layouts/partials/header-menu.html) -->
+<style>
+.nav { overflow: visible; }               /* theme's overflow:auto would clip dropdowns */
+.nav li.has-dropdown { position: relative; opacity: 1; }
+.nav li.has-dropdown > a,
+.nav li.has-dropdown > .nav-dropdown-toggle { opacity: .6; transition: opacity .2s ease-out; }
+.nav li.has-dropdown:hover > a,
+.nav li.has-dropdown:hover > .nav-dropdown-toggle,
+.nav li.has-dropdown.open > a,
+.nav li.has-dropdown.open > .nav-dropdown-toggle { opacity: 1; }
+.nav-dropdown-toggle {
+  background: none;
+  border: 0;
+  color: var(--default-color);
+  cursor: pointer;
+  font-size: .75rem;
+  padding: 0 0 0 .25rem;
+  line-height: 1;
+}
+.nav ul.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  z-index: 100;
+  margin: 0;
+  padding: .4rem 0;
+  min-width: 9rem;
+  text-align: left;
+  background: var(--background-color);
+  border: 1px solid var(--default-tint);
+  border-radius: 6px;
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+.nav li.has-dropdown:hover > ul.nav-dropdown,
+.nav li.has-dropdown:focus-within > ul.nav-dropdown,
+.nav li.has-dropdown.open > ul.nav-dropdown { display: block; }
+.nav ul.nav-dropdown li {
+  display: block;
+  padding: .3rem 1rem;
+  white-space: nowrap;
+}
+.nav-dropdown-toggle.nav-dropdown-label {
+  font-family: 'EB Garamond', Georgia, serif;  /* = $sans-serif used by .nav a (assets/scss/tale/_variables.scss) */
+  font-size: inherit;
+  padding: 0;
+}
+/* Invisible bridge so the menu doesn't close while the cursor crosses the gap */
+.nav ul.nav-dropdown::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: -.6rem; height: .6rem;
+}
+</style>
+
+
 <!-- RSS Feed Link -->
 <link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}"
       rel="alternate"

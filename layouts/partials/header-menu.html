@@ -1,0 +1,56 @@
+{{- /*
+  Overrides the theme's header-menu.html to support dropdowns.
+  Any [[menu.main]] entry with `parent = "<identifier>"` in config.toml is
+  rendered inside a dropdown under that parent. A parent with a url stays a
+  link with a separate caret toggle; a parent with no url is just a label that
+  opens the list. Hover (desktop) or tap the toggle (touch / keyboard).
+*/ -}}
+<ul class="nav-menu">
+    {{- range .Site.Menus.main }}
+        {{- if .HasChildren }}
+        <li class="has-dropdown">
+            {{- if .URL }}
+            <a href="{{ .URL }}">{{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}</a>
+            <button type="button" class="nav-dropdown-toggle" aria-expanded="false"
+                    aria-label="Show {{ .Name }} submenu">&#9662;</button>
+            {{- else }}
+            {{- /* Parent with no url: the whole label is the toggle. */}}
+            <button type="button" class="nav-dropdown-toggle nav-dropdown-label" aria-expanded="false">{{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}&nbsp;&#9662;</button>
+            {{- end }}
+            <ul class="nav-dropdown">
+                {{- range .Children }}
+                <li><a href="{{ .URL }}">{{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}</a></li>
+                {{- end }}
+            </ul>
+        </li>
+        {{- else }}
+        <li>
+            <a href="{{ .URL }}">{{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}</a>
+        </li>
+        {{- end }}
+    {{- end }}
+</ul>
+<script>
+(function () {
+  var toggles = document.querySelectorAll('.nav-dropdown-toggle');
+  function closeAll(except) {
+    toggles.forEach(function (t) {
+      if (t !== except) {
+        t.setAttribute('aria-expanded', 'false');
+        t.parentElement.classList.remove('open');
+      }
+    });
+  }
+  toggles.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      closeAll(btn);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.parentElement.classList.toggle('open', open);
+    });
+  });
+  document.addEventListener('click', function () { closeAll(null); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(null); });
+})();
+</script>
