@@ -1,0 +1,195 @@
+{{- /*
+  base-builder — an interactive widget that lets a reader generate their own
+  Obsidian Base (.base) file from a template by filling in three fields:
+    - the view/base name
+    - the folder path prefix  (matched with file.path.startsWith)
+    - the tag                 (matched with file.tags.contains)
+  It then previews the generated YAML and offers a download / copy.
+
+  Everything runs client-side (no server) — safe for static Netlify hosting.
+
+  Usage in a post (angle-bracket shortcode call):
+    base-builder
+  or with custom defaults:
+    base-builder name="Consulting" path="Atlas/CRM/Comp/" tag="consulting"
+*/ -}}
+{{- $id := printf "bb-%d" .Ordinal -}}
+{{- $name := .Get "name" | default "Consulting" -}}
+{{- $path := .Get "path" | default "Atlas/CRM/Comp/" -}}
+{{- $tag  := .Get "tag"  | default "consulting" -}}
+
+<div class="base-builder" id="{{ $id }}"
+     data-name="{{ $name }}" data-path="{{ $path }}" data-tag="{{ $tag }}">
+  <div class="base-builder__head">
+    <span class="base-builder__badge">.base</span>
+    <div>
+      <h3 class="base-builder__title">Obsidian Base builder</h3>
+      <p class="base-builder__sub">Fill in your own paths and tag, then download a ready-to-use <code>.base</code> file for your vault.</p>
+    </div>
+  </div>
+
+  <div class="base-builder__fields">
+    <label class="base-builder__field">
+      <span>View / base name</span>
+      <input type="text" data-bb="name" value="{{ $name }}" spellcheck="false" autocomplete="off">
+    </label>
+    <label class="base-builder__field">
+      <span>Folder path prefix</span>
+      <input type="text" data-bb="path" value="{{ $path }}" spellcheck="false" autocomplete="off">
+      <small>Matched with <code>file.path.startsWith(&hellip;)</code></small>
+    </label>
+    <label class="base-builder__field">
+      <span>Tag</span>
+      <input type="text" data-bb="tag" value="{{ $tag }}" spellcheck="false" autocomplete="off">
+      <small>Matched with <code>file.tags.contains(&hellip;)</code> &mdash; no leading <code>#</code></small>
+    </label>
+  </div>
+
+  <pre class="base-builder__preview" data-bb="preview" aria-live="polite"></pre>
+
+  <div class="base-builder__actions">
+    <button type="button" data-bb="download">Download <code>.base</code></button>
+    <button type="button" data-bb="copy" class="base-builder__secondary">Copy</button>
+    <span class="base-builder__status" data-bb="status" role="status"></span>
+  </div>
+</div>
+
+{{- if eq .Ordinal 0 }}
+<style>
+.base-builder{
+  --bb-accent: var(--default-tint, #729883);
+  border:1px solid var(--grey-2, #404040);
+  border-radius:10px;
+  padding:1.2rem 1.3rem 1.3rem;
+  margin:2rem 0;
+  background:var(--grey-4, #181818);
+  color:var(--default-color, #888);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:.95rem;
+  line-height:1.45;
+}
+.base-builder *{box-sizing:border-box;}
+.base-builder__head{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1rem;}
+.base-builder__badge{
+  flex:0 0 auto;font-family:Menlo,Monaco,monospace;font-size:.72rem;font-weight:700;
+  letter-spacing:.02em;padding:.3rem .5rem;border-radius:6px;margin-top:.15rem;
+  background:var(--bb-accent);color:var(--white, #fff);
+}
+.base-builder__title{margin:0;font-size:1.15rem;color:var(--default-shade, #989898);}
+.base-builder__sub{margin:.2rem 0 0;font-size:.88rem;color:var(--grey-1, #606060);}
+.base-builder__fields{display:grid;gap:.9rem;margin-bottom:1.1rem;}
+@media(min-width:620px){.base-builder__fields{grid-template-columns:1fr 1fr;}
+  .base-builder__field:first-child{grid-column:1 / -1;}}
+.base-builder__field{display:flex;flex-direction:column;gap:.3rem;}
+.base-builder__field > span{font-weight:600;font-size:.82rem;color:var(--default-shade, #989898);
+  text-transform:uppercase;letter-spacing:.04em;}
+.base-builder__field small{font-size:.76rem;color:var(--grey-1, #606060);}
+.base-builder__field input{
+  width:100%;padding:.5rem .6rem;border-radius:6px;
+  border:1px solid var(--grey-2, #404040);
+  background:var(--background-color, #000);
+  color:var(--default-shade, #989898);
+  font-family:Menlo,Monaco,monospace;font-size:.88rem;
+}
+.base-builder__field input:focus{outline:2px solid var(--bb-accent);outline-offset:0;border-color:var(--bb-accent);}
+.base-builder code{font-family:Menlo,Monaco,monospace;font-size:.85em;}
+.base-builder__preview{
+  margin:0 0 1rem;padding:.85rem 1rem;border-radius:8px;overflow:auto;
+  background:var(--background-color, #000);
+  border:1px solid var(--grey-2, #404040);
+  color:var(--default-color, #888);
+  font-family:Menlo,Monaco,monospace;font-size:.82rem;line-height:1.5;
+  white-space:pre;max-height:420px;
+}
+.base-builder__actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;}
+.base-builder__actions button{
+  cursor:pointer;border:0;border-radius:6px;padding:.55rem .95rem;
+  font-size:.88rem;font-weight:600;
+  background:var(--bb-accent);color:var(--white, #fff);
+}
+.base-builder__actions button:hover{filter:brightness(1.08);}
+.base-builder__secondary{background:transparent !important;
+  color:var(--default-shade, #989898) !important;border:1px solid var(--grey-2, #404040) !important;}
+.base-builder__status{font-size:.82rem;color:var(--bb-accent);min-height:1em;}
+</style>
+{{- end }}
+
+{{- if eq .Ordinal 0 }}
+<script>
+(function(){
+  function build(name, path, tag){
+    return [
+      "properties:",
+      "  note.Specialization:",
+      "    displayName: specialization",
+      "  note.website:",
+      "    displayName: website",
+      "views:",
+      "  - type: table",
+      "    name: " + name,
+      "    filters:",
+      "      and:",
+      '        - file.tags.contains("' + tag + '")',
+      '        - file.path.startsWith("' + path + '")',
+      "    order:",
+      "      - file.name",
+      "      - rating - MBA Internship",
+      "      - source",
+      "      - tags",
+      "      - summary",
+      "      - projects",
+      "      - related",
+      "      - 2027 MBA Internship Application",
+      "      - tasks",
+      "      - Email",
+      "    sort:",
+      "      - property: file.name",
+      "        direction: ASC",
+      ""
+    ].join("\n");
+  }
+  function safeFile(name){
+    var n = (name || "base").trim().replace(/[^a-z0-9._-]+/gi, "-").replace(/^-+|-+$/g, "");
+    return (n || "base") + ".base";
+  }
+  function init(root){
+    var q = function(sel){ return root.querySelector('[data-bb="' + sel + '"]'); };
+    var inName = q("name"), inPath = q("path"), inTag = q("tag");
+    var preview = q("preview"), status = q("status");
+    function current(){ return build(inName.value, inPath.value, inTag.value); }
+    function render(){ preview.textContent = current(); }
+    function flash(msg){ status.textContent = msg; setTimeout(function(){ status.textContent = ""; }, 2200); }
+
+    [inName, inPath, inTag].forEach(function(el){ el.addEventListener("input", render); });
+
+    q("download").addEventListener("click", function(){
+      var blob = new Blob([current()], {type: "text/yaml"});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = safeFile(inName.value);
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+      flash("Downloaded " + safeFile(inName.value));
+    });
+
+    q("copy").addEventListener("click", function(){
+      var text = current();
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ flash("Copied to clipboard"); },
+          function(){ flash("Copy failed — select manually"); });
+      } else {
+        preview.focus(); flash("Copy not supported — select manually");
+      }
+    });
+
+    render();
+  }
+  function initAll(){ document.querySelectorAll(".base-builder").forEach(init); }
+  if (document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", initAll);
+  } else {
+    initAll();
+  }
+})();
+</script>
+{{- end }}
