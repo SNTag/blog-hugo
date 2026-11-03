@@ -1,0 +1,57 @@
+{{- /*
+  Blockquote render hook: turns Obsidian callouts into styled boxes.
+
+    > [!note] Optional title        -> callout box (styles: assets/css/callouts.css)
+    > [!tip]- Folded by default     -> collapsible, starts closed
+    > [!tip]+ Open by default       -> collapsible, starts open
+    > [!quote] Author               -> the normal centered quote style, with
+    >                                  the title shown as "— Author"
+
+  Plain "> text" blockquotes render exactly as before.
+  Obsidian aliases (e.g. caution -> warning, error -> danger) are mapped so one
+  set of colors covers them all.
+*/ -}}
+{{- if eq .Type "alert" }}
+  {{- $alias := dict
+      "summary" "abstract" "tldr" "abstract"
+      "hint" "tip" "important" "tip"
+      "check" "success" "done" "success"
+      "help" "question" "faq" "question"
+      "caution" "warning" "attention" "warning"
+      "fail" "failure" "missing" "failure"
+      "error" "danger"
+      "cite" "quote" }}
+  {{- $type := .AlertType | lower }}
+  {{- $kind := index $alias $type | default $type }}
+  {{- $icons := dict
+      "note" "&#x270E;" "abstract" "&#x2630;" "info" "&#x2139;&#xFE0E;"
+      "todo" "&#x2610;" "tip" "&#x2726;" "success" "&#x2713;"
+      "question" "?" "warning" "&#x26A0;&#xFE0E;" "failure" "&#x2717;"
+      "danger" "&#x26A1;&#xFE0E;" "bug" "&#x2731;" "example" "&#x25B8;" }}
+
+  {{- if eq $kind "quote" }}
+<blockquote>
+{{ .Text }}
+{{- with .AlertTitle }}<footer>{{ . }}</footer>{{ end }}
+</blockquote>
+  {{- else }}
+    {{- $title := .AlertTitle | default (humanize $type) }}
+    {{- $icon := index $icons $kind | default "&#x270E;" }}
+    {{- $head := printf `<span class="callout-icon" aria-hidden="true">%s</span><span class="callout-title-text">%s</span>` $icon $title | safeHTML }}
+    {{- if .AlertSign }}
+<details class="callout callout-{{ $kind }}"{{ if eq .AlertSign "+" }} open{{ end }}>
+  <summary class="callout-title">{{ $head }}</summary>
+  {{- with .Text }}<div class="callout-content">{{ . }}</div>{{ end }}
+</details>
+    {{- else }}
+<div class="callout callout-{{ $kind }}">
+  <div class="callout-title">{{ $head }}</div>
+  {{- with .Text }}<div class="callout-content">{{ . }}</div>{{ end }}
+</div>
+    {{- end }}
+  {{- end }}
+{{- else }}
+<blockquote{{ range $k, $v := .Attributes }} {{ $k }}="{{ $v }}"{{ end }}>
+{{ .Text }}
+</blockquote>
+{{- end }}

@@ -1,0 +1,51 @@
+/* Obsidian-style callouts (> [!note] ...). Markup comes from
+   layouts/_default/_markup/render-blockquote.html.
+   Backgrounds are translucent tints of each callout's color, so they read on
+   both the light and dark site themes without separate rules. */
+
+.callout {
+  --callout-rgb: 68, 138, 255;            /* note (default) */
+  margin: 1.5rem 0;
+  padding: .75rem 1rem;
+  border-left: 3px solid rgb(var(--callout-rgb));
+  border-radius: 6px;
+  background: rgba(var(--callout-rgb), .1);
+}
+
+.callout-title {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  font-weight: bold;
+  color: rgb(var(--callout-rgb));
+  line-height: 1.5;
+}
+
+.callout-icon { flex: 0 0 auto; width: 1em; text-align: center; }
+
+.callout-content { margin-top: .5rem; }
+.callout-content > :first-child { margin-top: 0; }
+.callout-content > :last-child  { margin-bottom: 0; }
+
+/* Collapsible callouts ([!type]- / [!type]+) */
+details.callout > summary { cursor: pointer; list-style: none; }
+details.callout > summary::-webkit-details-marker { display: none; }
+details.callout > summary::after {
+  content: "\25B8";
+  margin-left: auto;
+  transition: transform .2s ease;
+}
+details.callout[open] > summary::after { transform: rotate(90deg); }
+
+/* Colors, matching Obsidian's defaults */
+.callout-abstract { --callout-rgb: 0, 176, 255; }
+.callout-info     { --callout-rgb: 0, 184, 212; }
+.callout-todo     { --callout-rgb: 0, 184, 212; }
+.callout-tip      { --callout-rgb: 0, 191, 165; }
+.callout-success  { --callout-rgb: 0, 200, 83; }
+.callout-question { --callout-rgb: 236, 117, 0; }
+.callout-warning  { --callout-rgb: 236, 117, 0; }
+.callout-failure  { --callout-rgb: 233, 49, 71; }
+.callout-danger   { --callout-rgb: 233, 49, 71; }
+.callout-bug      { --callout-rgb: 233, 49, 71; }
+.callout-example  { --callout-rgb: 120, 82, 238; }
