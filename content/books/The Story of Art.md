@@ -4,7 +4,6 @@ author:
   - Eh Gombrich
   - Leonie Gombrich
 tags:
-  - to-read
   - compendium_v3_0
   - art-history
   - non-fiction

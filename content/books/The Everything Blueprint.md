@@ -2,8 +2,6 @@
 title: The Everything Blueprint
 author:
   - James Ashton
-tags:
-  - hiatus
 rating:
 added date: 2026-04-11, 8:12:54 pm
 modified date: 2026-09-14, 7:36:33 pm
