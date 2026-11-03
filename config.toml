@@ -32,16 +32,21 @@ BaseURL = "https://sntag.netlify.app/"
     url = "/TagOS/"
     weight = -120
   [[menu.main]]
-    identifier = "linkedin"
-    name = "linkedin"
-    url = "https://www.linkedin.com/in/shayontagore/"
-    parent = "about"   # nested -> shows in the "about me" dropdown
-    weight = -110
+    identifier = "me"
+    name = "about"     # no url -> label just opens the dropdown
+    weight = -100
   [[menu.main]]
     identifier = "about"
     name = "about me"
     url = "/about/"
-    weight = -100
+    parent = "me"
+    weight = -20
+  [[menu.main]]
+    identifier = "linkedin"
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/shayontagore/"
+    parent = "me"
+    weight = -10
 
 [permalinks]
   posts = "/:slug/"
