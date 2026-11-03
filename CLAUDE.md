@@ -53,7 +53,13 @@ and inline `code`.
 - `#Heading` → GitHub-style anchor (`#events--recruiting-tracker`), matching
   Hugo's heading IDs. `[[#Heading]]` links within the page. `#^block` refs
   are dropped.
-- `[[Blog/static/…]]` (e.g. a PDF) → a plain link to that file.
+- `[[Blog/static/…]]` (e.g. a PDF) → a plain link to that file. Obsidian
+  omits `.md` on note links, so `.md` is added back when that's the file in
+  `static/`; a missing static file renders as text like any dead link.
+- **Downloadable Obsidian templates** live in `static/Templates/` (served
+  byte-for-byte, never built as pages or touched by the converter).
+  `netlify.toml` sets `Content-Disposition: attachment` on `/Templates/*` so
+  browsers download them instead of showing raw Markdown.
 - Anything else — paths outside `Blog/` (`Calendar/`, `Efforts/`, `Atlas/`),
   `.base` files, drafts, missing pages — renders as just the alias text and
   is listed in the build log as `not on site, rendered as text`.
