@@ -17,4 +17,6 @@ A scratch page for testing the `base-builder` shortcode. It is marked
 
 ## With custom defaults
 
-{{< base-builder name="Recruiting" path="Atlas/CRM/Recruiting/" tag="recruiting" >}}
+Same example notes, a different starting filter (tag `strategy`):
+
+{{< base-builder name="Strategy Shops" path="Atlas/CRM/Comp/" tag="strategy" notes="crm-sample" >}}

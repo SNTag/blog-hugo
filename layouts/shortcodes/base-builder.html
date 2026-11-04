@@ -1,30 +1,56 @@
 {{- /*
-  base-builder — an interactive widget that lets a reader generate their own
+  base-builder — interactive widget that lets a reader generate their own
   Obsidian Base (.base) file from a template by filling in three fields:
     - the view/base name
     - the folder path prefix  (matched with file.path.startsWith)
     - the tag                 (matched with file.tags.contains)
-  It then previews the generated YAML and offers a download / copy.
+  It previews the generated YAML, offers a download / copy, AND renders a live
+  demo table showing how the Base would look in Obsidian — populated from a
+  folder of GENERIC example notes (never the author's real vault).
 
   Everything runs client-side (no server) — safe for static Netlify hosting.
 
-  Usage in a post (angle-bracket shortcode call):
+  Params:
+    name   default "Consulting"      - starting view name
+    path   default "Atlas/CRM/Comp/" - starting folder prefix
+    tag    default "consulting"      - starting tag
+    notes  default "crm-sample"      - folder under static/obs-bases-gen/
+                                        whose .md notes feed the demo table
+
+  Usage in a post (place a summary divider BEFORE the widget so it stays out
+  of the home/tag feed — see CLAUDE.md):
     base-builder
-  or with custom defaults:
-    base-builder name="Consulting" path="Atlas/CRM/Comp/" tag="consulting"
+    base-builder name="Recruiting" path="Atlas/CRM/Recruiting/" tag="recruiting" notes="crm-sample"
 */ -}}
 {{- $id := printf "bb-%d" .Ordinal -}}
 {{- $name := .Get "name" | default "Consulting" -}}
 {{- $path := .Get "path" | default "Atlas/CRM/Comp/" -}}
 {{- $tag  := .Get "tag"  | default "consulting" -}}
+{{- $notes := .Get "notes" | default "crm-sample" -}}
+
+{{- /* Read the example-notes folder at build time and inline it as JSON. */ -}}
+{{- $dir := printf "static/obs-bases-gen/%s" $notes -}}
+{{- $rows := slice -}}
+{{- if os.FileExists $dir -}}
+  {{- range (os.ReadDir $dir) -}}
+    {{- if strings.HasSuffix .Name ".md" -}}
+      {{- $raw := os.ReadFile (printf "%s/%s" $dir .Name) -}}
+      {{- $after := strings.TrimPrefix "---\n" $raw -}}
+      {{- $fmText := index (split $after "\n---") 0 -}}
+      {{- $fm := $fmText | transform.Unmarshal -}}
+      {{- $row := merge $fm (dict "file.name" (strings.TrimSuffix ".md" .Name)) -}}
+      {{- $rows = $rows | append $row -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 
 <div class="base-builder" id="{{ $id }}"
-     data-name="{{ $name }}" data-path="{{ $path }}" data-tag="{{ $tag }}">
+     data-name="{{ $name }}" data-path="{{ $path }}" data-tag="{{ $tag }}" data-notes="{{ $notes }}">
   <div class="base-builder__head">
     <span class="base-builder__badge">.base</span>
     <div>
       <h3 class="base-builder__title">Obsidian Base builder</h3>
-      <p class="base-builder__sub">Fill in your own paths and tag, then download a ready-to-use <code>.base</code> file for your vault.</p>
+      <p class="base-builder__sub">Fill in your own paths and tag, see a live preview of the table, then download a ready-to-use <code>.base</code> file for your vault.</p>
     </div>
   </div>
 
@@ -45,19 +71,37 @@
     </label>
   </div>
 
-  <pre class="base-builder__preview" data-bb="preview" aria-live="polite"></pre>
-
-  <div class="base-builder__actions">
-    <button type="button" data-bb="download">Download <code>.base</code></button>
-    <button type="button" data-bb="copy" class="base-builder__secondary">Copy</button>
-    <span class="base-builder__status" data-bb="status" role="status"></span>
+  <div class="base-builder__demo">
+    <div class="base-builder__demo-head">
+      <span class="base-builder__view" data-bb="viewname">{{ $name }}</span>
+      <span class="base-builder__filter" data-bb="filtermsg"></span>
+    </div>
+    <div class="base-builder__tablewrap">
+      <table class="base-builder__table" data-bb="table"></table>
+    </div>
+    <p class="base-builder__demo-note">Live preview against <strong>{{ len $rows }}</strong> generic example notes (fictional data, not a real vault). Edit the fields above to see the filter change.</p>
   </div>
+
+  <details class="base-builder__file" open>
+    <summary>Generated <code>.base</code> file</summary>
+    <pre class="base-builder__preview" data-bb="preview" aria-live="polite"></pre>
+    <div class="base-builder__actions">
+      <button type="button" data-bb="download">Download <code>.base</code></button>
+      <button type="button" data-bb="copy" class="base-builder__secondary">Copy</button>
+      <span class="base-builder__status" data-bb="status" role="status"></span>
+    </div>
+  </details>
+
+  {{- /* safeJS: inside <script>, html/template would otherwise re-encode the
+         JSON string as a JS string literal (double-encoding it). */ -}}
+  <script type="application/json" data-bb="rows">{{ $rows | jsonify | safeJS }}</script>
 </div>
 
 {{- if eq .Ordinal 0 }}
 <style>
 .base-builder{
   --bb-accent: var(--default-tint, #729883);
+  --bb-link: var(--grey-2, #886aea);
   border:1px solid var(--grey-2, #404040);
   border-radius:10px;
   padding:1.2rem 1.3rem 1.3rem;
@@ -77,7 +121,7 @@
 }
 .base-builder__title{margin:0;font-size:1.15rem;color:var(--default-shade, #989898);}
 .base-builder__sub{margin:.2rem 0 0;font-size:.88rem;color:var(--grey-1, #606060);}
-.base-builder__fields{display:grid;gap:.9rem;margin-bottom:1.1rem;}
+.base-builder__fields{display:grid;gap:.9rem;margin-bottom:1.2rem;}
 @media(min-width:620px){.base-builder__fields{grid-template-columns:1fr 1fr;}
   .base-builder__field:first-child{grid-column:1 / -1;}}
 .base-builder__field{display:flex;flex-direction:column;gap:.3rem;}
@@ -93,32 +137,91 @@
 }
 .base-builder__field input:focus{outline:2px solid var(--bb-accent);outline-offset:0;border-color:var(--bb-accent);}
 .base-builder code{font-family:Menlo,Monaco,monospace;font-size:.85em;}
+
+/* ---- live demo table (Obsidian Base "table view" look) ---- */
+.base-builder__demo{margin-bottom:1.1rem;}
+.base-builder__demo-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem .9rem;margin-bottom:.5rem;}
+.base-builder__view{
+  font-weight:700;font-size:.95rem;color:var(--default-shade, #989898);
+  padding:.2rem .55rem;border-radius:6px 6px 0 0;border:1px solid var(--grey-2, #404040);
+  border-bottom:2px solid var(--bb-accent);background:var(--background-color, #000);
+}
+.base-builder__filter{font-family:Menlo,Monaco,monospace;font-size:.78rem;color:var(--grey-1, #606060);}
+.base-builder__tablewrap{
+  overflow-x:auto;border:1px solid var(--grey-2, #404040);border-radius:0 8px 8px 8px;
+  background:var(--background-color, #000);
+}
+.base-builder__table{border-collapse:collapse;width:100%;font-size:.82rem;white-space:nowrap;}
+.base-builder__table th,.base-builder__table td{
+  text-align:left;padding:.45rem .7rem;border-bottom:1px solid var(--grey-3, #202020);
+  border-right:1px solid var(--grey-3, #202020);vertical-align:top;
+}
+.base-builder__table th{
+  position:sticky;top:0;background:var(--grey-4, #181818);color:var(--grey-1, #606060);
+  font-weight:600;font-size:.76rem;
+}
+.base-builder__table th .bb-ico{opacity:.6;margin-right:.35rem;font-family:Menlo,Monaco,monospace;}
+.base-builder__table tr:last-child td{border-bottom:0;}
+.base-builder__table tr:hover td{background:rgba(127,127,127,.06);}
+.base-builder__table .bb-file{color:var(--bb-accent);font-weight:600;text-decoration:underline;cursor:default;}
+.base-builder__tag{
+  display:inline-block;margin:0 .2rem .15rem 0;padding:.05rem .45rem;border-radius:10px;
+  font-size:.74rem;background:color-mix(in srgb, var(--blue, #4a9ae1) 22%, transparent);
+  color:var(--blue, #4a9ae1);
+}
+.base-builder__pill{
+  display:inline-block;margin:0 .2rem .15rem 0;padding:.05rem .4rem;border-radius:5px;
+  font-size:.74rem;border:1px solid color-mix(in srgb, var(--bb-link, #886aea) 45%, transparent);
+  color:var(--bb-link, #886aea);text-decoration:underline;
+}
+.base-builder__ext{color:var(--blue, #4a9ae1);text-decoration:underline;}
+.base-builder__ext::after,.base-builder__pill--ext::after{content:" \2197";opacity:.7;}
+.base-builder__empty{padding:1rem;color:var(--grey-1,#606060);font-size:.82rem;}
+.base-builder__demo-note{margin:.5rem 0 0;font-size:.78rem;color:var(--grey-1, #606060);}
+.base-builder__demo-note strong{color:var(--default-shade, #989898);}
+
+/* ---- generated file ---- */
+.base-builder__file{margin-top:.4rem;border-top:1px solid var(--grey-3, #202020);padding-top:.7rem;}
+.base-builder__file > summary{cursor:pointer;font-weight:600;font-size:.86rem;color:var(--default-shade, #989898);}
 .base-builder__preview{
-  margin:0 0 1rem;padding:.85rem 1rem;border-radius:8px;overflow:auto;
+  margin:.8rem 0 0;padding:.85rem 1rem;border-radius:8px;overflow:auto;
   background:var(--background-color, #000);
   border:1px solid var(--grey-2, #404040);
   color:var(--default-color, #888);
-  font-family:Menlo,Monaco,monospace;font-size:.82rem;line-height:1.5;
-  white-space:pre;max-height:420px;
+  font-family:Menlo,Monaco,monospace;font-size:.8rem;line-height:1.5;
+  white-space:pre;max-height:380px;
 }
-.base-builder__actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;}
+.base-builder__actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.8rem;}
 .base-builder__actions button{
   cursor:pointer;border:0;border-radius:6px;padding:.55rem .95rem;
-  font-size:.88rem;font-weight:600;
-  background:var(--bb-accent);color:var(--white, #fff);
+  font-size:.88rem;font-weight:600;background:var(--bb-accent);color:var(--white, #fff);
 }
 .base-builder__actions button:hover{filter:brightness(1.08);}
 .base-builder__secondary{background:transparent !important;
   color:var(--default-shade, #989898) !important;border:1px solid var(--grey-2, #404040) !important;}
 .base-builder__status{font-size:.82rem;color:var(--bb-accent);min-height:1em;}
+@media(prefers-reduced-motion:reduce){.base-builder *{transition:none !important;}}
 </style>
 {{- end }}
 
 {{- if eq .Ordinal 0 }}
 <script>
 (function(){
-  function build(name, path, tag){
-    return [
+  // Columns of the generated base, shared by the .base file and the demo table.
+  var ORDER = [
+    "file.name","rating - MBA Internship","source","tags","summary",
+    "projects","related","2027 MBA Internship Application","tasks","Email"
+  ];
+  var ICON = {
+    "file.name":"☰","rating - MBA Internship":"#","source":"☰","tags":"⧉",
+    "summary":"≡","projects":"☰","related":"☰",
+    "2027 MBA Internship Application":"☰","tasks":"☑","Email":"✉"
+  };
+
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  function buildText(name, path, tag){
+    var lines = [
       "properties:",
       "  note.Specialization:",
       "    displayName: specialization",
@@ -131,65 +234,107 @@
       "      and:",
       '        - file.tags.contains("' + tag + '")',
       '        - file.path.startsWith("' + path + '")',
-      "    order:",
-      "      - file.name",
-      "      - rating - MBA Internship",
-      "      - source",
-      "      - tags",
-      "      - summary",
-      "      - projects",
-      "      - related",
-      "      - 2027 MBA Internship Application",
-      "      - tasks",
-      "      - Email",
-      "    sort:",
-      "      - property: file.name",
-      "        direction: ASC",
-      ""
-    ].join("\n");
+      "    order:"
+    ];
+    ORDER.forEach(function(c){ lines.push("      - " + c); });
+    lines.push("    sort:","      - property: file.name","        direction: ASC","");
+    return lines.join("\n");
   }
+
   function safeFile(name){
-    var n = (name || "base").trim().replace(/[^a-z0-9._-]+/gi, "-").replace(/^-+|-+$/g, "");
-    return (n || "base") + ".base";
+    var n=(name||"base").trim().replace(/[^a-z0-9._-]+/gi,"-").replace(/^-+|-+$/g,"");
+    return (n||"base")+".base";
   }
+
+  function label(key){ return key==="file.name" ? "file name" : key; }
+
+  function isURL(v){ return typeof v==="string" && /^https?:\/\//.test(v); }
+
+  function extLink(v){
+    var disp=v.replace(/^https?:\/\//,"");
+    if(disp.length>20) disp=disp.slice(0,20)+"…";
+    return '<span class="base-builder__ext">'+esc(disp)+'</span>';
+  }
+
+  function cell(key, val){
+    if(key==="file.name") return '<span class="bb-file">'+esc(val)+'</span>';
+    if(Array.isArray(val)){
+      if(!val.length) return "";
+      if(key==="tags") return val.map(function(t){return '<span class="base-builder__tag">'+esc(t)+'</span>';}).join("");
+      return val.map(function(t){
+        var cls = isURL(t) ? "base-builder__pill base-builder__pill--ext" : "base-builder__pill";
+        return '<span class="'+cls+'">'+esc(isURL(t)?t.replace(/^https?:\/\//,""):t)+'</span>';
+      }).join("");
+    }
+    if(isURL(val)) return extLink(val);
+    return esc(val==null?"":val);
+  }
+
   function init(root){
-    var q = function(sel){ return root.querySelector('[data-bb="' + sel + '"]'); };
-    var inName = q("name"), inPath = q("path"), inTag = q("tag");
-    var preview = q("preview"), status = q("status");
-    function current(){ return build(inName.value, inPath.value, inTag.value); }
-    function render(){ preview.textContent = current(); }
-    function flash(msg){ status.textContent = msg; setTimeout(function(){ status.textContent = ""; }, 2200); }
+    var q=function(s){return root.querySelector('[data-bb="'+s+'"]');};
+    var inName=q("name"), inPath=q("path"), inTag=q("tag");
+    var preview=q("preview"), status=q("status"), table=q("table");
+    var viewname=q("viewname"), filtermsg=q("filtermsg");
 
-    [inName, inPath, inTag].forEach(function(el){ el.addEventListener("input", render); });
+    var rows=[];
+    try{ rows=JSON.parse(q("rows").textContent||"[]"); }catch(e){ rows=[]; }
 
-    q("download").addEventListener("click", function(){
-      var blob = new Blob([current()], {type: "text/yaml"});
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement("a");
-      a.href = url; a.download = safeFile(inName.value);
-      document.body.appendChild(a); a.click(); a.remove();
-      URL.revokeObjectURL(url);
-      flash("Downloaded " + safeFile(inName.value));
-    });
+    function matches(row){
+      var tag=inTag.value.trim(), path=inPath.value;
+      var okTag = !tag || (row.tags||[]).some(function(t){return String(t).toLowerCase()===tag.toLowerCase();});
+      var okPath = !path || String(row.path||"").indexOf(path)===0;
+      return okTag && okPath;
+    }
 
-    q("copy").addEventListener("click", function(){
-      var text = current();
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(function(){ flash("Copied to clipboard"); },
-          function(){ flash("Copy failed — select manually"); });
-      } else {
-        preview.focus(); flash("Copy not supported — select manually");
+    function renderTable(){
+      var shown=rows.filter(matches);
+      var head="<thead><tr>"+ORDER.map(function(c){
+        return '<th><span class="bb-ico">'+esc(ICON[c]||"≡")+'</span>'+esc(label(c))+'</th>';
+      }).join("")+"</tr></thead>";
+      var body;
+      if(!shown.length){
+        body='<tbody><tr><td colspan="'+ORDER.length+'" class="base-builder__empty">No example notes match this filter. Try clearing the tag or path.</td></tr></tbody>';
+      }else{
+        body="<tbody>"+shown.map(function(row){
+          return "<tr>"+ORDER.map(function(c){return "<td>"+cell(c,row[c])+"</td>";}).join("")+"</tr>";
+        }).join("")+"</tbody>";
       }
+      table.innerHTML=head+body;
+      viewname.textContent=inName.value||"Base";
+      var tag=inTag.value.trim(), path=inPath.value;
+      filtermsg.textContent="showing "+shown.length+" of "+rows.length+
+        (tag?"  ·  #"+tag:"")+(path?"  ·  "+path:"");
+    }
+
+    function render(){
+      preview.textContent=buildText(inName.value,inPath.value,inTag.value);
+      renderTable();
+    }
+    function flash(m){status.textContent=m;setTimeout(function(){status.textContent="";},2200);}
+
+    [inName,inPath,inTag].forEach(function(el){el.addEventListener("input",render);});
+
+    q("download").addEventListener("click",function(){
+      var blob=new Blob([buildText(inName.value,inPath.value,inTag.value)],{type:"text/yaml"});
+      var url=URL.createObjectURL(blob),a=document.createElement("a");
+      a.href=url;a.download=safeFile(inName.value);
+      document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+      flash("Downloaded "+safeFile(inName.value));
+    });
+    q("copy").addEventListener("click",function(){
+      var text=buildText(inName.value,inPath.value,inTag.value);
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){flash("Copied to clipboard");},
+          function(){flash("Copy failed — select manually");});
+      }else{flash("Copy not supported — select manually");}
     });
 
     render();
   }
-  function initAll(){ document.querySelectorAll(".base-builder").forEach(init); }
-  if (document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", initAll);
-  } else {
-    initAll();
-  }
+
+  function initAll(){document.querySelectorAll(".base-builder").forEach(init);}
+  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",initAll);}
+  else{initAll();}
 })();
 </script>
 {{- end }}

@@ -165,6 +165,26 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
   that wrap the following cards. The divider keeps the widget out of the feed
   entirely; it only ever renders on the post's own page.
 
+## The `base-builder` widget
+
+`layouts/shortcodes/base-builder.html` lets a reader fill in a view name,
+folder prefix and tag, see a live Obsidian-style table, and download a
+customised `.base` file. Entirely client-side.
+
+- **Live-demo data** comes from generic, fictional example notes under
+  `static/obs-bases-gen/<folder>/` (one `.md` per note, YAML front matter).
+  The `notes="<folder>"` param selects a folder; the shortcode reads it **at
+  build time** (`os.ReadDir` / `os.ReadFile` + `transform.Unmarshal`) and
+  inlines the rows as JSON. Never use real vault data here — these files are
+  also served publicly from `static/`.
+- Each note's front matter supplies the table columns (`tags`, `source`,
+  `summary`, `path`, …); `path` is a synthetic vault path so the
+  `file.path.startsWith` filter has something to match.
+- **Gotcha:** the inlined JSON is emitted inside `<script>` with
+  `jsonify | safeJS`. Without `safeJS`, Go's `html/template` re-escapes the
+  JSON string in the script (JS) context and double-encodes it, so
+  `JSON.parse` yields a string, not an array.
+
 ## Future Directions (not started)
 
 Ideas discussed but deliberately deferred. Pick up when working on the MBA
