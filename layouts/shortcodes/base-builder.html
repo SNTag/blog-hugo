@@ -290,7 +290,9 @@ views:
     fieldsEl.innerHTML=tokens.map(fieldHTML).join("");
     tokens.forEach(function(t){
       var el=fieldsEl.querySelector('[data-bbid="'+t.id+'"]');
-      if(el)el.addEventListener("input",function(){vals[t.id]=el.value;render();});
+      if(!el)return;
+      vals[t.id]=el.value; // sync from the rendered control (handles selects)
+      ["input","change"].forEach(function(ev){el.addEventListener(ev,function(){vals[t.id]=el.value;render();});});
     });
 
     function safeFile(name){var n=(name||"base").trim().replace(/[^a-z0-9._-]+/gi,"-").replace(/^-+|-+$/g,"");return (n||"base")+".base";}
