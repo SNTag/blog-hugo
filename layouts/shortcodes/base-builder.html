@@ -1,0 +1,333 @@
+{{- /*
+  base-builder — interactive widget that turns a pasted Obsidian Base into a
+  fill-in-the-blanks tool: a reader edits the marked fields, sees a live demo
+  table, and downloads a ready-to-use .base file.
+
+  THE BASE LIVES IN YOUR POST, NOT IN THIS WIDGET. Paste the real .base YAML as
+  the shortcode body (open/close tags required) and mark each editable spot with
+  a self-describing token:
+
+      ${id | label=Label text | help=Tooltip text | default=Value | options=A,B}
+
+    - id       : unique key; the same id may appear in several places.
+    - label    : field label (defaults to id).
+    - help     : tooltip shown on the "?" (optional).
+    - default  : starting value (optional).
+    - options  : comma-separated -> renders a dropdown instead of a text box.
+    A token may not contain the characters "}" or "|" in its values.
+
+  The generated .base file is whatever you pasted with tokens filled in, so any
+  Obsidian Bases feature passes through untouched. The live demo table renders
+  the first view against generic example notes under static/obs-bases-gen/<notes>/
+  (fictional data — never a real vault) and understands the common filter
+  operators (and/or/not, file.tags.contains, file.path.startsWith,
+  file.inFolder, file.hasTag); unknown operators are treated as "match".
+
+  Params:
+    notes  default "crm-sample"  - example-notes folder under static/obs-bases-gen/
+
+  Usage (place a <!--more--> summary divider BEFORE the widget — see CLAUDE.md).
+  Call it with open AND close tags; an empty body uses the built-in default
+  base, otherwise the body is your base with tokens:
+    base-builder            (open) ... (close)
+    base-builder notes="crm-sample"   (open) ... your .base YAML ... (close)
+*/ -}}
+{{- $id := printf "bb-%d" .Ordinal -}}
+{{- $notes := .Get "notes" | default "crm-sample" -}}
+
+{{- /* Built-in default base (used when no body is supplied). */ -}}
+{{- $default := `properties:
+  note.Specialization:
+    displayName: specialization
+  note.website:
+    displayName: website
+views:
+  - type: table
+    name: ${name | label=View name | help=Shown as the view's tab in Obsidian | default=Consulting}
+    filters:
+      and:
+        - file.tags.contains("${tag | label=Tag | help=Only notes with this tag; no leading # | default=consulting}")
+        - file.path.startsWith("${path | label=Folder path prefix | help=Only notes whose path starts with this; end with a slash | default=Atlas/CRM/Comp/}")
+    order:
+      - file.name
+      - rating - MBA Internship
+      - source
+      - tags
+      - summary
+      - projects
+      - related
+      - 2027 MBA Internship Application
+      - tasks
+      - Email
+    sort:
+      - property: file.name
+        direction: ${dir | label=Sort direction | help=ASC or DESC | options=ASC,DESC | default=ASC}` -}}
+{{- $tmpl := trim .Inner "\n\r\t " -}}
+{{- if not $tmpl -}}{{- $tmpl = $default -}}{{- end -}}
+
+{{- /* Replace each ${id|...} token with a YAML-safe sentinel, then let Hugo
+       parse the base at build time. The client swaps sentinels for live
+       values when it renders the table. */ -}}
+{{- $sanitized := replaceRE `\$\{\s*([a-zA-Z0-9_]+)[^}]*\}` "xtokx_${1}_xtokx" $tmpl -}}
+{{- $doc := $sanitized | transform.Unmarshal -}}
+
+{{- /* Read the example-notes folder at build time and inline it as JSON. */ -}}
+{{- $dir := printf "static/obs-bases-gen/%s" $notes -}}
+{{- $rows := slice -}}
+{{- if os.FileExists $dir -}}
+  {{- range (os.ReadDir $dir) -}}
+    {{- if strings.HasSuffix .Name ".md" -}}
+      {{- $raw := os.ReadFile (printf "%s/%s" $dir .Name) -}}
+      {{- $after := strings.TrimPrefix "---\n" $raw -}}
+      {{- $fmText := index (split $after "\n---") 0 -}}
+      {{- $fm := $fmText | transform.Unmarshal -}}
+      {{- $row := merge $fm (dict "file.name" (strings.TrimSuffix ".md" .Name)) -}}
+      {{- $rows = $rows | append $row -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<div class="base-builder" id="{{ $id }}" data-notes="{{ $notes }}">
+  <div class="base-builder__head">
+    <span class="base-builder__badge">.base</span>
+    <div>
+      <h3 class="base-builder__title">Obsidian Base builder</h3>
+      <p class="base-builder__sub">Fill in the marked fields, see a live preview of the table, then download a ready-to-use <code>.base</code> file for your vault.</p>
+    </div>
+  </div>
+
+  <div class="base-builder__fields" data-bb="fields"></div>
+
+  <div class="base-builder__demo">
+    <div class="base-builder__demo-head">
+      <span class="base-builder__view" data-bb="viewname"></span>
+      <span class="base-builder__filter" data-bb="filtermsg"></span>
+    </div>
+    <div class="base-builder__tablewrap">
+      <table class="base-builder__table" data-bb="table"></table>
+    </div>
+    <p class="base-builder__demo-note">Live preview against <strong>{{ len $rows }}</strong> generic example notes (fictional data, not a real vault). Edit the fields above to see the filter change.</p>
+  </div>
+
+  <details class="base-builder__file">
+    <summary>Generated <code>.base</code> file</summary>
+    <pre class="base-builder__preview" data-bb="preview" aria-live="polite"></pre>
+    <div class="base-builder__actions">
+      <button type="button" data-bb="download">Download <code>.base</code></button>
+      <button type="button" data-bb="copy" class="base-builder__secondary">Copy</button>
+      <span class="base-builder__status" data-bb="status" role="status"></span>
+    </div>
+  </details>
+
+  {{- /* safeJS: inside <script>, html/template would otherwise re-encode these
+         as JS string literals (double-encoding them). */ -}}
+  <script type="text/plain" data-bb="template">{{ $tmpl | base64Encode | safeJS }}</script>
+  <script type="application/json" data-bb="doc">{{ $doc | jsonify | safeJS }}</script>
+  <script type="application/json" data-bb="rows">{{ $rows | jsonify | safeJS }}</script>
+</div>
+
+{{- if eq .Ordinal 0 }}
+<style>
+.base-builder{
+  --bb-accent: var(--default-tint, #729883);
+  --bb-link: var(--grey-2, #886aea);
+  border:1px solid var(--grey-2, #404040);border-radius:10px;padding:1.2rem 1.3rem 1.3rem;
+  margin:2rem 0;background:var(--grey-4, #181818);color:var(--default-color, #888);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:.95rem;line-height:1.45;
+}
+.base-builder *{box-sizing:border-box;}
+.base-builder__head{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1rem;}
+.base-builder__badge{flex:0 0 auto;font-family:Menlo,Monaco,monospace;font-size:.72rem;font-weight:700;
+  letter-spacing:.02em;padding:.3rem .5rem;border-radius:6px;margin-top:.15rem;background:var(--bb-accent);color:var(--white, #fff);}
+.base-builder__title{margin:0;font-size:1.15rem;color:var(--default-shade, #989898);}
+.base-builder__sub{margin:.2rem 0 0;font-size:.88rem;color:var(--grey-1, #606060);}
+.base-builder__fields{display:grid;gap:.9rem;margin-bottom:1.2rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+.base-builder__field{display:flex;flex-direction:column;gap:.3rem;min-width:0;}
+.base-builder__field > .base-builder__label{font-weight:600;font-size:.82rem;color:var(--default-shade, #989898);
+  text-transform:uppercase;letter-spacing:.04em;}
+.base-builder__field input,.base-builder__field select{
+  width:100%;padding:.5rem .6rem;border-radius:6px;border:1px solid var(--grey-2, #404040);
+  background:var(--background-color, #000);color:var(--default-shade, #989898);font-family:Menlo,Monaco,monospace;font-size:.88rem;}
+.base-builder__field input:focus,.base-builder__field select:focus{outline:2px solid var(--bb-accent);outline-offset:0;border-color:var(--bb-accent);}
+.base-builder code{font-family:Menlo,Monaco,monospace;font-size:.85em;}
+.base-builder__label{display:inline-flex;align-items:center;gap:.1rem;}
+.base-builder__help{position:relative;display:inline-flex;align-items:center;justify-content:center;
+  width:15px;height:15px;padding:0;margin-left:.4rem;border-radius:50%;cursor:help;
+  border:1px solid var(--grey-1, #606060);background:transparent;color:var(--grey-1, #606060);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:.68rem;font-weight:700;line-height:1;letter-spacing:0;text-transform:none;}
+.base-builder__help:hover,.base-builder__help:focus-visible{border-color:var(--bb-accent);color:var(--bb-accent);outline:none;}
+.base-builder__help:focus-visible{box-shadow:0 0 0 2px color-mix(in srgb, var(--bb-accent) 45%, transparent);}
+.base-builder__tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  width:max-content;max-width:230px;z-index:6;padding:.5rem .6rem;border-radius:7px;
+  background:var(--background-color, #000);color:var(--default-shade, #989898);
+  border:1px solid var(--grey-2, #404040);box-shadow:0 4px 14px var(--shadow-color, rgba(0,0,0,.35));
+  font-size:.76rem;font-weight:400;line-height:1.4;text-align:left;text-transform:none;letter-spacing:normal;
+  opacity:0;visibility:hidden;transition:opacity .12s ease;pointer-events:none;}
+.base-builder__tip code{font-size:.9em;}
+.base-builder__tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-top-color:var(--grey-2, #404040);}
+.base-builder__help:hover .base-builder__tip,.base-builder__help:focus-visible .base-builder__tip{opacity:1;visibility:visible;}
+.base-builder__demo{margin-bottom:1.1rem;}
+.base-builder__demo-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem .9rem;margin-bottom:.5rem;}
+.base-builder__view{font-weight:700;font-size:.95rem;color:var(--default-shade, #989898);
+  padding:.2rem .55rem;border-radius:6px 6px 0 0;border:1px solid var(--grey-2, #404040);
+  border-bottom:2px solid var(--bb-accent);background:var(--background-color, #000);}
+.base-builder__filter{font-family:Menlo,Monaco,monospace;font-size:.78rem;color:var(--grey-1, #606060);}
+.base-builder__tablewrap{overflow-x:auto;border:1px solid var(--grey-2, #404040);border-radius:0 8px 8px 8px;background:var(--background-color, #000);}
+.base-builder__table{border-collapse:collapse;width:100%;font-size:.82rem;white-space:nowrap;}
+.base-builder__table th,.base-builder__table td{text-align:left;padding:.45rem .7rem;
+  border-bottom:1px solid var(--grey-3, #202020);border-right:1px solid var(--grey-3, #202020);vertical-align:top;}
+.base-builder__table th{position:sticky;top:0;background:var(--grey-4, #181818);color:var(--grey-1, #606060);font-weight:600;font-size:.76rem;}
+.base-builder__table th .bb-ico{opacity:.6;margin-right:.35rem;font-family:Menlo,Monaco,monospace;}
+.base-builder__table tr:last-child td{border-bottom:0;}
+.base-builder__table tr:hover td{background:rgba(127,127,127,.06);}
+.base-builder__table .bb-file{color:var(--bb-accent);font-weight:600;text-decoration:underline;cursor:default;}
+.base-builder__tag{display:inline-block;margin:0 .2rem .15rem 0;padding:.05rem .45rem;border-radius:10px;font-size:.74rem;
+  background:color-mix(in srgb, var(--blue, #4a9ae1) 22%, transparent);color:var(--blue, #4a9ae1);}
+.base-builder__pill{display:inline-block;margin:0 .2rem .15rem 0;padding:.05rem .4rem;border-radius:5px;font-size:.74rem;
+  border:1px solid color-mix(in srgb, var(--bb-link, #886aea) 45%, transparent);color:var(--bb-link, #886aea);text-decoration:underline;}
+.base-builder__ext{color:var(--blue, #4a9ae1);text-decoration:underline;}
+.base-builder__ext::after,.base-builder__pill--ext::after{content:" \2197";opacity:.7;}
+.base-builder__empty{padding:1rem;color:var(--grey-1,#606060);font-size:.82rem;}
+.base-builder__demo-note{margin:.5rem 0 0;font-size:.78rem;color:var(--grey-1, #606060);}
+.base-builder__demo-note strong{color:var(--default-shade, #989898);}
+.base-builder__file{margin-top:.4rem;border-top:1px solid var(--grey-3, #202020);padding-top:.7rem;}
+.base-builder__file > summary{cursor:pointer;font-weight:600;font-size:.86rem;color:var(--default-shade, #989898);}
+.base-builder__preview{margin:.8rem 0 0;padding:.85rem 1rem;border-radius:8px;overflow:auto;background:var(--background-color, #000);
+  border:1px solid var(--grey-2, #404040);color:var(--default-color, #888);font-family:Menlo,Monaco,monospace;font-size:.8rem;line-height:1.5;white-space:pre;max-height:380px;}
+.base-builder__actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.8rem;}
+.base-builder__actions button{cursor:pointer;border:0;border-radius:6px;padding:.55rem .95rem;font-size:.88rem;font-weight:600;background:var(--bb-accent);color:var(--white, #fff);}
+.base-builder__actions button:hover{filter:brightness(1.08);}
+.base-builder__secondary{background:transparent !important;color:var(--default-shade, #989898) !important;border:1px solid var(--grey-2, #404040) !important;}
+.base-builder__status{font-size:.82rem;color:var(--bb-accent);min-height:1em;}
+@media(prefers-reduced-motion:reduce){.base-builder *{transition:none !important;}}
+</style>
+{{- end }}
+
+{{- if eq .Ordinal 0 }}
+<script>
+(function(){
+  var ICON={"file.name":"☰","tags":"⧉","summary":"≡","tasks":"☑","Email":"✉"};
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  function b64(s){try{return decodeURIComponent(Array.prototype.map.call(atob(s),function(c){return "%"+("00"+c.charCodeAt(0).toString(16)).slice(-2);}).join(""));}catch(e){return "";}}
+
+  var TOKEN=/\$\{\s*([a-zA-Z0-9_]+)\s*(\|[^}]*)?\}/g;
+  function parseTokens(tmpl){
+    var m,seen={},list=[];
+    TOKEN.lastIndex=0;
+    while(m=TOKEN.exec(tmpl)){
+      var id=m[1]; if(seen[id])continue; seen[id]=1;
+      var a={id:id,label:id,help:"",default:"",options:""};
+      if(m[2]){m[2].slice(1).split("|").forEach(function(p){var i=p.indexOf("=");if(i<0)return;
+        var k=p.slice(0,i).trim(),v=p.slice(i+1).trim();if(k==="label"||k==="help"||k==="default"||k==="options")a[k]=v;});}
+      list.push(a);
+    }
+    return list;
+  }
+  function resolveText(tmpl,vals){return tmpl.replace(TOKEN,function(_,id){return vals[id]!=null?vals[id]:"";});}
+  function substStruct(o,vals){
+    if(typeof o==="string")return o.replace(/xtokx_([a-zA-Z0-9_]+)_xtokx/g,function(_,id){return vals[id]!=null?vals[id]:"";});
+    if(Array.isArray(o))return o.map(function(x){return substStruct(x,vals);});
+    if(o&&typeof o==="object"){var r={};for(var k in o)r[k]=substStruct(o[k],vals);return r;}
+    return o;
+  }
+
+  function fieldHTML(t){
+    var help=t.help?'<button type="button" class="base-builder__help" aria-label="'+esc(t.label)+": "+esc(t.help)+'">?<span class="base-builder__tip" aria-hidden="true">'+esc(t.help)+'</span></button>':"";
+    var control;
+    if(t.options){
+      control='<select data-bbid="'+esc(t.id)+'">'+t.options.split(",").map(function(o){o=o.trim();
+        return '<option'+(o===t.default?" selected":"")+'>'+esc(o)+'</option>';}).join("")+'</select>';
+    }else{
+      control='<input type="text" data-bbid="'+esc(t.id)+'" value="'+esc(t.default)+'" spellcheck="false" autocomplete="off">';
+    }
+    return '<label class="base-builder__field"><span class="base-builder__label">'+esc(t.label)+help+'</span>'+control+'</label>';
+  }
+
+  // ---- demo table ----
+  function isURL(v){return typeof v==="string"&&/^https?:\/\//.test(v);}
+  function extLink(v){var d=v.replace(/^https?:\/\//,"");if(d.length>20)d=d.slice(0,20)+"…";return '<span class="base-builder__ext">'+esc(d)+'</span>';}
+  function cell(key,val){
+    if(key==="file.name")return '<span class="bb-file">'+esc(val)+'</span>';
+    if(Array.isArray(val)){if(!val.length)return "";
+      if(key==="tags")return val.map(function(t){return '<span class="base-builder__tag">'+esc(t)+'</span>';}).join("");
+      return val.map(function(t){var c=isURL(t)?"base-builder__pill base-builder__pill--ext":"base-builder__pill";
+        return '<span class="'+c+'">'+esc(isURL(t)?t.replace(/^https?:\/\//,""):t)+'</span>';}).join("");}
+    if(isURL(val))return extLink(val);
+    return esc(val);
+  }
+  function evalLeaf(expr,row){
+    var m;
+    if(m=expr.match(/file\.tags\.contains\(\s*"([^"]*)"\s*\)/))return (row.tags||[]).some(function(t){return String(t).toLowerCase()===m[1].toLowerCase();});
+    if(m=expr.match(/file\.hasTag\(\s*"([^"]*)"\s*\)/))return (row.tags||[]).some(function(t){return String(t).toLowerCase()===m[1].toLowerCase();});
+    if(m=expr.match(/file\.path\.startsWith\(\s*"([^"]*)"\s*\)/))return String(row.path||"").indexOf(m[1])===0;
+    if(m=expr.match(/file\.inFolder\(\s*"([^"]*)"\s*\)/))return String(row.path||"").indexOf(m[1].replace(/\/?$/,"/"))===0;
+    return true; // unknown operator -> don't exclude
+  }
+  function evalFilter(node,row){
+    if(node==null)return true;
+    if(typeof node==="string")return node.trim()?evalLeaf(node,row):true;
+    if(Array.isArray(node))return node.every(function(n){return evalFilter(n,row);});
+    if(typeof node==="object"){
+      if(node.and!=null)return [].concat(node.and).every(function(n){return evalFilter(n,row);});
+      if(node.or!=null)return [].concat(node.or).some(function(n){return evalFilter(n,row);});
+      if(node.not!=null){var v=node.not;return Array.isArray(v)?!v.every(function(n){return evalFilter(n,row);}):!evalFilter(v,row);}
+    }
+    return true;
+  }
+
+  function init(root){
+    var fieldsEl=root.querySelector('[data-bb="fields"]');
+    var preview=root.querySelector('[data-bb="preview"]'),status=root.querySelector('[data-bb="status"]');
+    var table=root.querySelector('[data-bb="table"]'),viewname=root.querySelector('[data-bb="viewname"]'),filtermsg=root.querySelector('[data-bb="filtermsg"]');
+    var tmpl=b64((root.querySelector('[data-bb="template"]')||{}).textContent||"");
+    var doc; try{doc=JSON.parse((root.querySelector('[data-bb="doc"]')||{}).textContent||"null");}catch(e){doc=null;}
+    var rows; try{rows=JSON.parse((root.querySelector('[data-bb="rows"]')||{}).textContent||"[]");}catch(e){rows=[];}
+
+    var tokens=parseTokens(tmpl),vals={};
+    tokens.forEach(function(t){vals[t.id]=t.default;});
+    fieldsEl.innerHTML=tokens.map(fieldHTML).join("");
+    tokens.forEach(function(t){
+      var el=fieldsEl.querySelector('[data-bbid="'+t.id+'"]');
+      if(!el)return;
+      vals[t.id]=el.value; // sync from the rendered control (handles selects)
+      ["input","change"].forEach(function(ev){el.addEventListener(ev,function(){vals[t.id]=el.value;render();});});
+    });
+
+    function safeFile(name){var n=(name||"base").trim().replace(/[^a-z0-9._-]+/gi,"-").replace(/^-+|-+$/g,"");return (n||"base")+".base";}
+    function firstView(){var v=(doc&&doc.views)||[];return v[0]||null;}
+    function dlName(){var vw=firstView();var nm=vw?substStruct(vw.name,vals):"base";return safeFile(nm);}
+
+    function renderTable(){
+      var vw=firstView();
+      if(!vw){table.innerHTML='<tbody><tr><td class="base-builder__empty">This base has no <code>views</code> to preview.</td></tr></tbody>';
+        viewname.textContent="";filtermsg.textContent="";return;}
+      vw=substStruct(vw,vals);
+      var cols=Array.isArray(vw.order)&&vw.order.length?vw.order:["file.name"];
+      var shown=rows.filter(function(r){return evalFilter(vw.filters,r);});
+      var head="<thead><tr>"+cols.map(function(c){return '<th><span class="bb-ico">'+esc(ICON[c]||"≡")+'</span>'+esc(c==="file.name"?"file name":c)+'</th>';}).join("")+"</tr></thead>";
+      var body=shown.length?"<tbody>"+shown.map(function(r){return "<tr>"+cols.map(function(c){return "<td>"+cell(c,r[c])+"</td>";}).join("")+"</tr>"}).join("")+"</tbody>"
+        :'<tbody><tr><td colspan="'+cols.length+'" class="base-builder__empty">No example notes match this filter. Try clearing the tag or path.</td></tr></tbody>';
+      table.innerHTML=head+body;
+      viewname.textContent=vw.name||"Base";
+      filtermsg.textContent="showing "+shown.length+" of "+rows.length;
+    }
+    function render(){preview.textContent=resolveText(tmpl,vals);renderTable();}
+    function flash(m){status.textContent=m;setTimeout(function(){status.textContent="";},2200);}
+
+    root.querySelector('[data-bb="download"]').addEventListener("click",function(){
+      var blob=new Blob([resolveText(tmpl,vals)],{type:"text/yaml"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+      a.href=url;a.download=dlName();document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);flash("Downloaded "+dlName());});
+    root.querySelector('[data-bb="copy"]').addEventListener("click",function(){
+      var text=resolveText(tmpl,vals);
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){flash("Copied to clipboard");},function(){flash("Copy failed — select manually");});}
+      else{flash("Copy not supported — select manually");}});
+
+    render();
+  }
+  function initAll(){document.querySelectorAll(".base-builder").forEach(init);}
+  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",initAll);}else{initAll();}
+})();
+</script>
+{{- end }}
