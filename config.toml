@@ -92,6 +92,10 @@ BaseURL = "https://sntag.netlify.app/"
     startLevel = 2  # Start from ## headers
     endLevel = 2    # End at #### headers
     ordered = false # Use <ul> instead of <ol>
+  # Let raw HTML in posts through (<br> in table cells, R-generated <table>s,
+  # embeds). All content is authored here, so this is safe.
+  [markup.goldmark.renderer]
+    unsafe = true
 
 [taxonomies]
   tag = "tags"

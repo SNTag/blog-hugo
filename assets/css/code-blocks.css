@@ -100,3 +100,7 @@ code {
     opacity: 1; /* Always visible on mobile */
   }
 }
+
+/* Plain <pre> blocks (raw HTML in older posts, no .highlight wrapper):
+   scroll long lines instead of widening the page. */
+.post pre { overflow-x: auto; }
