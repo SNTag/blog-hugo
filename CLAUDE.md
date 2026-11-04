@@ -167,23 +167,39 @@ Standalone images are styled by `layouts/_default/_markup/render-image.html`
 
 ## The `base-builder` widget
 
-`layouts/shortcodes/base-builder.html` lets a reader fill in a view name,
-folder prefix and tag, see a live Obsidian-style table, and download a
-customised `.base` file. Entirely client-side.
+`layouts/shortcodes/base-builder.html` turns a pasted Obsidian Base into a
+fill-in-the-blanks tool: a reader edits the marked fields, sees a live
+Obsidian-style table, and downloads a customised `.base` file. Entirely
+client-side. **The base lives in the post, not in the widget** — so it is not
+limited to a fixed template.
 
+- **Call it with open AND close tags.** An empty body uses the built-in
+  default base; otherwise the body is your `.base` YAML. (The template reads
+  `.Inner`, so a bare `{{</* base-builder */>}}` with no close fails the build.)
+- **Editable fields are self-describing tokens** placed anywhere in the base:
+  `${id | label=… | help=… | default=… | options=A,B}`. `id` is required and
+  may repeat; `options` makes a dropdown; the rest are optional. `help=` is
+  the text of that field's `?` tooltip — so **help text is edited in the post**,
+  not in the widget. A token value may not contain `}` or `|`.
+- **How it renders.** At build time the shortcode replaces each `${…}` with a
+  YAML-safe sentinel (`xtokx_<id>_xtokx`), parses the base with
+  `transform.Unmarshal`, and inlines the parsed structure as JSON; it also
+  inlines the raw base (base64) and the example rows. The client builds the
+  form from the tokens, generates the `.base` by text-substituting token
+  values (so **any** Obsidian Bases feature passes through), and renders the
+  first view's table by swapping sentinels for live values.
+- **Live-table filter support** is best-effort and grows over time: `and` /
+  `or` / `not`, `file.tags.contains`, `file.path.startsWith`, `file.inFolder`,
+  `file.hasTag`. Unknown operators are treated as "match" (never hide a row).
 - **Live-demo data** comes from generic, fictional example notes under
-  `static/obs-bases-gen/<folder>/` (one `.md` per note, YAML front matter).
-  The `notes="<folder>"` param selects a folder; the shortcode reads it **at
-  build time** (`os.ReadDir` / `os.ReadFile` + `transform.Unmarshal`) and
-  inlines the rows as JSON. Never use real vault data here — these files are
-  also served publicly from `static/`.
-- Each note's front matter supplies the table columns (`tags`, `source`,
-  `summary`, `path`, …); `path` is a synthetic vault path so the
-  `file.path.startsWith` filter has something to match.
-- **Gotcha:** the inlined JSON is emitted inside `<script>` with
-  `jsonify | safeJS`. Without `safeJS`, Go's `html/template` re-escapes the
-  JSON string in the script (JS) context and double-encodes it, so
-  `JSON.parse` yields a string, not an array.
+  `static/obs-bases-gen/<folder>/` (one `.md` per note, YAML front matter),
+  selected with the `notes="<folder>"` param and read at build time. Each
+  note's front matter supplies the columns; a synthetic `path` lets the path
+  filters match. Never use real vault data — these files are served publicly
+  from `static/`.
+- **Gotcha:** the inlined JSON / base64 is emitted inside `<script>` with
+  `… | safeJS`. Without it, Go's `html/template` re-escapes the value in the
+  script (JS) context and double-encodes it, so `JSON.parse` / `atob` break.
 
 ## Future Directions (not started)
 

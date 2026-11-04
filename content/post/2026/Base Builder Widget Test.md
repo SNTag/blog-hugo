@@ -11,12 +11,32 @@ A scratch page for testing the `base-builder` shortcode. It is marked
 
 <!--more-->
 
-## Default example
+## Built-in default base
 
-{{< base-builder >}}
+Empty body ⇒ the widget's built-in default base (name / tag / path / sort):
 
-## With custom defaults
+{{< base-builder >}}{{< /base-builder >}}
 
-Same example notes, a different starting filter (tag `strategy`):
+## A custom pasted base
 
-{{< base-builder name="Strategy Shops" path="Atlas/CRM/Comp/" tag="strategy" notes="crm-sample" >}}
+A different base pasted straight into the post — an `or` filter, custom
+columns, and several tokens (note how each token's `help=` becomes the `?`
+tooltip):
+
+{{< base-builder notes="crm-sample" >}}
+views:
+  - type: table
+    name: ${name | label=View name | help=Shown as the tab in Obsidian | default=Strategy shops}
+    filters:
+      or:
+        - file.tags.contains("${tag1 | label=Tag A | help=First tag to include; no leading # | default=strategy}")
+        - file.tags.contains("${tag2 | label=Tag B | help=Second tag to include; no leading # | default=boutique}")
+    order:
+      - file.name
+      - tags
+      - summary
+      - source
+    sort:
+      - property: file.name
+        direction: ${dir | label=Sort direction | help=ASC or DESC | options=ASC,DESC | default=ASC}
+{{< /base-builder >}}
