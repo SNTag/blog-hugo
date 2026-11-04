@@ -7,7 +7,7 @@ tags:
   - chopin
   - reddit
 added date: 2026-08-25, 1:18:40 am
-modified date: 2026-11-04, 9:04:11 am
+modified date: 2026-11-04, 9:20:37 am
 date: 2020-06-14T00:00:00Z
 layout: post
 ---
