@@ -4,9 +4,9 @@ author: SNTagore
 tags: []
 added date: Invalid date
 modified date: 2026-11-04, 4:03:02 pm
-date:
+date: 2026-11-04T16:18:00
 layout: post
-summary:
+summary: In Honor of Patrick Stewart
 Obs Category:
 ---
 
