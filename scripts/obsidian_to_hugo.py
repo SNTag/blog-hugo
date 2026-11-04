@@ -14,7 +14,8 @@ Build-time converter for Obsidian syntax that Hugo/Goldmark doesn't understand:
    Hugo's relref resolves the real URL (and fails the build if it can't).
    Links that point outside the site (Calendar/, Efforts/, .base files, drafts,
    missing pages) are rendered as just their alias text -- never raw brackets.
-   Links to files under Blog/static/ become plain links to that file.
+   Links to files under Blog/static/ become plain links to that file (".md"
+   is added back when Obsidian omitted it); missing files render as text.
 
 Why this exists
 ---------------
@@ -177,15 +178,26 @@ class PageIndex:
         return matches[0] if len(matches) == 1 else None
 
 
-def static_file_url(target: str):
-    """[[Blog/static/resources/x.pdf]] -> /resources/x.pdf ; else None."""
-    t = target.strip().replace("\\", "/")
-    if t.startswith(VAULT_PREFIX + "static/"):
-        return normalize_path(t)
+STATIC_LINK_PREFIX = VAULT_PREFIX + "static/"
+
+
+def static_file_url(target: str, static_dir: Path):
+    """Web path for a [[Blog/static/...]] link target, or None if no such file.
+
+    Obsidian drops the ".md" from links to notes, so
+    [[Blog/static/Templates/MBA Recruiting Events]] points at
+    static/Templates/MBA Recruiting Events.md -- add the extension back when
+    that's the file that exists.
+    """
+    rel = target.strip().replace("\\", "/")[len(STATIC_LINK_PREFIX):]
+    if (static_dir / rel).is_file():
+        return normalize_path(STATIC_LINK_PREFIX + rel)
+    if (static_dir / (rel + ".md")).is_file():
+        return normalize_path(STATIC_LINK_PREFIX + rel + ".md")
     return None
 
 
-def make_link_converter(index: PageIndex, unresolved: list):
+def make_link_converter(index: PageIndex, static_dir: Path, unresolved: list):
     def convert_link(match: re.Match) -> str:
         inner = match.group(1)
         parts = ALIAS_SPLIT.split(inner, 1)
@@ -210,8 +222,11 @@ def make_link_converter(index: PageIndex, unresolved: list):
         if not target:
             return f"[{alias}](#{anchorize(heading)})" if heading else alias
 
-        url = static_file_url(target)
-        if url:
+        if target.replace("\\", "/").startswith(STATIC_LINK_PREFIX):
+            url = static_file_url(target, static_dir)
+            if url is None:
+                unresolved.append(inner)
+                return alias
             return f"[{alias}]({url})"
 
         rel = index.resolve(target)
@@ -293,7 +308,7 @@ def main() -> int:
     for md in content.rglob("*.md"):
         original = md.read_text(encoding="utf-8")
         unresolved = []
-        converted = convert_text(original, make_link_converter(index, unresolved))
+        converted = convert_text(original, make_link_converter(index, root / "static", unresolved))
         if converted != original:
             md.write_text(converted, encoding="utf-8")
             changed += 1

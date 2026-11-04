@@ -7,3 +7,10 @@
   
 [context.production.environment]
   HUGO_ENV = "production"
+
+# Files in static/Templates/ are Obsidian templates meant to be downloaded,
+# not viewed: make browsers save them instead of showing raw Markdown text.
+[[headers]]
+  for = "/Templates/*"
+  [headers.values]
+    Content-Disposition = "attachment"
