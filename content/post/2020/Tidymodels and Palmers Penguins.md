@@ -125,7 +125,7 @@ the smaller penguins to minimize the variables while playing with <code>tidymode
 
 <pre class="r"><code>penguins %&gt;%
     skimr::skim()</code></pre>
-<table>
+<div class="table-wrap"><table>
 <caption>(#tab:prepping_data)Data summary</caption>
 <tbody>
 <tr class="odd">
@@ -165,9 +165,9 @@ the smaller penguins to minimize the variables while playing with <code>tidymode
 <td align="left">None</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>Variable type: character</strong></p>
-<table>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th align="left">skim_variable</th>
@@ -212,9 +212,9 @@ the smaller penguins to minimize the variables while playing with <code>tidymode
 <td align="right">0</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>Variable type: numeric</strong></p>
-<table>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th align="left">skim_variable</th>
@@ -297,7 +297,7 @@ the smaller penguins to minimize the variables while playing with <code>tidymode
 <td align="left">▇▁▇▁▇</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>I need species as a factor. All rows with nas will be removed to enable downstream analysis.</p>
 <pre class="r"><code>penguins$species &lt;- penguins$species %&gt;%
     as.factor()
