@@ -199,3 +199,48 @@ body {
 */
 
 /* You can add other typography rules here later */
+
+/* ------------------------------------------------------------------
+   Make in-post links easier to spot.
+   Keeps the small-caps style above, but gives links an accent colour
+   and a faint highlighter-style background so they stand out from
+   body text (incl. inside tables). `main` raises specificity over the
+   rules above; visited links keep the same colour so they stay findable.
+   ------------------------------------------------------------------ */
+:root {
+    --link-color: #b3a3f5;
+    --link-bg: rgba(136, 106, 234, 0.16);
+    --link-bg-hover: rgba(136, 106, 234, 0.30);
+}
+:root.light {
+    --link-color: #5b45c4;
+    --link-bg: rgba(136, 106, 234, 0.10);
+    --link-bg-hover: rgba(136, 106, 234, 0.22);
+}
+
+main .post a:not(figure a):not(.glightbox),
+main .post a:not(figure a):not(.glightbox):visited {
+    color: var(--link-color) !important;
+    background-color: var(--link-bg) !important;
+    padding: 0 0.2em !important;
+    border-radius: 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+main .post a:not(figure a):not(.glightbox):hover,
+main .post a:not(figure a):not(.glightbox):focus-visible {
+    color: var(--link-color) !important;
+    background-color: var(--link-bg-hover) !important;
+    padding: 0 0.2em !important;
+}
+
+/* Title/heading anchors and footnote back-links shouldn't look like pills. */
+main .post h1 a:not(figure a):not(.glightbox),
+main .post h2 a:not(figure a):not(.glightbox),
+main .post h3 a:not(figure a):not(.glightbox),
+main .post h4 a:not(figure a):not(.glightbox),
+main .post a.footnote-backref:not(figure a):not(.glightbox) {
+    background-color: transparent !important;
+    padding: 0 !important;
+}

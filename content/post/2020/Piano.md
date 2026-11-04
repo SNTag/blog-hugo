@@ -30,6 +30,6 @@ Practice</a>. It’s a collection of wisdom for any piano player to use. Especia
 
 I’m planning on working myself through learning to heart a good number of pieces before I get hired! So far, I’ve been having fun with the Chopin Nocturnes, and plan to move to Debussey next (unless Gershwin gets me first).
 
-[^1] As of writing, the most recent piano jam is found here: <a href="https://www.reddit.com/r/piano/comments/gv7hpp/piano_jam_82_june_2020/">June 02,
+[^1]: As of writing, the most recent piano jam is found here: <a href="https://www.reddit.com/r/piano/comments/gv7hpp/piano_jam_82_june_2020/">June 02,
 2020</a>. The piano jams can be
 found at the top of the r/piano page.
