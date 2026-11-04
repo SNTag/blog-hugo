@@ -1,9 +1,9 @@
 ---
-title: Stern Recruiting Events
+title: MBA Recruiting Events
 tags:
   - recruiting
-added date:
-modified date:
+added date: 2026-11-03, 5:53:40 pm
+modified date: 2026-11-03, 6:18:28 pm
 status:
 related crm people:
 summary:
