@@ -78,6 +78,14 @@
 
 
 
+<!-- tables -->
+{{ $tablesCSS := resources.Get "css/tables.css" }}
+{{ if $tablesCSS }}
+<link rel="stylesheet" href="{{ $tablesCSS.RelPermalink }}">
+{{ end }}
+
+
+
 <!-- quotes -->
 {{ $quotesCSS := resources.Get "css/quotes.css" }}
 {{ if $quotesCSS }}

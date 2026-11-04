@@ -1,0 +1,87 @@
+/*
+  Classic "book-style" tables for post content (Markdown tables and raw HTML
+  tables alike). Horizontal rules only: a heavy rule above and below the
+  header — the darkest line sits right under the header — lighter rules
+  between rows, and a closing rule at the bottom. No vertical lines.
+
+  The theme is dark by default and toggles light mode with :root.light.
+  Widgets with their own table styling (base-builder, code line numbers)
+  are excluded.
+*/
+:root {
+  --tbl-rule-strong: #989898; /* header underline + top/bottom rules */
+  --tbl-rule:        #3a3a3a; /* between body rows */
+  --tbl-head-bg:     #141414;
+  --tbl-head-color:  #d0d0d0;
+  --tbl-hover-bg:    rgba(255, 255, 255, .04);
+}
+:root.light {
+  --tbl-rule-strong: #2b2b2b;
+  --tbl-rule:        #c4c4c4;
+  --tbl-head-bg:     #f4f4f4;
+  --tbl-head-color:  #222;
+  --tbl-hover-bg:    rgba(0, 0, 0, .03);
+}
+
+.post .table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.5rem 0;
+}
+.post .table-wrap > table { margin: 0; }
+/* On narrow screens, scroll sideways rather than crushing columns. */
+@media (max-width: 40rem) {
+  .post .table-wrap > table { min-width: 36rem; }
+}
+
+.post table:not(.base-builder__table):not(.lntable) {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-top: 2px solid var(--tbl-rule-strong);
+  border-bottom: 2px solid var(--tbl-rule-strong);
+  font-size: .9em;
+  line-height: 1.5;
+}
+
+.post table:not(.base-builder__table):not(.lntable) caption {
+  caption-side: top;
+  padding-bottom: .5rem;
+  font-style: italic;
+  text-align: left;
+}
+
+.post table:not(.base-builder__table):not(.lntable) th,
+.post table:not(.base-builder__table):not(.lntable) td {
+  padding: .6rem .75rem;
+  text-align: left;
+  vertical-align: top;
+  border: 0;
+}
+
+/* Header: tinted band with the darkest rule directly beneath it. */
+.post table:not(.base-builder__table):not(.lntable) thead th {
+  background: var(--tbl-head-bg);
+  color: var(--tbl-head-color);
+  font-weight: 700;
+  vertical-align: bottom;
+  border-bottom: 3px solid var(--tbl-rule-strong);
+}
+
+/* Body rows: a dark hairline under each row. The last row relies on the
+   table's bottom rule instead. */
+.post table:not(.base-builder__table):not(.lntable) tbody tr {
+  border-bottom: 1px solid var(--tbl-rule);
+}
+.post table:not(.base-builder__table):not(.lntable) tbody tr:last-child {
+  border-bottom: 0;
+}
+.post table:not(.base-builder__table):not(.lntable) tbody tr:hover {
+  background: var(--tbl-hover-bg);
+}
+
+/* Bold first-column labels (common in comparison tables) stay readable. */
+.post table:not(.base-builder__table):not(.lntable) td strong {
+  color: var(--tbl-head-color);
+}
