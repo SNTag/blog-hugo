@@ -3,7 +3,7 @@ title: In Honor of Patrick Stewart
 author: SNTagore
 tags: []
 added date: Invalid date
-modified date: 2026-11-04, 4:03:02 pm
+modified date: 2026-11-06, 11:19:08 am
 date: 2026-11-04T16:18:00
 layout: post
 summary: In Honor of Patrick Stewart
