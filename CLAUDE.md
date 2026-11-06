@@ -191,12 +191,18 @@ limited to a fixed template.
 - **Live-table filter support** is best-effort and grows over time: `and` /
   `or` / `not`, `file.tags.contains`, `file.path.startsWith`, `file.inFolder`,
   `file.hasTag`. Unknown operators are treated as "match" (never hide a row).
-- **Live-demo data** comes from generic, fictional example notes under
-  `static/obs-bases-gen/<folder>/` (one `.md` per note, YAML front matter),
-  selected with the `notes="<folder>"` param and read at build time. Each
-  note's front matter supplies the columns; a synthetic `path` lets the path
-  filters match. Never use real vault data — these files are served publicly
-  from `static/`.
+- **Live-demo data** comes from generic, fictional example notes (one `.md`
+  per note, YAML front matter supplies the columns), read at build time:
+  - `folders="Atlas/CRM/Comp, Calendar"` — preferred. Comma-separated folders
+    inside the fake vault `static/fake-obs/`, walked recursively by
+    `layouts/partials/base-builder-walk.html` (`"/"` = whole vault; overlaps
+    are de-duplicated; a missing folder fails the build). Each row's `path` is
+    the note's real location in the fake vault, so path filters behave as in
+    Obsidian.
+  - `notes="<folder>"` — legacy, a flat folder under `static/obs-bases-gen/`;
+    `path` comes from front matter. Default `crm-sample` when neither param is
+    given; `folders` wins if both are.
+  Never use real vault data — these files are served publicly from `static/`.
 - **Gotcha:** the inlined JSON / base64 is emitted inside `<script>` with
   `… | safeJS`. Without it, Go's `html/template` re-escapes the value in the
   script (JS) context and double-encodes it, so `JSON.parse` / `atob` break.

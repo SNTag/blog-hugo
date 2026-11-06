@@ -18,22 +18,31 @@
 
   The generated .base file is whatever you pasted with tokens filled in, so any
   Obsidian Bases feature passes through untouched. The live demo table renders
-  the first view against generic example notes under static/obs-bases-gen/<notes>/
-  (fictional data — never a real vault) and understands the common filter
-  operators (and/or/not, file.tags.contains, file.path.startsWith,
-  file.inFolder, file.hasTag); unknown operators are treated as "match".
+  the first view against fictional example notes (never a real vault) and
+  understands the common filter operators (and/or/not, file.tags.contains,
+  file.path.startsWith, file.inFolder, file.hasTag); unknown operators are
+  treated as "match".
 
-  Params:
-    notes  default "crm-sample"  - example-notes folder under static/obs-bases-gen/
+  Demo notes come from ONE of:
+    folders  - comma-separated folders inside the fake vault at static/fake-obs/,
+               read recursively, e.g. folders="Atlas/CRM/Comp, Calendar".
+               "/" means the whole vault. Each note's path is its real location
+               in the fake vault, so path filters behave as in Obsidian.
+    notes    - (legacy) a flat folder under static/obs-bases-gen/; paths come
+               from each note's `path` front-matter field.
+  If neither is given, notes="crm-sample" is used. If both are given, folders wins.
 
   Usage (place a <!--more--> summary divider BEFORE the widget — see CLAUDE.md).
   Call it with open AND close tags; an empty body uses the built-in default
   base, otherwise the body is your base with tokens:
     base-builder            (open) ... (close)
     base-builder notes="crm-sample"   (open) ... your .base YAML ... (close)
+    base-builder folders="Atlas/CRM/Comp, Calendar"   (open) ... (close)
 */ -}}
 {{- $id := printf "bb-%d" .Ordinal -}}
+{{- $folders := .Get "folders" -}}
 {{- $notes := .Get "notes" | default "crm-sample" -}}
+{{- $vault := "static/fake-obs" -}}
 
 {{- /* Built-in default base (used when no body is supplied). */ -}}
 {{- $default := `properties:
@@ -71,9 +80,29 @@ views:
 {{- $sanitized := replaceRE `\$\{\s*([a-zA-Z0-9_]+)[^}]*\}` "xtokx_${1}_xtokx" $tmpl -}}
 {{- $doc := $sanitized | transform.Unmarshal -}}
 
-{{- /* Read the example-notes folder at build time and inline it as JSON. */ -}}
-{{- $dir := printf "static/obs-bases-gen/%s" $notes -}}
+{{- /* Read the example notes at build time and inline them as JSON. */ -}}
 {{- $rows := slice -}}
+{{- $source := "" -}}
+{{- if $folders -}}
+  {{- $seen := dict -}}
+  {{- range split $folders "," -}}
+    {{- $f := strings.Trim (trim . " ") "/" -}}
+    {{- $dir := cond (eq $f "") $vault (printf "%s/%s" $vault $f) -}}
+    {{- if not (os.FileExists $dir) -}}
+      {{- errorf "base-builder: folder %q not found under %s/ (in %s)" . $vault $.Page.File.Path -}}
+    {{- end -}}
+    {{- range partial "base-builder-walk.html" (dict "root" $vault "rel" $f) -}}
+      {{- $p := index . "path" -}}
+      {{- if not (index $seen $p) -}}
+        {{- $seen = merge $seen (dict $p true) -}}
+        {{- $rows = $rows | append . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $source = $folders -}}
+{{- else -}}
+{{- $dir := printf "static/obs-bases-gen/%s" $notes -}}
+{{- $source = $notes -}}
 {{- if os.FileExists $dir -}}
   {{- range (os.ReadDir $dir) -}}
     {{- if strings.HasSuffix .Name ".md" -}}
@@ -86,8 +115,9 @@ views:
     {{- end -}}
   {{- end -}}
 {{- end -}}
+{{- end -}}
 
-<div class="base-builder" id="{{ $id }}" data-notes="{{ $notes }}">
+<div class="base-builder" id="{{ $id }}" data-notes="{{ $source }}">
   <div class="base-builder__head">
     <span class="base-builder__badge">.base</span>
     <div>

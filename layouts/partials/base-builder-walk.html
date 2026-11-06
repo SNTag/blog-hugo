@@ -1,0 +1,36 @@
+{{- /*
+  base-builder-walk — recursively collect example-note rows for base-builder.
+
+  Context: dict
+    root : site-relative directory to read from (e.g. "static/fake-obs")
+    rel  : path of the folder to walk, relative to root ("" = whole root)
+
+  Returns a slice of maps: each note's YAML front matter plus
+    file.name : filename without .md
+    path      : vault-relative path ("Atlas/CRM/Comp/Acme Analytics.md"),
+                taken from the note's real location so path filters
+                (file.path.startsWith, file.inFolder) match what Obsidian sees.
+*/ -}}
+{{- $root := .root -}}
+{{- $rel := strings.Trim .rel "/" -}}
+{{- $dir := cond (eq $rel "") $root (printf "%s/%s" $root $rel) -}}
+{{- $rows := slice -}}
+{{- if os.FileExists $dir -}}
+  {{- range (os.ReadDir $dir) -}}
+    {{- $relPath := cond (eq $rel "") .Name (printf "%s/%s" $rel .Name) -}}
+    {{- if .IsDir -}}
+      {{- if not (strings.HasPrefix .Name ".") -}}
+        {{- $rows = $rows | append (partial "base-builder-walk.html" (dict "root" $root "rel" $relPath)) -}}
+      {{- end -}}
+    {{- else if strings.HasSuffix .Name ".md" -}}
+      {{- $raw := replace (os.ReadFile (printf "%s/%s" $root $relPath)) "\r\n" "\n" -}}
+      {{- $fm := dict -}}
+      {{- if strings.HasPrefix $raw "---\n" -}}
+        {{- $fmText := index (split (strings.TrimPrefix "---\n" $raw) "\n---") 0 -}}
+        {{- with $fmText | transform.Unmarshal -}}{{- $fm = . -}}{{- end -}}
+      {{- end -}}
+      {{- $rows = $rows | append (merge $fm (dict "file.name" (strings.TrimSuffix ".md" .Name) "path" $relPath)) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $rows -}}
