@@ -1,7 +1,8 @@
 ---
 title: Outline of my MBA Recruiting Bases
 added date: 2026-11-03, 7:23:23 pm
-modified date: 2026-11-06, 11:19:18 am
+modified date: 2026-11-14, 4:36:24 pm
+projects: "[[Blog/content/post/2026/How I Setup an MBA Tracker in Obsidian|How I Setup an MBA Tracker in Obsidian]]"
 ---
 
 > [!note] Home to future widgets both describing a specific base used in my MBA recruiting, and allowing custom creation of each base.
@@ -39,8 +40,20 @@ views:
 
 # Applications
 
+> [!warning] Not Setup Yet
+> Coming in the Future
+
 # Interviews
+
+> [!warning] Not Setup Yet
+> Coming in the Future
 
 # Case Tracker
 
+> [!warning] Not Setup Yet
+> Coming in the Future
+
 # 2026 Consulting Company Map
+
+> [!warning] Not Setup Yet
+> Coming in the Future
